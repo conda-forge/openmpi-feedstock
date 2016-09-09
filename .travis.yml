@@ -1,0 +1,36 @@
+# This file was generated automatically from conda-smithy. To update this configuration,
+# update the conda-forge.yaml and/or the recipe/meta.yaml.
+
+language: generic
+
+os: osx
+
+env:
+  matrix:
+    
+    - CONDA_PERL=5.20.3.1
+
+
+before_install:
+    # Remove homebrew.
+    - brew remove --force $(brew list)
+    - brew cleanup -s
+    - rm -rf $(brew --cache)
+
+install:
+    - |
+      MINICONDA_URL="http://repo.continuum.io/miniconda"
+      MINICONDA_FILE="Miniconda3-latest-MacOSX-x86_64.sh"
+      curl -O "${MINICONDA_URL}/${MINICONDA_FILE}"
+      bash $MINICONDA_FILE -b
+
+      export PATH=/Users/travis/miniconda3/bin:$PATH
+      conda config --add channels conda-forge
+      conda config --set show_channel_urls true
+      conda install --yes --quiet conda-forge-build-setup
+      source run_conda_forge_build_setup
+
+script:
+  - conda build ./recipe
+
+  - ./ci_support/upload_or_check_non_existence.py ./recipe conda-forge --channel=main
