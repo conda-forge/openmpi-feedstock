@@ -13,7 +13,9 @@ fi
 
 
 ./configure --prefix=$PREFIX \
-            --disable-dependency-tracking
+            --disable-dependency-tracking \
+            --enable-mpi-cxx \
+            --enable-mpi-fortran
 
 
 make -j $CPU_COUNT
