@@ -9,13 +9,11 @@ if [ "$(uname)" == "Darwin" ]; then
     export MACOSX_DEPLOYMENT_TARGET="10.9"
     export CXXFLAGS="-stdlib=libc++ $CXXFLAGS"
     export CXXFLAGS="$CXXFLAGS -stdlib=libc++"
-    OPTS="--disable-mpi-fortran"
 fi
 
 
 ./configure --prefix=$PREFIX \
-            --disable-dependency-tracking \
-            $OPTS
+            --disable-dependency-tracking
 
 
 make -j $CPU_COUNT
