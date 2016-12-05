@@ -48,7 +48,6 @@ conda search openmpi --channel conda-forge
 ```
 
 
-
 About conda-forge
 =================
 
