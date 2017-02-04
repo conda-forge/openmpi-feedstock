@@ -1,23 +1,16 @@
 #!/bin/bash
 
-OPTS=""
-
-if [ "$(uname)" == "Darwin" ]; then
-    export DYLD_FALLBACK_LIBRARY_PATH=$PREFIX/lib
-    export CC=clang
-    export CXX=clang++
-    export MACOSX_DEPLOYMENT_TARGET="10.9"
-    export CXXFLAGS="-stdlib=libc++ $CXXFLAGS"
-    export CXXFLAGS="$CXXFLAGS -stdlib=libc++"
+if [ $(uname) == Darwin ]; then
+    export LDFLAGS="$LDFLAGS -Wl,-rpath,$PREFIX/lib"
 fi
 
+export LIBRARY_PATH="$PREFIX/lib"
 
 ./configure --prefix=$PREFIX \
             --disable-dependency-tracking \
             --enable-mpi-cxx \
-            --enable-mpi-fortran
+            --enable-mpi-fortran \
+            --with-wrapper-ldflags="-Wl,-rpath,$PREFIX/lib"
 
-
-make -j $CPU_COUNT
-make check
+make
 make install

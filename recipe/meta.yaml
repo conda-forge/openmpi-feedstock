@@ -13,30 +13,27 @@ source:
 build:
     number: 1
     skip: True  # [win]
-    binary_relocation: true
-    detect_binary_files_with_prefix: true
 
 requirements:
     build:
-        - perl
         - gcc  # [not win]
+        - perl
         - toolchain
     run:
-        - libgfortran  # [osx]
         - libgcc  # [linux]
+        - libgfortran  # [osx]
 
 test:
-
     requires:
         - gcc  # [not win]
-
     files:
         - tests/helloworld.c
         - tests/helloworld.cxx
+        - tests/helloworld.f
         - tests/helloworld.f90
-    #commands:
-        #- conda inspect linkages -n _test openmpi  # [not win]
-        #- conda inspect objects -n _test openmpi  # [osx]
+    commands:
+        - conda inspect objects openmpi  # [osx]
+        - conda inspect linkages openmpi  # [not win]
 
 
 about:
