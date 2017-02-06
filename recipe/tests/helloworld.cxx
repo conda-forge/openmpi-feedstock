@@ -3,7 +3,7 @@
 
 int main(int argc, char *argv[])
 {
-  MPI::Init_thread(MPI_THREAD_MULTIPLE);
+  MPI::Init();
 
   int size = MPI::COMM_WORLD.Get_size();
   int rank = MPI::COMM_WORLD.Get_rank();

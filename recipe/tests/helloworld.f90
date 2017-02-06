@@ -6,7 +6,7 @@ program main
   integer :: provided,  ierr, size, rank, len
   character (len=MPI_MAX_PROCESSOR_NAME) :: name
 
-  call MPI_Init_thread(MPI_THREAD_MULTIPLE, provided, ierr)
+  call MPI_Init(ierr)
 
   call MPI_Comm_rank(MPI_COMM_WORLD, rank, ierr)
   call MPI_Comm_size(MPI_COMM_WORLD, size, ierr)

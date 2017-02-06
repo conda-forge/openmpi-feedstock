@@ -1,32 +1,33 @@
 #!/bin/bash
 
-if [[ $(uname) == Darwin ]]; then
-  export DYLD_LIBRARY_PATH=$PREFIX/lib
-fi
-
 command -v ompi_info
 ompi_info
 
-command -v mpirun
-mpirun --allow-run-as-root --help
-
 command -v mpicc
-mpicc --allow-run-as-root -show
+mpicc -show
 
 command -v mpicxx
-mpicxx --allow-run-as-root -show
+mpicxx -show
 
 command -v mpif90
-mpif90 --allow-run-as-root -show
+mpif90 -show
 
 command -v mpiexec
+MPIEXEC="mpiexec -mca plm isolated --allow-run-as-root"
+$MPIEXEC --help
 
-mpicc $RECIPE_DIR/tests/helloworld.c -o helloworld_c
-mpiexec -mca plm isolated --allow-run-as-root -n 4 helloworld_c
+pushd $RECIPE_DIR/tests
 
-mpicxx $RECIPE_DIR/tests/helloworld.cxx -o helloworld_cxx
-mpiexec -mca plm isolated --allow-run-as-root -n 4 helloworld_cxx
+mpicc helloworld.c -o helloworld_c
+$MPIEXEC -n 4 ./helloworld_c
 
-mpif90 $RECIPE_DIR/tests/helloworld.f90 -o helloworld_f90
-mpiexec -mca plm isolated --allow-run-as-root -n 4 helloworld_f90
+mpicxx helloworld.cxx -o helloworld_cxx
+$MPIEXEC -n 4 ./helloworld_cxx
 
+mpif77 helloworld.f -o helloworld_f
+$MPIEXEC -n 4 ./helloworld_f
+
+mpif90 helloworld.f90 -o helloworld_f90
+$MPIEXEC -n 4 ./helloworld_f90
+
+popd
