@@ -13,8 +13,14 @@ command -v mpif90
 mpif90 -show
 
 command -v mpiexec
-MPIEXEC="mpiexec -mca plm isolated --allow-run-as-root"
-$MPIEXEC --help
+if [[ "$(uname)" == "Darwin" ]]; then
+  MPIEXEC="mpiexec -mca plm isolated --allow-run-as-root"
+  $MPIEXEC --help
+else
+  # skip mpiexec tests on Linux due to conda-forge bug:
+  # https://github.com/conda-forge/conda-smithy/pull/337
+  MPIEXEC="echo SKIPPING mpiexec"
+fi
 
 pushd $RECIPE_DIR/tests
 
