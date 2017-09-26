@@ -15,7 +15,7 @@ source:
 build:
     number: {{ build }}
     skip: True  # [win]
-    track_features:
+    features:
       - openmpi
 
 requirements:
@@ -26,6 +26,7 @@ requirements:
     run:
         - libgcc  # [linux]
         - libgfortran  # [osx]
+        - mpi
 
 test:
     requires:
