@@ -1,4 +1,4 @@
-{% set version = "2.1.1" %}
+{% set version = "2.1.2" %}
 {% set major = ".".join(version.split(".")[:2]) %}
 
 package:
@@ -8,7 +8,7 @@ package:
 source:
     fn: openmpi-{{ version }}.tar.bz2
     url: https://www.open-mpi.org/software/ompi/v{{ major }}/downloads/openmpi-{{ version }}.tar.bz2
-    sha1: 3aaee35c17b6ef02f4cee274f2670d5b7b2c968a
+    sha1: 4d43bb407eb8b9da099a555e8dc083352c6a1d02
 
 build:
     number: 0
