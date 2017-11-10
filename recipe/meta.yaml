@@ -1,5 +1,7 @@
-{% set version = "2.1.2" %}
-{% set major = ".".join(version.split(".")[:2]) %}
+{% set build = 0 %}
+{% set version = '3.0.0' %}
+{% set sha256 = 'f699bff21db0125d8cccfe79518b77641cd83628725a1e1ed3e45633496a82d7' %}
+{% set major = version.rpartition('.')[0] %}
 
 package:
     name: openmpi
@@ -8,17 +10,17 @@ package:
 source:
     fn: openmpi-{{ version }}.tar.bz2
     url: https://www.open-mpi.org/software/ompi/v{{ major }}/downloads/openmpi-{{ version }}.tar.bz2
-    sha1: 4d43bb407eb8b9da099a555e8dc083352c6a1d02
+    sha256: {{ sha256 }}
 
 build:
-    number: 0
+    number: {{ build }}
     skip: True  # [win]
 
 requirements:
     build:
+        - toolchain
         - gcc  # [not win]
         - perl
-        - toolchain
     run:
         - libgcc  # [linux]
         - libgfortran  # [osx]
@@ -32,12 +34,11 @@ test:
         - tests/helloworld.f
         - tests/helloworld.f90
     commands:
-        - conda inspect objects openmpi  # [osx]
+        - conda inspect objects  openmpi  # [osx]
         - conda inspect linkages openmpi  # [not win]
 
-
 about:
-    home: http://www.open-mpi.org/
+    home: https://www.open-mpi.org/
     license: BSD 3-Clause
     license_family: BSD
     license_file: LICENSE

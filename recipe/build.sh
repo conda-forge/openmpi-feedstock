@@ -9,8 +9,7 @@ export LIBRARY_PATH="$PREFIX/lib"
 ./configure --prefix=$PREFIX \
             --disable-dependency-tracking \
             --enable-mpi-cxx \
-            --enable-mpi-fortran \
-            --with-wrapper-ldflags="-Wl,-rpath,$PREFIX/lib"
+            --enable-mpi-fortran
 
 make
 make install
