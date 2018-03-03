@@ -11,5 +11,5 @@ export LIBRARY_PATH="$PREFIX/lib"
             --enable-mpi-cxx \
             --enable-mpi-fortran
 
-make
+make -j"${CPU_COUNT:-1}"
 make install

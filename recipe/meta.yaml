@@ -1,4 +1,4 @@
-{% set build = 0 %}
+{% set build = 1 %}
 {% set version = '3.0.0' %}
 {% set sha256 = 'f699bff21db0125d8cccfe79518b77641cd83628725a1e1ed3e45633496a82d7' %}
 {% set major = version.rpartition('.')[0] %}
@@ -24,6 +24,7 @@ requirements:
     run:
         - libgcc  # [linux]
         - libgfortran  # [osx]
+        - mpi 1.0 openmpi
 
 test:
     requires:
