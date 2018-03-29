@@ -1,7 +1,7 @@
 About openmpi
 =============
 
-Home: http://www.open-mpi.org/
+Home: https://www.open-mpi.org/
 
 Package license: BSD 3-Clause
 
