@@ -9,9 +9,6 @@ osx_image: xcode6.4
 env:
   matrix:
     
-    - CONDA_PERL=5.20.3.1
-    - CONDA_PERL=5.22.0.1
-    - CONDA_PERL=5.22.2.1
     - CONDA_PERL=5.26.0
   global:
     # The BINSTAR_TOKEN secure variable. This is defined canonically in conda-forge.yml.
