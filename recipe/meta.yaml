@@ -20,7 +20,7 @@ requirements:
     build:
         - toolchain
         - gcc  # [not win]
-        - perl
+        - perl 5.26.0
     run:
         - libgcc  # [linux]
         - libgfortran  # [osx]
