@@ -1,9 +1,11 @@
 version: 2
 
 jobs:
-  build:
+  build__CONDA_PERL_5.26.0:
     working_directory: ~/test
     machine: true
+    environment:
+      - CONDA_PERL: "5.26.0"
     steps:
       - checkout
       - run:
@@ -14,6 +16,10 @@ jobs:
       - run:
           command: docker pull condaforge/linux-anvil
       - run:
+          name: Print conda-build environment variables
+          command: |
+            echo "CONDA_PERL=${CONDA_PERL}"
+      - run:
           # Run, test and (if we have a BINSTAR_TOKEN) upload the distributions.
           command: ./ci_support/run_docker_build.sh
 
@@ -21,4 +27,4 @@ workflows:
   version: 2
   build_and_test:
     jobs:
-      - build
+      - build__CONDA_PERL_5.26.0

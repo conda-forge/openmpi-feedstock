@@ -1,6 +1,6 @@
 {% set build = 1 %}
-{% set version = '3.0.0' %}
-{% set sha256 = 'f699bff21db0125d8cccfe79518b77641cd83628725a1e1ed3e45633496a82d7' %}
+{% set version = "3.0.1" %}
+{% set sha256 = '663450d1ee7838b03644507e8a76edfb1fba23e601e9e0b5b2a738e54acd785d' %}
 {% set major = version.rpartition('.')[0] %}
 
 package:
@@ -13,14 +13,14 @@ source:
     sha256: {{ sha256 }}
 
 build:
-    number: {{ build }}
+    number: 0
     skip: True  # [win]
 
 requirements:
     build:
         - toolchain
         - gcc  # [not win]
-        - perl
+        - perl 5.26.0
     run:
         - libgcc  # [linux]
         - libgfortran  # [osx]
