@@ -1,6 +1,6 @@
 {% set build = 1 %}
-{% set version = "3.0.1" %}
-{% set sha256 = '663450d1ee7838b03644507e8a76edfb1fba23e601e9e0b5b2a738e54acd785d' %}
+{% set version = "3.1.0" %}
+{% set sha256 = 'b25c044124cc859c0b4e6e825574f9439a51683af1950f6acda1951f5ccdf06c' %}
 {% set major = version.rpartition('.')[0] %}
 
 package:
