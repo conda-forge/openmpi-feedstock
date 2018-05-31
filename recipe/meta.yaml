@@ -1,4 +1,3 @@
-{% set build = 1 %}
 {% set version = "3.1.0" %}
 {% set sha256 = 'b25c044124cc859c0b4e6e825574f9439a51683af1950f6acda1951f5ccdf06c' %}
 {% set major = version.rpartition('.')[0] %}
@@ -13,8 +12,10 @@ source:
     sha256: {{ sha256 }}
 
 build:
-    number: 0
+    number: 1
     skip: True  # [win]
+    run_exports:
+        - {{ pin_compatible('openmpi', min_pin='x.x', max_pin='x.x') }}
 
 requirements:
     build:
