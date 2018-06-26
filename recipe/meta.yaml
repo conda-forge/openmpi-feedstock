@@ -19,12 +19,12 @@ build:
 
 requirements:
     build:
-        - toolchain
-        - gcc  # [not win]
         - perl 5.26.0
+        - {{ compiler('fortran') }}
+        - {{ compiler('c') }}
+        - {{ compiler('cxx') }}
+    host:
     run:
-        - libgcc  # [linux]
-        - libgfortran  # [osx]
         - mpi 1.0 openmpi
 
 test:
