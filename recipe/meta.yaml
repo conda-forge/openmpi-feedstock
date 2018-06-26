@@ -23,7 +23,7 @@ requirements:
         - {{ compiler('fortran') }}
         - {{ compiler('c') }}
         - {{ compiler('cxx') }}
-    host:
+    host: []
     run:
         - mpi 1.0 openmpi
 
