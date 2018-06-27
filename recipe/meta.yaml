@@ -29,7 +29,9 @@ requirements:
 
 test:
     requires:
-        - gcc  # [not win]
+        - {{ compiler('fortran') }}
+        - {{ compiler('c') }}
+        - {{ compiler('cxx') }}
     files:
         - tests/helloworld.c
         - tests/helloworld.cxx
