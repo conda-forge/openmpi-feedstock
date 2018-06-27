@@ -15,7 +15,7 @@ build:
     number: 2
     skip: True  # [win]
     run_exports:
-        - {{ pin_compatible('openmpi', min_pin='x.x', max_pin='x.x') }}
+        - {{ pin_subpackage('openmpi', min_pin='x.x', max_pin='x.x') }}
 
 requirements:
     build:
