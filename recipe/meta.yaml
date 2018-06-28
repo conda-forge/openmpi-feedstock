@@ -12,24 +12,26 @@ source:
     sha256: {{ sha256 }}
 
 build:
-    number: 1
+    number: 2
     skip: True  # [win]
     run_exports:
-        - {{ pin_compatible('openmpi', min_pin='x.x', max_pin='x.x') }}
+        - {{ pin_subpackage('openmpi', min_pin='x.x', max_pin='x.x') }}
 
 requirements:
     build:
-        - toolchain
-        - gcc  # [not win]
         - perl 5.26.0
+        - {{ compiler('fortran') }}
+        - {{ compiler('c') }}
+        - {{ compiler('cxx') }}
+    host: []
     run:
-        - libgcc  # [linux]
-        - libgfortran  # [osx]
         - mpi 1.0 openmpi
 
 test:
     requires:
-        - gcc  # [not win]
+        - {{ compiler('fortran') }}
+        - {{ compiler('c') }}
+        - {{ compiler('cxx') }}
     files:
         - tests/helloworld.c
         - tests/helloworld.cxx
