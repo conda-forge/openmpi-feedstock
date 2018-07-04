@@ -12,7 +12,7 @@ source:
     sha256: {{ sha256 }}
 
 build:
-    number: 2
+    number: 3
     skip: True  # [win]
     run_exports:
         - {{ pin_subpackage('openmpi', min_pin='x.x', max_pin='x.x') }}
