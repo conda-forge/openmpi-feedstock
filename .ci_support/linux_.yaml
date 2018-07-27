@@ -4,3 +4,8 @@ cxx_compiler:
 - toolchain_cxx
 fortran_compiler:
 - toolchain_fort
+perl:
+- '5.26'
+pin_run_as_build:
+  perl:
+    max_pin: x.x.x
