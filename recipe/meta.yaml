@@ -12,14 +12,14 @@ source:
     sha256: {{ sha256 }}
 
 build:
-    number: 3
+    number: 4
     skip: True  # [win]
     run_exports:
         - {{ pin_subpackage('openmpi', min_pin='x.x', max_pin='x.x') }}
 
 requirements:
     build:
-        - perl 5.26.0
+        - perl
         - {{ compiler('fortran') }}
         - {{ compiler('c') }}
         - {{ compiler('cxx') }}
