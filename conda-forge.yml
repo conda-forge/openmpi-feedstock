@@ -1,8 +1,10 @@
+appveyor:
+  secure: {BINSTAR_TOKEN: tumuXLL8PU75WMnRDemRy02ruEq2RpNxeK3dz0MjFssnosPm2v4EFjfNB4PTotA1}
+compiler_stack: comp7
+max_py_ver: '37'
+max_r_ver: '35'
 provider:
   osx: circle
 travis:
   secure:
     BINSTAR_TOKEN: aruK/ntVJWnvUrqBmVOgjP3DaLH1j7jPVIy/tKQr3nl0fAY6GgJumE47G6f6uo+Acq/YkS+nxJ0/PtPZfKSz7cFSdnhhUT81lavFs/TptSkp37kmbLNadgkdd/jtfNAym1N3O8CarvGIdQbMDEujYb7PwtZlBdRuLqt7J0FkRZF/x4+PB4ewoB1czU2XePD+TZOqo8gkgdjRWZKIAFVnvcdPP6eSWvL1SQ5ZHUJoZTJdlbiuejEuqBTbWiQTZvKH7pc9Znz8Ayoq4HaggJ4HdbnJpd+9UUhipoBUgEyoZf+lmBGz3rTCD+E585ajcei8OrNtRJbL660saVwaD8Q64JZiser9xX0qASlyKtC1durtFdjln9Ibu+OAqkYgaX7qJGWFl9EBpeuxO92lSd/qgli+2KeJD8b0E4hO16qz6nIWDxHbkhhy6fR8EKrfiIBVdBMWISOvgjRH5kUvQtdb1xEE52cyaYrPAkrVeY6LbWBsx+cuOSTfnjylB7YRCsA79XpAtTSHjZkIhVIvq/ngoaeG/JRKXGXmp03cu1uFsT1i+O7/SnEwzBeKvDX0etWwNCV4xvxHR2JLaleClmZB1308ML2wmCMTlP8zuq1QLIjyZ8pDpiS0hqE4QhFaa5DV+r5PRjpRkZ/3E10m+py/mIJrRNWec86IxiOh070bLWs=
-appveyor:
-  secure:
-    BINSTAR_TOKEN: tumuXLL8PU75WMnRDemRy02ruEq2RpNxeK3dz0MjFssnosPm2v4EFjfNB4PTotA1

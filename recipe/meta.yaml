@@ -12,7 +12,7 @@ source:
     sha256: {{ sha256 }}
 
 build:
-    number: 0
+    number: 1000
     skip: True  # [win]
     run_exports:
         - {{ pin_subpackage('openmpi', min_pin='x.x', max_pin='x.x') }}
@@ -20,10 +20,10 @@ build:
 requirements:
     build:
         - perl 5.26.0
+    host:
         - {{ compiler('fortran') }}
         - {{ compiler('c') }}
         - {{ compiler('cxx') }}
-    host: []
     run:
         - mpi 1.0 openmpi
 
