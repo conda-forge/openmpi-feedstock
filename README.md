@@ -17,7 +17,8 @@ research, and industry partners.
 Current build status
 ====================
 
-[![Linux,OSX](https://img.shields.io/circleci/project/github/conda-forge/openmpi-feedstock/master.svg?label=Linux,OSX)](https://circleci.com/gh/conda-forge/openmpi-feedstock)
+[![Linux](https://img.shields.io/circleci/project/github/conda-forge/openmpi-feedstock/master.svg?label=Linux)](https://circleci.com/gh/conda-forge/openmpi-feedstock)
+[![OSX](https://img.shields.io/travis/conda-forge/openmpi-feedstock/master.svg?label=macOS)](https://travis-ci.org/conda-forge/openmpi-feedstock)
 ![Windows disabled](https://img.shields.io/badge/Windows-disabled-lightgrey.svg)
 
 Current release info
