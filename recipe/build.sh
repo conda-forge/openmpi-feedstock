@@ -24,7 +24,8 @@ export LIBRARY_PATH="$PREFIX/lib"
 ./configure --prefix=$PREFIX \
             --disable-dependency-tracking \
             --enable-mpi-cxx \
-            --enable-mpi-fortran
+            --enable-mpi-fortran \
+            --with-sge
 
 make -j"${CPU_COUNT:-1}"
 make install
