@@ -9,7 +9,7 @@ channel_targets:
 cxx_compiler:
 - gxx
 docker_image:
-- conda/c3i-linux-64
+- condaforge/linux-anvil-comp7
 fortran_compiler:
 - gfortran
 zip_keys:
