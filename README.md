@@ -1,6 +1,8 @@
 About openmpi
 =============
 
+[![Powered by NumFOCUS](https://img.shields.io/badge/powered%20by-NumFOCUS-orange.svg?style=flat&colorA=E1523D&colorB=007D8A)](http://numfocus.org)
+
 Home: https://www.open-mpi.org/
 
 Package license: BSD 3-Clause
@@ -17,7 +19,8 @@ research, and industry partners.
 Current build status
 ====================
 
-[![Linux,OSX](https://img.shields.io/circleci/project/github/conda-forge/openmpi-feedstock/master.svg?label=Linux,OSX)](https://circleci.com/gh/conda-forge/openmpi-feedstock)
+[![Linux](https://img.shields.io/circleci/project/github/conda-forge/openmpi-feedstock/master.svg?label=Linux)](https://circleci.com/gh/conda-forge/openmpi-feedstock)
+[![OSX](https://img.shields.io/travis/conda-forge/openmpi-feedstock/master.svg?label=macOS)](https://travis-ci.org/conda-forge/openmpi-feedstock)
 ![Windows disabled](https://img.shields.io/badge/Windows-disabled-lightgrey.svg)
 
 Current release info
@@ -106,3 +109,13 @@ In order to produce a uniquely identifiable distribution:
  * If the version of a package **is** being increased, please remember to return
    the [``build/number``](https://conda.io/docs/user-guide/tasks/build-packages/define-metadata.html#build-number-and-string)
    back to 0.
+
+Feedstock Maintainers
+=====================
+
+* [@astrofrog-conda-forge](https://github.com/astrofrog-conda-forge/)
+* [@bekozi](https://github.com/bekozi/)
+* [@dalcinl](https://github.com/dalcinl/)
+* [@minrk](https://github.com/minrk/)
+* [@msarahan](https://github.com/msarahan/)
+* [@ocefpaf](https://github.com/ocefpaf/)
