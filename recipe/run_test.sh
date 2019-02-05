@@ -24,7 +24,7 @@ export OMPI_MCA_btl_vader_single_copy_mechanism=none
 export OMPI_MCA_rmaps_base_oversubscribe=yes
 
 command -v mpiexec
-MPIEXEC="${RECIPE_DIR}/mpiexec.sh"
+MPIEXEC="${PWD}/mpiexec.sh"
 $MPIEXEC --help
 
 pushd "tests"

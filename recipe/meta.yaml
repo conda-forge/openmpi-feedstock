@@ -34,6 +34,7 @@ outputs:
     test:
       script: run_test.sh
       files:
+        - mpiexec.sh
         - tests/test_exec.py
       requires:
         - python >=3
@@ -53,6 +54,7 @@ outputs:
     test:
       script: run_test.sh
       files:
+        - mpiexec.sh
         - tests/helloworld.c
 
   - name: openmpi-mpicxx
@@ -70,6 +72,7 @@ outputs:
     test:
       script: run_test.sh
       files:
+        - mpiexec.sh
         - tests/helloworld.cxx
 
   - name: openmpi-mpifort
@@ -86,6 +89,7 @@ outputs:
     test:
       script: run_test.sh
       files:
+        - mpiexec.sh
         - tests/helloworld.f
         - tests/helloworld.f90
 
