@@ -3,43 +3,92 @@
 {% set major = version.rpartition('.')[0] %}
 
 package:
-    name: openmpi
-    version: {{ version }}
+  name: openmpi-mpi
+  version: {{ version }}
 
 source:
-    fn: openmpi-{{ version }}.tar.bz2
-    url: https://www.open-mpi.org/software/ompi/v{{ major }}/downloads/openmpi-{{ version }}.tar.bz2
-    sha256: {{ sha256 }}
+  fn: openmpi-{{ version }}.tar.bz2
+  url: https://www.open-mpi.org/software/ompi/v{{ major }}/downloads/openmpi-{{ version }}.tar.bz2
+  sha256: {{ sha256 }}
 
 build:
-    number: 1000
-    skip: True  # [win]
-    run_exports:
-        - {{ pin_subpackage('openmpi', min_pin='x.x', max_pin='x.x') }}
+  number: 1001
+  skip: True  # [win]
 
-requirements:
+outputs:
+  - name: openmpi
+    script: build-openmpi.sh
     build:
-        - perl 5.26.0
-    host:
-        - {{ compiler('fortran') }}
-        - {{ compiler('c') }}
-        - {{ compiler('cxx') }}
-    run:
-        - mpi 1.0 openmpi
+      run_exports:
+        - {{ pin_subpackage('openmpi', min_pin='x.x.x', max_pin='x.x') }}
 
-test:
-    requires:
+    requirements:
+      build:
+        - perl 5.26.0
+      host:
         - {{ compiler('fortran') }}
         - {{ compiler('c') }}
         - {{ compiler('cxx') }}
-    files:
+      run:
+        - mpi 1.0 openmpi
+    test:
+      script: run_test.sh
+      files:
+        - tests/test_exec.py
+      requires:
+        - python >=3
+
+  - name: openmpi-mpicc
+    build:
+      script:
+        - echo 'ok'  # [not osx]
+        # make CONDA_BUILD_SYSROOT a 'used variable'
+        # so that conda-build knows to pass it to the test env
+        - echo "{{CONDA_BUILD_SYSROOT}}"  # [osx]
+    requirements:
+      run:
+        - {{ pin_subpackage('openmpi', exact=True) }}
+        # host C compilers work fine (better) on mac
+        - {{ compiler('c') }}
+    test:
+      script: run_test.sh
+      files:
         - tests/helloworld.c
+
+  - name: openmpi-mpicxx
+    build:
+      script:
+        - echo 'ok'  # [not osx]
+        # make CONDA_BUILD_SYSROOT a 'used variable'
+        # so that conda-build knows to pass it to the test env
+        - echo "{{CONDA_BUILD_SYSROOT}}"  # [osx]
+    requirements:
+      run:
+        - {{ pin_subpackage('openmpi', exact=True) }}
+        # host C compilers work fine (better) on mac
+        - {{ compiler('cxx') }}
+    test:
+      script: run_test.sh
+      files:
         - tests/helloworld.cxx
+
+  - name: openmpi-mpifort
+    build:
+      script:
+        - echo 'ok'  # [not osx]
+        # make CONDA_BUILD_SYSROOT a 'used variable'
+        # so that conda-build knows to pass it to the test env
+        - echo "{{CONDA_BUILD_SYSROOT}}"  # [osx]
+    requirements:
+      run:
+        - {{ pin_subpackage('openmpi', exact=True) }}
+        - {{ compiler('fortran') }}
+    test:
+      script: run_test.sh
+      files:
         - tests/helloworld.f
         - tests/helloworld.f90
-    commands:
-        - conda inspect objects  openmpi  # [osx]
-        - conda inspect linkages openmpi  # [not win]
+
 
 about:
     home: https://www.open-mpi.org/

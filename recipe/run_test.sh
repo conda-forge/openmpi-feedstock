@@ -1,5 +1,5 @@
 #!/bin/bash
-set -e
+set -ex
 
 command -v ompi_info
 ompi_info
@@ -27,18 +27,31 @@ command -v mpiexec
 MPIEXEC="${RECIPE_DIR}/mpiexec.sh"
 $MPIEXEC --help
 
-pushd $RECIPE_DIR/tests
+pushd "tests"
 
-mpicc helloworld.c -o helloworld_c
-$MPIEXEC -n 4 ./helloworld_c
+if [[ $PKG_NAME == "openmpi" ]]; then
+  $MPIEXEC -n 4 python test_exec.py
+fi
 
-mpicxx helloworld.cxx -o helloworld_cxx
-$MPIEXEC -n 4 ./helloworld_cxx
+if [[ $PKG_NAME == "openmpi-mpicc" ]]; then
+  mpicc $CFLAGS $LDFLAGS helloworld.c -o helloworld_c
+  $MPIEXEC -n 4 ./helloworld_c
+fi
 
-mpif90 helloworld.f90 -o helloworld_f90
-$MPIEXEC -n 4 ./helloworld_f90
+if [[ $PKG_NAME == "openmpi-mpicxx" ]]; then
+  mpicxx $CXXFLAGS $LDFLAGS helloworld.cxx -o helloworld_cxx
+  $MPIEXEC -n 4 ./helloworld_cxx
+fi
 
-mpif77 helloworld.f -o helloworld_f
-$MPIEXEC -n 4 ./helloworld_f
+if [[ $PKG_NAME == "openmpi-mpifort" ]]; then
+  mpif77 $FFLAGS $LDFLAGS helloworld.f -o helloworld_f
+  $MPIEXEC -n 4 ./helloworld_f
+
+  mpif90 $FFLAGS $LDFLAGS helloworld.f90 -o helloworld_f90
+  $MPIEXEC -n 4 ./helloworld_f90
+
+  mpifort $FFLAGS $LDFLAGS helloworld.f90 -o helloworld_fort
+  $MPIEXEC -n 4 ./helloworld_fort
+fi
 
 popd
