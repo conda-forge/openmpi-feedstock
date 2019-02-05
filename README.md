@@ -1,7 +1,9 @@
-About openmpi
-=============
+<!--
+# -*- mode: jinja -*-
+-->
 
-[![Powered by NumFOCUS](https://img.shields.io/badge/powered%20by-NumFOCUS-orange.svg?style=flat&colorA=E1523D&colorB=007D8A)](http://numfocus.org)
+About openmpi-mpi
+=================
 
 Home: https://www.open-mpi.org/
 
@@ -29,20 +31,23 @@ Current release info
 | Name | Downloads | Version | Platforms |
 | --- | --- | --- | --- |
 | [![Conda Recipe](https://img.shields.io/badge/recipe-openmpi-green.svg)](https://anaconda.org/conda-forge/openmpi) | [![Conda Downloads](https://img.shields.io/conda/dn/conda-forge/openmpi.svg)](https://anaconda.org/conda-forge/openmpi) | [![Conda Version](https://img.shields.io/conda/vn/conda-forge/openmpi.svg)](https://anaconda.org/conda-forge/openmpi) | [![Conda Platforms](https://img.shields.io/conda/pn/conda-forge/openmpi.svg)](https://anaconda.org/conda-forge/openmpi) |
+| [![Conda Recipe](https://img.shields.io/badge/recipe-openmpi--mpicc-green.svg)](https://anaconda.org/conda-forge/openmpi-mpicc) | [![Conda Downloads](https://img.shields.io/conda/dn/conda-forge/openmpi-mpicc.svg)](https://anaconda.org/conda-forge/openmpi-mpicc) | [![Conda Version](https://img.shields.io/conda/vn/conda-forge/openmpi-mpicc.svg)](https://anaconda.org/conda-forge/openmpi-mpicc) | [![Conda Platforms](https://img.shields.io/conda/pn/conda-forge/openmpi-mpicc.svg)](https://anaconda.org/conda-forge/openmpi-mpicc) |
+| [![Conda Recipe](https://img.shields.io/badge/recipe-openmpi--mpicxx-green.svg)](https://anaconda.org/conda-forge/openmpi-mpicxx) | [![Conda Downloads](https://img.shields.io/conda/dn/conda-forge/openmpi-mpicxx.svg)](https://anaconda.org/conda-forge/openmpi-mpicxx) | [![Conda Version](https://img.shields.io/conda/vn/conda-forge/openmpi-mpicxx.svg)](https://anaconda.org/conda-forge/openmpi-mpicxx) | [![Conda Platforms](https://img.shields.io/conda/pn/conda-forge/openmpi-mpicxx.svg)](https://anaconda.org/conda-forge/openmpi-mpicxx) |
+| [![Conda Recipe](https://img.shields.io/badge/recipe-openmpi--mpifort-green.svg)](https://anaconda.org/conda-forge/openmpi-mpifort) | [![Conda Downloads](https://img.shields.io/conda/dn/conda-forge/openmpi-mpifort.svg)](https://anaconda.org/conda-forge/openmpi-mpifort) | [![Conda Version](https://img.shields.io/conda/vn/conda-forge/openmpi-mpifort.svg)](https://anaconda.org/conda-forge/openmpi-mpifort) | [![Conda Platforms](https://img.shields.io/conda/pn/conda-forge/openmpi-mpifort.svg)](https://anaconda.org/conda-forge/openmpi-mpifort) |
 
-Installing openmpi
-==================
+Installing openmpi-mpi
+======================
 
-Installing `openmpi` from the `conda-forge` channel can be achieved by adding `conda-forge` to your channels with:
+Installing `openmpi-mpi` from the `conda-forge` channel can be achieved by adding `conda-forge` to your channels with:
 
 ```
 conda config --add channels conda-forge
 ```
 
-Once the `conda-forge` channel has been enabled, `openmpi` can be installed with:
+Once the `conda-forge` channel has been enabled, `openmpi, openmpi-mpicc, openmpi-mpicxx, openmpi-mpifort` can be installed with:
 
 ```
-conda install openmpi
+conda install openmpi openmpi-mpicc openmpi-mpicxx openmpi-mpifort
 ```
 
 It is possible to list all of the versions of `openmpi` available on your platform with:
@@ -54,6 +59,8 @@ conda search openmpi --channel conda-forge
 
 About conda-forge
 =================
+
+[![Powered by NumFOCUS](https://img.shields.io/badge/powered%20by-NumFOCUS-orange.svg?style=flat&colorA=E1523D&colorB=007D8A)](http://numfocus.org)
 
 conda-forge is a community-led conda channel of installable packages.
 In order to provide high-quality builds, the process has been automated into the
@@ -88,17 +95,17 @@ Terminology
                   produce the finished article (built conda distributions)
 
 
-Updating openmpi-feedstock
-==========================
+Updating openmpi-mpi-feedstock
+==============================
 
-If you would like to improve the openmpi recipe or build a new
+If you would like to improve the openmpi-mpi recipe or build a new
 package version, please fork this repository and submit a PR. Upon submission,
 your changes will be run on the appropriate platforms to give the reviewer an
 opportunity to confirm that the changes result in a successful build. Once
 merged, the recipe will be re-built and uploaded automatically to the
 `conda-forge` channel, whereupon the built conda packages will be available for
 everybody to install and use from the `conda-forge` channel.
-Note that all branches in the conda-forge/openmpi-feedstock are
+Note that all branches in the conda-forge/openmpi-mpi-feedstock are
 immediately built and any created packages are uploaded, so PRs should be based
 on branches in forks and branches in the main repository should only be used to
 build distinct package versions.
