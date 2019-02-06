@@ -34,6 +34,7 @@ export LIBRARY_PATH="$PREFIX/lib"
             --with-wrapper-fflags="-I$PREFIX/include" \
             --with-wrapper-fcflags="-I$PREFIX/include" \
             --with-wrapper-ldflags="-L$PREFIX/lib -Wl,-rpath,$PREFIX/lib" \
+            --disable-wrapper-rpath \
             --disable-wrapper-runpath \
             --with-sge
 
