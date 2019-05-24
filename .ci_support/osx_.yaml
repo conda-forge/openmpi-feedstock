@@ -1,5 +1,5 @@
 MACOSX_DEPLOYMENT_TARGET:
-- '10.9'
+- '10.12'
 c_compiler:
 - clang
 c_compiler_version:
@@ -19,4 +19,4 @@ fortran_compiler_version:
 macos_machine:
 - x86_64-apple-darwin13.4.0
 macos_min_version:
-- '10.9'
+- '10.12'
