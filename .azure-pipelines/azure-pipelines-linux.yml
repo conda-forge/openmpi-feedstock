@@ -13,6 +13,9 @@ jobs:
       linux_:
         CONFIG: linux_
         UPLOAD_PACKAGES: True
+      linux_aarch64_:
+        CONFIG: linux_aarch64_
+        UPLOAD_PACKAGES: True
   steps:
   - script: |
       sudo pip install --upgrade pip
