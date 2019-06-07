@@ -12,7 +12,7 @@ source:
   sha256: {{ sha256 }}
 
 build:
-  number: 0
+  number: 1
   skip: True  # [win]
 
 outputs:
@@ -24,11 +24,12 @@ outputs:
 
     requirements:
       build:
-        - perl 5.26.0
+        - perl 5.26.2
       host:
         - {{ compiler('fortran') }}
         - {{ compiler('c') }}
         - {{ compiler('cxx') }}
+        - make  # [unix]
       run:
         - mpi 1.0 openmpi
     test:

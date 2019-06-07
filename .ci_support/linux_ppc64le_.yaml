@@ -1,24 +1,22 @@
-CONDA_BUILD_SYSROOT:
-- /opt/MacOSX10.10.sdk
 MACOSX_DEPLOYMENT_TARGET:
 - '10.12'
 c_compiler:
-- clang
+- gcc
 c_compiler_version:
-- '4'
+- '8'
 channel_sources:
 - conda-forge,defaults
 channel_targets:
 - conda-forge main
 cxx_compiler:
-- clangxx
+- gxx
 cxx_compiler_version:
-- '4'
+- '8'
+docker_image:
+- condaforge/linux-anvil-ppc64le
 fortran_compiler:
 - gfortran
 fortran_compiler_version:
-- '4'
-macos_machine:
-- x86_64-apple-darwin13.4.0
+- '8'
 macos_min_version:
 - '10.12'
