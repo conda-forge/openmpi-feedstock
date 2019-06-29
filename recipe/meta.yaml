@@ -1,44 +1,41 @@
 {% set version = "4.0.1" %}
-{% set sha256 = "cce7b6d20522849301727f81282201d609553103ac0b09162cf28d102efb9709" %}
 {% set major = version.rpartition('.')[0] %}
 
 package:
+  # must not match any outputs for requirements to be handled correctly
   name: openmpi-mpi
   version: {{ version }}
 
 source:
   fn: openmpi-{{ version }}.tar.bz2
   url: https://www.open-mpi.org/software/ompi/v{{ major }}/downloads/openmpi-{{ version }}.tar.bz2
-  sha256: {{ sha256 }}
+  sha256: cce7b6d20522849301727f81282201d609553103ac0b09162cf28d102efb9709
 
 build:
-  number: 1
+  number: 2
   skip: True  # [win]
 
 outputs:
   - name: openmpi
-    script: build-openmpi.sh
+    script: build-mpi.sh
     build:
       run_exports:
         - {{ pin_subpackage('openmpi', min_pin='x.x.x', max_pin='x.x') }}
-
     requirements:
       build:
-        - perl 5.26.2
-      host:
-        - {{ compiler('fortran') }}
         - {{ compiler('c') }}
         - {{ compiler('cxx') }}
+        - {{ compiler('fortran') }}
         - make  # [unix]
+        - perl 5.26.2
+      host: []
       run:
         - mpi 1.0 openmpi
     test:
       script: run_test.sh
       files:
         - mpiexec.sh
-        - tests/test_exec.py
-      requires:
-        - python >=3
+        - tests/helloworld.sh
 
   - name: openmpi-mpicc
     build:
@@ -93,7 +90,6 @@ outputs:
         - mpiexec.sh
         - tests/helloworld.f
         - tests/helloworld.f90
-
 
 about:
     home: https://www.open-mpi.org/
