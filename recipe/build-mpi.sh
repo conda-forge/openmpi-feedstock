@@ -1,13 +1,8 @@
 #!/bin/bash
 
-# unset unused old fortran flags
+# unset unused old fortran compiler vars
 unset F90 F77
 
-# remove --as-needed, which causes problems for downstream builds,
-# seen in failures in petsc, slepc, and hdf5 at least
-export LDFLAGS="${LDFLAGS/-Wl,--as-needed/}"
-
-# this might not be needed?
 export FCFLAGS="$FFLAGS"
 
 # avoid absolute-paths in compilers
@@ -29,13 +24,12 @@ export LIBRARY_PATH="$PREFIX/lib"
             --disable-dependency-tracking \
             --enable-mpi-cxx \
             --enable-mpi-fortran \
-            --with-wrapper-cflags="-I$PREFIX/include" \
-            --with-wrapper-cxxflags="-I$PREFIX/include" \
-            --with-wrapper-fflags="-I$PREFIX/include" \
-            --with-wrapper-fcflags="-I$PREFIX/include" \
-            --with-wrapper-ldflags="-L$PREFIX/lib -Wl,-rpath,$PREFIX/lib" \
             --disable-wrapper-rpath \
             --disable-wrapper-runpath \
+            --with-wrapper-cflags="-I$PREFIX/include" \
+            --with-wrapper-cxxflags="-I$PREFIX/include" \
+            --with-wrapper-fcflags="-I$PREFIX/include" \
+            --with-wrapper-ldflags="-L$PREFIX/lib -Wl,-rpath,$PREFIX/lib" \
             --with-sge
 
 make -j"${CPU_COUNT:-1}"

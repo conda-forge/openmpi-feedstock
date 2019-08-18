@@ -4,8 +4,6 @@ set -ex
 export OMPI_MCA_plm=isolated
 export OMPI_MCA_btl_vader_single_copy_mechanism=none
 export OMPI_MCA_rmaps_base_oversubscribe=yes
-
-command -v mpiexec
 MPIEXEC="${PWD}/mpiexec.sh"
 
 pushd "tests"
@@ -14,9 +12,9 @@ if [[ $PKG_NAME == "openmpi" ]]; then
   command -v ompi_info
   ompi_info
 
+  command -v mpiexec
   $MPIEXEC --help
-
-  $MPIEXEC -n 4 python test_exec.py
+  $MPIEXEC -n 4 ./helloworld.sh
 fi
 
 if [[ $PKG_NAME == "openmpi-mpicc" ]]; then
@@ -36,24 +34,27 @@ if [[ $PKG_NAME == "openmpi-mpicxx" ]]; then
 fi
 
 if [[ $PKG_NAME == "openmpi-mpifort" ]]; then
-
   command -v mpifort
   mpifort -show
 
-  command -v mpif90
-  mpif90 -show
+  mpifort $FFLAGS $LDFLAGS helloworld.f -o helloworld1_f
+  $MPIEXEC -n 4 ./helloworld1_f
+
+  mpifort $FFLAGS $LDFLAGS helloworld.f90 -o helloworld1_f90
+  $MPIEXEC -n 4 ./helloworld1_f90
 
   command -v mpif77
   mpif77 -show
 
-  mpif77 $FFLAGS $LDFLAGS helloworld.f -o helloworld_f
-  $MPIEXEC -n 4 ./helloworld_f
+  mpif77 $FFLAGS $LDFLAGS helloworld.f -o helloworld2_f
+  $MPIEXEC -n 4 ./helloworld2_f
 
-  mpif90 $FFLAGS $LDFLAGS helloworld.f90 -o helloworld_f90
-  $MPIEXEC -n 4 ./helloworld_f90
+  command -v mpif90
+  mpif90 -show
 
-  mpifort $FFLAGS $LDFLAGS helloworld.f90 -o helloworld_fort
-  $MPIEXEC -n 4 ./helloworld_fort
+  mpif90 $FFLAGS $LDFLAGS helloworld.f90 -o helloworld2_f90
+  $MPIEXEC -n 4 ./helloworld2_f90
+
 fi
 
 popd

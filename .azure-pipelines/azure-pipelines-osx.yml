@@ -10,8 +10,11 @@ jobs:
   strategy:
     maxParallel: 8
     matrix:
-      osx_:
-        CONFIG: osx_
+      osx_fortran_compiler_version4:
+        CONFIG: osx_fortran_compiler_version4
+        UPLOAD_PACKAGES: True
+      osx_fortran_compiler_version7:
+        CONFIG: osx_fortran_compiler_version7
         UPLOAD_PACKAGES: True
 
   steps:
