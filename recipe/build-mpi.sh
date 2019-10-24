@@ -3,6 +3,8 @@
 # unset unused old fortran compiler vars
 unset F90 F77
 
+set -e
+
 export FCFLAGS="$FFLAGS"
 
 # avoid absolute-paths in compilers
@@ -16,6 +18,13 @@ if [ $(uname) == Darwin ]; then
         export CXXFLAGS="$CXXFLAGS -isysroot $CONDA_BUILD_SYSROOT"
     fi
     export LDFLAGS="$LDFLAGS -Wl,-rpath,$PREFIX/lib"
+
+    # fix #include <version> issue on mac
+    # VERSION (no ext) is included from the top-level repo dir for c++
+    # not sure why...
+    # fix by renaming VERSION to VERSION.sh
+    grep -l '/VERSION' -R . | xargs sed -i "" s@/VERSION@/VERSION.sh@g
+    mv -v VERSION VERSION.sh
 fi
 
 export LIBRARY_PATH="$PREFIX/lib"
