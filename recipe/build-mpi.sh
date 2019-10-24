@@ -23,8 +23,9 @@ if [ $(uname) == Darwin ]; then
     # VERSION (no ext) is included from the top-level repo dir for c++
     # not sure why...
     # fix by renaming VERSION to VERSION.sh
-    grep -l '/VERSION' -R . | xargs sed -i "" s@/VERSION@/VERSION.sh@g
+    # grep -l '/VERSION' -R . | xargs sed -i "" s@/VERSION@/VERSION.sh@g
     mv -v VERSION VERSION.sh
+    sed -i "" s@/VERSION@/VERSION.sh@g configure configure.ac
 fi
 
 export LIBRARY_PATH="$PREFIX/lib"
