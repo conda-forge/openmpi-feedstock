@@ -22,6 +22,8 @@ outputs:
       run_exports:
         - {{ pin_subpackage('openmpi', min_pin='x.x.x', max_pin='x.x') }}
     requirements:
+      run_constrained:  # [osx]
+        - __osx >={{ MACOSX_DEPLOYMENT_TARGET|default("10.9") }}  # [osx]    
       build:
         - {{ compiler('c') }}
         - {{ compiler('cxx') }}
@@ -45,6 +47,8 @@ outputs:
         # so that conda-build knows to pass it to the test env
         - echo "{{CONDA_BUILD_SYSROOT}}"  # [osx]
     requirements:
+      run_constrained:  # [osx]
+        - __osx >={{ MACOSX_DEPLOYMENT_TARGET|default("10.9") }}  # [osx]    
       run:
         - {{ pin_subpackage('openmpi', exact=True) }}
         # host C compilers work fine (better) on mac
@@ -63,6 +67,8 @@ outputs:
         # so that conda-build knows to pass it to the test env
         - echo "{{CONDA_BUILD_SYSROOT}}"  # [osx]
     requirements:
+      run_constrained:  # [osx]
+        - __osx >={{ MACOSX_DEPLOYMENT_TARGET|default("10.9") }}  # [osx]    
       run:
         - {{ pin_subpackage('openmpi', exact=True) }}
         # host C compilers work fine (better) on mac
@@ -81,6 +87,8 @@ outputs:
         # so that conda-build knows to pass it to the test env
         - echo "{{CONDA_BUILD_SYSROOT}}"  # [osx]
     requirements:
+      run_constrained:  # [osx]
+        - __osx >={{ MACOSX_DEPLOYMENT_TARGET|default("10.9") }}  # [osx]    
       run:
         - {{ pin_subpackage('openmpi', exact=True) }}
         - {{ compiler('fortran') }}
