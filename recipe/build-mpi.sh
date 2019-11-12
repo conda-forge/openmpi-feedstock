@@ -23,6 +23,8 @@ fi
 rm VERSION
 cp $RECIPE_DIR/VERSION.new VERSION
 
+./autogen.pl
+
 export LIBRARY_PATH="$PREFIX/lib"
 
 ./configure --prefix=$PREFIX \

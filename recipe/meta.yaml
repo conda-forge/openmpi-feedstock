@@ -28,6 +28,9 @@ outputs:
         - {{ compiler('fortran') }}
         - make  # [unix]
         - perl 5.26.2
+        - autoconf
+        - automake
+        - libtool
       host:
         - zlib
       run:
