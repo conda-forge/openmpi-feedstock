@@ -27,12 +27,11 @@ outputs:
         - {{ compiler('cxx') }}
         - {{ compiler('fortran') }}
         - make  # [unix]
-        - autoconf  # [osx]
-        - automake  # [osx]
-        - libtool  # [osx]
         - perl 5.26.2
-      host: []
+      host:
+        - zlib
       run:
+        - zlib
         - mpi 1.0 openmpi
     test:
       script: run_test.sh
