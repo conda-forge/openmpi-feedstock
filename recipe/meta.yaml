@@ -1,4 +1,4 @@
-{% set version = "4.0.1" %}
+{% set version = "4.0.2" %}
 {% set major = version.rpartition('.')[0] %}
 
 package:
@@ -9,10 +9,10 @@ package:
 source:
   fn: openmpi-{{ version }}.tar.bz2
   url: https://www.open-mpi.org/software/ompi/v{{ major }}/downloads/openmpi-{{ version }}.tar.bz2
-  sha256: cce7b6d20522849301727f81282201d609553103ac0b09162cf28d102efb9709
+  sha256: 900bf751be72eccf06de9d186f7b1c4b5c2fa9fa66458e53b77778dffdfe4057
 
 build:
-  number: 2
+  number: 0
   skip: True  # [win]
 
 outputs:
@@ -28,8 +28,10 @@ outputs:
         - {{ compiler('fortran') }}
         - make  # [unix]
         - perl 5.26.2
-      host: []
+      host:
+        - zlib
       run:
+        - zlib
         - mpi 1.0 openmpi
     test:
       script: run_test.sh
