@@ -26,6 +26,7 @@ if [ $(uname) == Darwin ]; then
     # grep -l '/VERSION' -R . | xargs sed -i "" s@/VERSION@/VERSION.sh@g
     mv -v VERSION VERSION.sh
     sed -i "" s@/VERSION@/VERSION.sh@g configure configure.ac
+    autoreconf -ivf --warnings=all,no-obsolete,no-override -I config
 fi
 
 export LIBRARY_PATH="$PREFIX/lib"
