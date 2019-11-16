@@ -20,9 +20,6 @@ if [ $(uname) == Darwin ]; then
     export LDFLAGS="$LDFLAGS -Wl,-rpath,$PREFIX/lib"
 fi
 
-rm VERSION
-cp $RECIPE_DIR/VERSION.new VERSION
-
 ./autogen.pl
 
 export LIBRARY_PATH="$PREFIX/lib"
