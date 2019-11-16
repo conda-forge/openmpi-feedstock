@@ -8,7 +8,7 @@ package:
 
 source:
   fn: openmpi-{{ version }}.tar.bz2
-  url: https://github.com/hjelmn/ompi/archive/fix_what_wg21_calls_our_problem_not_theirs_seriously__in_some_ways_they_are_correct_but_wtf.zip
+  url: https://github.com/hjelmn/ompi/archive/fix_what_wg21_calls_our_problem_not_theirs_seriously__in_some_ways_they_are_correct_but_wtf.tar.gz
 
 build:
   number: 0
