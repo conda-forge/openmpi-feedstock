@@ -12,8 +12,6 @@ int main(int argc, char *argv[])
   MPI_Comm_rank(MPI_COMM_WORLD, &rank);
   MPI_Get_processor_name(name, &len);
 
-  printf("Hello, World! I am process %d of %d on %s.\n", rank, size, name);
-
   std::cout <<
     "Hello, World! " <<
     "I am process "  << rank <<
