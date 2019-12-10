@@ -15,6 +15,7 @@ export FC=$(basename "$FC")
 if [ $(uname) == Darwin ]; then
     if [[ ! -z "$CONDA_BUILD_SYSROOT" ]]; then
         export CFLAGS="$CFLAGS -isysroot $CONDA_BUILD_SYSROOT"
+        export CXXFLAGS="$CXXFLAGS -isysroot $CONDA_BUILD_SYSROOT"
     fi
     export LDFLAGS="$LDFLAGS -Wl,-rpath,$PREFIX/lib"
 fi
