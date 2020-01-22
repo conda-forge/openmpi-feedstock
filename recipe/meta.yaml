@@ -28,7 +28,7 @@ outputs:
         - {{ compiler('c') }}
         - {{ compiler('cxx') }}
         - {{ compiler('fortran') }}
-        - {{ compiler('cuda') }}  # [linux and cuda_compiler_version != 'None']
+        - {{ compiler('cuda') }}  # [linux and not ppc64le and cuda_compiler_version != 'None']
         - make  # [unix]
         - perl 5.26.2
       host:

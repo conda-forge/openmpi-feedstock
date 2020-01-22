@@ -18,10 +18,13 @@ if [ $(uname) == Darwin ]; then
         export CXXFLAGS="$CXXFLAGS -isysroot $CONDA_BUILD_SYSROOT"
     fi
     export LDFLAGS="$LDFLAGS -Wl,-rpath,$PREFIX/lib"
-    # CUDA is only supported for Linux on conda-forge
-    build_with_cuda=""
-else
+fi
+
+# CUDA is only supported for Linux on conda-forge
+if [ $(uname) == Linux ]; then
     build_with_cuda="--with-cuda"
+else
+    build_with_cuda=""
 fi
 
 export LIBRARY_PATH="$PREFIX/lib"
