@@ -31,7 +31,9 @@ export LIBRARY_PATH="$PREFIX/lib"
             --with-wrapper-cxxflags="-I$PREFIX/include" \
             --with-wrapper-fcflags="-I$PREFIX/include" \
             --with-wrapper-ldflags="-L$PREFIX/lib -Wl,-rpath,$PREFIX/lib" \
-            --with-sge
+            --with-sge \
+            --with-cuda
 
 make -j"${CPU_COUNT:-1}"
 make install
+echo opal_warn_on_missing_libcuda = 0 >> $PREFIX/etc/openmpi-mca-params.conf
