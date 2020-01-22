@@ -14,7 +14,7 @@ source:
     - 0001-common-ompio-fix-calculation-in-simple-grouping-opti.patch
 
 build:
-  number: 2
+  number: 3
   skip: True  # [win]
 
 outputs:
@@ -28,6 +28,7 @@ outputs:
         - {{ compiler('c') }}
         - {{ compiler('cxx') }}
         - {{ compiler('fortran') }}
+        - {{ compiler('cuda') }}  [linux and cuda_compiler_version != 'None']
         - make  # [unix]
         - perl 5.26.2
       host:
