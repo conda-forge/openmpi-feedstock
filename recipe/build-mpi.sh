@@ -22,9 +22,7 @@ fi
 
 # At this point, we selected the correct docker image, but we have no
 # way to know tell if CUDA is present, so we look for nvcc
-nvcc --version
-nvcc_ok=$?
-if [ $nvcc_ok -eq 0 ]; then
+if [ $(command -v nvcc) ]; then
     build_with_cuda="--with-cuda"
 else
     build_with_cuda=""
