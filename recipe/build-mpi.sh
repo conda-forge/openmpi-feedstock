@@ -18,6 +18,10 @@ if [ $(uname) == Darwin ]; then
         export CXXFLAGS="$CXXFLAGS -isysroot $CONDA_BUILD_SYSROOT"
     fi
     export LDFLAGS="$LDFLAGS -Wl,-rpath,$PREFIX/lib"
+    # CUDA is only supported for Linux on conda-forge
+    build_with_cuda=""
+else
+    build_with_cuda="--with-cuda"
 fi
 
 export LIBRARY_PATH="$PREFIX/lib"
@@ -32,7 +36,7 @@ export LIBRARY_PATH="$PREFIX/lib"
             --with-wrapper-fcflags="-I$PREFIX/include" \
             --with-wrapper-ldflags="-L$PREFIX/lib -Wl,-rpath,$PREFIX/lib" \
             --with-sge \
-            --with-cuda
+            $(build_with_cuda)
 
 make -j"${CPU_COUNT:-1}"
 make install
