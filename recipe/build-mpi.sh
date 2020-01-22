@@ -21,7 +21,7 @@ if [ $(uname) == Darwin ]; then
 fi
 
 # CUDA is only supported for Linux on conda-forge
-if [ $(uname) == Linux ]; then
+if [ $(uname) == Linux ] && [ $(uname -m) == x86_64 ]; then
     build_with_cuda="--with-cuda"
 else
     build_with_cuda=""
