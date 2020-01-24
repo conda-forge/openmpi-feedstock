@@ -43,7 +43,7 @@ export LIBRARY_PATH="$PREFIX/lib"
 make -j"${CPU_COUNT:-1}"
 make install
 
-if [ -z "$build_with_cuda" ]; then
+if [ ! -z "$build_with_cuda" ]; then
     echo "setting the mca opal_warn_on_missing_libcuda to 0..."
     echo opal_warn_on_missing_libcuda = 0 >> $PREFIX/etc/openmpi-mca-params.conf
 fi
