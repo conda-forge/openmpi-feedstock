@@ -38,6 +38,8 @@ outputs:
       run:
         - zlib
         - mpi 1.0 openmpi
+      run_constrained:
+        - cudatoolkit >={{ cuda_compiler_version }}  # [linux64]
     test:
       script: run_test.sh
       files:
