@@ -20,9 +20,7 @@ if [ $(uname) == Darwin ]; then
     export LDFLAGS="$LDFLAGS -Wl,-rpath,$PREFIX/lib"
 fi
 
-# At this point, we selected the correct docker image, but we have no
-# way to know tell if CUDA is present, so we look for nvcc
-if [ $(command -v nvcc) ]; then
+if [ $cuda_compiler_version == '9.2' ]; then
     build_with_cuda="--with-cuda"
 else
     build_with_cuda=""
@@ -44,4 +42,8 @@ export LIBRARY_PATH="$PREFIX/lib"
 
 make -j"${CPU_COUNT:-1}"
 make install
-echo opal_warn_on_missing_libcuda = 0 >> $PREFIX/etc/openmpi-mca-params.conf
+
+if [ -z "$build_with_cuda" ]; then
+    echo "setting the mca opal_warn_on_missing_libcuda to 0..."
+    echo opal_warn_on_missing_libcuda = 0 >> $PREFIX/etc/openmpi-mca-params.conf
+fi

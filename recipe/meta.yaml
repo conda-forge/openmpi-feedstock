@@ -15,7 +15,7 @@ source:
 
 build:
   number: 3
-  skip: True  # [win]
+  skip: True  # [win or (linux64 and cuda_compiler_version != '9.2')]
 
 outputs:
   - name: openmpi
@@ -23,12 +23,14 @@ outputs:
     build:
       run_exports:
         - {{ pin_subpackage('openmpi', min_pin='x.x.x', max_pin='x.x') }}
+      ignore_run_exports:
+        - cudatoolkit
     requirements:
       build:
         - {{ compiler('c') }}
         - {{ compiler('cxx') }}
         - {{ compiler('fortran') }}
-        - {{ compiler('cuda') }}  # [linux64 and cuda_compiler_version != 'None']
+        - {{ compiler('cuda') }}  # [linux64]
         - make  # [unix]
         - perl 5.26.2
       host:
