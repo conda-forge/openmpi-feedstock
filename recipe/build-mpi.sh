@@ -20,6 +20,12 @@ if [ $(uname) == Darwin ]; then
     export LDFLAGS="$LDFLAGS -Wl,-rpath,$PREFIX/lib"
 fi
 
+if [ $cuda_compiler_version == '9.2' ]; then
+    build_with_cuda="--with-cuda"
+else
+    build_with_cuda=""
+fi
+
 export LIBRARY_PATH="$PREFIX/lib"
 
 ./configure --prefix=$PREFIX \
@@ -31,7 +37,13 @@ export LIBRARY_PATH="$PREFIX/lib"
             --with-wrapper-cxxflags="-I$PREFIX/include" \
             --with-wrapper-fcflags="-I$PREFIX/include" \
             --with-wrapper-ldflags="-L$PREFIX/lib -Wl,-rpath,$PREFIX/lib" \
-            --with-sge
+            --with-sge \
+            $build_with_cuda
 
 make -j"${CPU_COUNT:-1}"
 make install
+
+if [ ! -z "$build_with_cuda" ]; then
+    echo "setting the mca opal_warn_on_missing_libcuda to 0..."
+    echo opal_warn_on_missing_libcuda = 0 >> $PREFIX/etc/openmpi-mca-params.conf
+fi
