@@ -14,7 +14,7 @@ source:
     - 0001-common-ompio-fix-calculation-in-simple-grouping-opti.patch
 
 build:
-  number: 3
+  number: 4
   skip: True  # [win or (linux64 and cuda_compiler_version != '9.2')]
 
 outputs:

@@ -45,5 +45,11 @@ make install
 
 if [ ! -z "$build_with_cuda" ]; then
     echo "setting the mca opal_warn_on_missing_libcuda to 0..."
-    echo opal_warn_on_missing_libcuda = 0 >> $PREFIX/etc/openmpi-mca-params.conf
+    echo "opal_warn_on_missing_libcuda = 0" >> $PREFIX/etc/openmpi-mca-params.conf
+    echo "setting the mca opal_cuda_support to 0..."
+    echo "opal_cuda_support = 0" >> $PREFIX/etc/openmpi-mca-params.conf
+    
+    POST_LINK=$PREFIX/bin/.openmpi-post-link.sh
+    cp $RECIPE_DIR/post-link.sh $POST_LINK
+    chmod +x $POST_LINK
 fi
