@@ -10,8 +10,6 @@ source:
   fn: openmpi-{{ version }}.tar.bz2
   url: https://www.open-mpi.org/software/ompi/v{{ major }}/downloads/openmpi-{{ version }}.tar.bz2
   sha256: 1402feced8c3847b3ab8252165b90f7d1fa28c23b6b2ca4632b6e4971267fd03
-  patches:
-    - 0001-common-ompio-fix-calculation-in-simple-grouping-opti.patch
 
 build:
   number: 0
