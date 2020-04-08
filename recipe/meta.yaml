@@ -12,7 +12,7 @@ source:
   sha256: 1402feced8c3847b3ab8252165b90f7d1fa28c23b6b2ca4632b6e4971267fd03
 
 build:
-  number: 0
+  number: 1
   skip: true  # [win or (linux64 and cuda_compiler_version != '9.2')]
 
 outputs:

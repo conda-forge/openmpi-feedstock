@@ -53,3 +53,13 @@ if [ ! -z "$build_with_cuda" ]; then
     cp $RECIPE_DIR/post-link.sh $POST_LINK
     chmod +x $POST_LINK
 fi
+
+if [ $(uname) == Darwin ]; then
+    # workaround for open-mpi/ompi#7516
+    echo "setting the mca gds to hash..."
+    echo "gds = hash" >> $PREFIX/etc/pmix-mca-params.conf
+
+    # workaround for open-mpi/ompi#5798
+    echo "setting the mca btl_vader_backing_directory to /tmp..."
+    echo "btl_vader_backing_directory = /tmp" >> $PREFIX/etc/openmpi-mca-params.conf
+fi
