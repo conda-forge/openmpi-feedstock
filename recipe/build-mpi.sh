@@ -53,3 +53,9 @@ if [ ! -z "$build_with_cuda" ]; then
     cp $RECIPE_DIR/post-link.sh $POST_LINK
     chmod +x $POST_LINK
 fi
+
+# workaround for open-mpi/ompi#7516
+if [ $(uname) == Darwin ]; then
+    echo "setting the mca gds to hash..."
+    echo "gds = hash" >> $PREFIX/etc/pmix-mca-params.conf
+fi
