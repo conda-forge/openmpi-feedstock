@@ -1,4 +1,4 @@
-{% set version = "4.0.3" %}
+{% set version = "4.0.4" %}
 {% set major = version.rpartition('.')[0] %}
 
 package:
@@ -9,10 +9,10 @@ package:
 source:
   fn: openmpi-{{ version }}.tar.bz2
   url: https://www.open-mpi.org/software/ompi/v{{ major }}/downloads/openmpi-{{ version }}.tar.bz2
-  sha256: 1402feced8c3847b3ab8252165b90f7d1fa28c23b6b2ca4632b6e4971267fd03
+  sha256: 47e24eb2223fe5d24438658958a313b6b7a55bb281563542e1afc9dec4a31ac4
 
 build:
-  number: 1
+  number: 0
   skip: true  # [win or (linux64 and cuda_compiler_version != '9.2')]
 
 outputs:
@@ -50,7 +50,7 @@ outputs:
         - echo 'ok'  # [not osx]
         # make CONDA_BUILD_SYSROOT a 'used variable'
         # so that conda-build knows to pass it to the test env
-        - echo "{{CONDA_BUILD_SYSROOT}}"  # [osx]
+        - echo "{{ CONDA_BUILD_SYSROOT }}"  # [osx]
     requirements:
       run:
         - {{ pin_subpackage('openmpi', exact=True) }}
@@ -68,7 +68,7 @@ outputs:
         - echo 'ok'  # [not osx]
         # make CONDA_BUILD_SYSROOT a 'used variable'
         # so that conda-build knows to pass it to the test env
-        - echo "{{CONDA_BUILD_SYSROOT}}"  # [osx]
+        - echo "{{ CONDA_BUILD_SYSROOT }}"  # [osx]
     requirements:
       run:
         - {{ pin_subpackage('openmpi', exact=True) }}
@@ -86,7 +86,7 @@ outputs:
         - echo 'ok'  # [not osx]
         # make CONDA_BUILD_SYSROOT a 'used variable'
         # so that conda-build knows to pass it to the test env
-        - echo "{{CONDA_BUILD_SYSROOT}}"  # [osx]
+        - echo "{{ CONDA_BUILD_SYSROOT }}"  # [osx]
     requirements:
       run:
         - {{ pin_subpackage('openmpi', exact=True) }}
