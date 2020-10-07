@@ -5,9 +5,13 @@ Home: https://www.open-mpi.org/
 
 Package license: BSD-3-Clause
 
-Feedstock license: BSD-3-Clause
+Feedstock license: [BSD-3-Clause](https://github.com/conda-forge/openmpi-feedstock/blob/master/LICENSE.txt)
 
 Summary: An open source Message Passing Interface implementation.
+
+Development: https://github.com/open-mpi/ompi
+
+Documentation: https://www.open-mpi.org/doc/
 
 The Open MPI Project is an open source Message Passing Interface
 implementation that is developed and maintained by a consortium of academic,
