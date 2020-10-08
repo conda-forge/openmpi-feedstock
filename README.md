@@ -5,9 +5,13 @@ Home: https://www.open-mpi.org/
 
 Package license: BSD-3-Clause
 
-Feedstock license: BSD-3-Clause
+Feedstock license: [BSD-3-Clause](https://github.com/conda-forge/openmpi-feedstock/blob/master/LICENSE.txt)
 
 Summary: An open source Message Passing Interface implementation.
+
+Development: https://github.com/open-mpi/ompi
+
+Documentation: https://www.open-mpi.org/doc/
 
 The Open MPI Project is an open source Message Passing Interface
 implementation that is developed and maintained by a consortium of academic,
@@ -46,31 +50,59 @@ Current build status
         <table>
           <thead><tr><th>Variant</th><th>Status</th></tr></thead>
           <tbody><tr>
-              <td>linux_64_cuda_compiler_version9.2</td>
+              <td>linux_64_cuda_compiler_version9.2fortran_compiler_version7</td>
               <td>
                 <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=720&branchName=master">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/openmpi-feedstock?branchName=master&jobName=linux&configuration=linux_64_cuda_compiler_version9.2" alt="variant">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/openmpi-feedstock?branchName=master&jobName=linux&configuration=linux_64_cuda_compiler_version9.2fortran_compiler_version7" alt="variant">
                 </a>
               </td>
             </tr><tr>
-              <td>linux_aarch64</td>
+              <td>linux_64_cuda_compiler_version9.2fortran_compiler_version9</td>
               <td>
                 <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=720&branchName=master">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/openmpi-feedstock?branchName=master&jobName=linux&configuration=linux_aarch64_" alt="variant">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/openmpi-feedstock?branchName=master&jobName=linux&configuration=linux_64_cuda_compiler_version9.2fortran_compiler_version9" alt="variant">
                 </a>
               </td>
             </tr><tr>
-              <td>linux_ppc64le</td>
+              <td>linux_aarch64_fortran_compiler_version7</td>
               <td>
                 <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=720&branchName=master">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/openmpi-feedstock?branchName=master&jobName=linux&configuration=linux_ppc64le_" alt="variant">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/openmpi-feedstock?branchName=master&jobName=linux&configuration=linux_aarch64_fortran_compiler_version7" alt="variant">
                 </a>
               </td>
             </tr><tr>
-              <td>osx_64</td>
+              <td>linux_aarch64_fortran_compiler_version9</td>
               <td>
                 <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=720&branchName=master">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/openmpi-feedstock?branchName=master&jobName=osx&configuration=osx_64_" alt="variant">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/openmpi-feedstock?branchName=master&jobName=linux&configuration=linux_aarch64_fortran_compiler_version9" alt="variant">
+                </a>
+              </td>
+            </tr><tr>
+              <td>linux_ppc64le_fortran_compiler_version8</td>
+              <td>
+                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=720&branchName=master">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/openmpi-feedstock?branchName=master&jobName=linux&configuration=linux_ppc64le_fortran_compiler_version8" alt="variant">
+                </a>
+              </td>
+            </tr><tr>
+              <td>linux_ppc64le_fortran_compiler_version9</td>
+              <td>
+                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=720&branchName=master">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/openmpi-feedstock?branchName=master&jobName=linux&configuration=linux_ppc64le_fortran_compiler_version9" alt="variant">
+                </a>
+              </td>
+            </tr><tr>
+              <td>osx_64_fortran_compiler_version7</td>
+              <td>
+                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=720&branchName=master">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/openmpi-feedstock?branchName=master&jobName=osx&configuration=osx_64_fortran_compiler_version7" alt="variant">
+                </a>
+              </td>
+            </tr><tr>
+              <td>osx_64_fortran_compiler_version9</td>
+              <td>
+                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=720&branchName=master">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/openmpi-feedstock?branchName=master&jobName=osx&configuration=osx_64_fortran_compiler_version9" alt="variant">
                 </a>
               </td>
             </tr>
