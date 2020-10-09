@@ -8,8 +8,12 @@ jobs:
     vmImage: ubuntu-16.04
   strategy:
     matrix:
-      linux_64_cuda_compiler_version9.2:
-        CONFIG: linux_64_cuda_compiler_version9.2
+      linux_64_c_compiler_version7cuda_compiler_version9.2cxx_compiler_version7fortran_compiler_version7:
+        CONFIG: linux_64_c_compiler_version7cuda_compiler_version9.2cxx_compiler_version7fortran_compiler_version7
+        UPLOAD_PACKAGES: 'True'
+        DOCKER_IMAGE: condaforge/linux-anvil-cuda:9.2
+      linux_64_c_compiler_version9cuda_compiler_version9.2cxx_compiler_version9fortran_compiler_version9:
+        CONFIG: linux_64_c_compiler_version9cuda_compiler_version9.2cxx_compiler_version9fortran_compiler_version9
         UPLOAD_PACKAGES: 'True'
         DOCKER_IMAGE: condaforge/linux-anvil-cuda:9.2
     maxParallel: 8
