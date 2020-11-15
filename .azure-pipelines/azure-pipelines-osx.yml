@@ -14,7 +14,9 @@ jobs:
       osx_64_fortran_compiler_version9:
         CONFIG: osx_64_fortran_compiler_version9
         UPLOAD_PACKAGES: 'True'
-    maxParallel: 8
+      osx_arm64_:
+        CONFIG: osx_arm64_
+        UPLOAD_PACKAGES: 'True'
   timeoutInMinutes: 360
 
   steps:
