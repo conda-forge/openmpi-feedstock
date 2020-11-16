@@ -14,7 +14,7 @@ export FC=$(basename "$FC")
 
 ./autogen.pl --force
 
-if [ "$target_platform" == osx-* ]; then
+if [[ "$target_platform" == osx-* ]]; then
     if [[ ! -z "$CONDA_BUILD_SYSROOT" ]]; then
         export CFLAGS="$CFLAGS -isysroot $CONDA_BUILD_SYSROOT"
         export CXXFLAGS="$CXXFLAGS -isysroot $CONDA_BUILD_SYSROOT"
