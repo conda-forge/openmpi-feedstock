@@ -12,12 +12,13 @@ export CC=$(basename "$CC")
 export CXX=$(basename "$CXX")
 export FC=$(basename "$FC")
 
-if [ $(uname) == Darwin ]; then
+./autogen.pl --force
+
+if [ "$target_platform" == osx-* ]; then
     if [[ ! -z "$CONDA_BUILD_SYSROOT" ]]; then
         export CFLAGS="$CFLAGS -isysroot $CONDA_BUILD_SYSROOT"
         export CXXFLAGS="$CXXFLAGS -isysroot $CONDA_BUILD_SYSROOT"
     fi
-    export LDFLAGS="$LDFLAGS -Wl,-rpath,$PREFIX/lib"
 fi
 
 if [ $cuda_compiler_version == '9.2' ]; then
@@ -54,7 +55,7 @@ if [ ! -z "$build_with_cuda" ]; then
     chmod +x $POST_LINK
 fi
 
-if [ $(uname) == Darwin ]; then
+if [[ "$target_platform" == osx-* ]]; then
     # workaround for open-mpi/ompi#7516
     echo "setting the mca gds to hash..."
     echo "gds = hash" >> $PREFIX/etc/pmix-mca-params.conf
