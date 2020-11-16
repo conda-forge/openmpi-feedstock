@@ -29,6 +29,9 @@ outputs:
         - {{ compiler('cxx') }}
         - {{ compiler('fortran') }}
         - {{ compiler('cuda') }}  # [linux64]
+        - autoconf  # [unix]
+        - automake  # [unix]
+        - libtool   # [unix]
         - make  # [unix]
         - perl 5.26.2
       host:
