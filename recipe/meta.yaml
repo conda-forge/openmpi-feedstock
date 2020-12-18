@@ -1,4 +1,4 @@
-{% set version = "4.0.5" %}
+{% set version = "4.1.0" %}
 {% set major = version.rpartition('.')[0] %}
 
 package:
@@ -9,10 +9,10 @@ package:
 source:
   fn: openmpi-{{ version }}.tar.bz2
   url: https://www.open-mpi.org/software/ompi/v{{ major }}/downloads/openmpi-{{ version }}.tar.bz2
-  sha256: c58f3863b61d944231077f344fe6b4b8fbb83f3d1bc93ab74640bf3e5acac009
+  sha256: 9a3dd11f504983583ca6ab60ba9c52772aff81ac1188dd59dc75a0cc46b63bdc
 
 build:
-  number: 4
+  number: 0
   skip: true  # [win or (linux64 and cuda_compiler_version != '9.2')]
 
 outputs:
