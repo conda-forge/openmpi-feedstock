@@ -9,7 +9,7 @@ package:
 source:
   fn: openmpi-{{ version }}.tar.bz2
   url: https://www.open-mpi.org/software/ompi/v{{ major }}/downloads/openmpi-{{ version }}.tar.bz2
-  sha256: 9a3dd11f504983583ca6ab60ba9c52772aff81ac1188dd59dc75a0cc46b63bdc
+  sha256: 73866fb77090819b6a8c85cb8539638d37d6877455825b74e289d647a39fd5b5
 
 build:
   number: 0
