@@ -132,6 +132,12 @@ fi
 
 export LIBRARY_PATH="$PREFIX/lib"
 
+if [[ "$target_platform" == *-64 ]]; then
+    # -march=skylake-avx512 -march=nocona invalidates AVX512 flag. Remove -march flags and -mtune flags
+    export CFLAGS=$(echo $CFLAGS | sed 's/-march=[a-z0-9\-]*//g')
+    export CFLAGS=$(echo $CFLAGS | sed 's/-mtune=[a-z0-9\-]*//g')
+fi
+
 ./configure --prefix=$PREFIX \
             --disable-dependency-tracking \
             --enable-mpi-fortran \
