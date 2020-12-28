@@ -150,7 +150,7 @@ fi
             --with-sge \
             $build_with_cuda
 
-make -j"${CPU_COUNT:-1}" V=1
+make -j"${CPU_COUNT:-1}"
 make install
 
 if [ ! -z "$build_with_cuda" ]; then
