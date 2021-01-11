@@ -11,9 +11,9 @@ source:
   url: https://www.open-mpi.org/software/ompi/v{{ major }}/downloads/openmpi-{{ version }}.tar.bz2
   sha256: 73866fb77090819b6a8c85cb8539638d37d6877455825b74e289d647a39fd5b5
   patches:
-    # From open-mpi/ompi#8322: hotfix for the issue of building the op/avx module.
+    # From open-mpi/ompi#8361: hotfix for the issue of building the op/avx module.
     # TODO(leofang): remove this patch in the next release
-    - ompi-8322.diff
+    - ompi-8361.diff
 
 build:
   number: 0
