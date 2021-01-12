@@ -41,6 +41,9 @@ outputs:
         - perl 5.26.2
       host:
         - zlib
+        # since we are ignoring run_exports, we don't get the following in host
+        - libgfortran     # [osx]
+        - libgfortran-ng  # [linux]
       run:
         - zlib
         - mpi 1.0 openmpi
@@ -98,7 +101,7 @@ outputs:
     requirements:
       run:
         - {{ pin_subpackage('openmpi', exact=True) }}
-        - {{ fortran_compiler }}
+        - {{ fortran_compiler }}_{{ target_platform }}
     test:
       script: run_test.sh
       files:
