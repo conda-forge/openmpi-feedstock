@@ -43,7 +43,7 @@ outputs:
         - zlib
         # since we are ignoring run_exports, we don't get the following in host
         - libgfortran     # [osx]
-        - libgfortran-ng  # [linux]
+        - libgfortran-ng {{ fortran_compiler_version }} # [linux]
       run:
         - zlib
         - mpi 1.0 openmpi
