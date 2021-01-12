@@ -27,7 +27,6 @@ outputs:
         - {{ pin_subpackage('openmpi', min_pin='x.x.x', max_pin='x.x') }}
       ignore_run_exports_from:
         - {{ compiler('cuda') }}
-        - {{ compiler('fortran') }}
     requirements:
       build:
         - {{ compiler('c') }}
@@ -41,9 +40,6 @@ outputs:
         - perl 5.26.2
       host:
         - zlib
-        # since we are ignoring run_exports, we don't get the following in host
-        - libgfortran     # [osx]
-        - libgfortran-ng {{ fortran_compiler_version }} # [linux]
       run:
         - zlib
         - mpi 1.0 openmpi
@@ -101,7 +97,7 @@ outputs:
     requirements:
       run:
         - {{ pin_subpackage('openmpi', exact=True) }}
-        - {{ fortran_compiler }}_{{ target_platform }}
+        - {{ compiler('fortran') }}
     test:
       script: run_test.sh
       files:
