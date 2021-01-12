@@ -25,8 +25,9 @@ outputs:
     build:
       run_exports:
         - {{ pin_subpackage('openmpi', min_pin='x.x.x', max_pin='x.x') }}
-      ignore_run_exports:
-        - cudatoolkit
+      ignore_run_exports_from:
+        - {{ compiler('cuda') }}
+        - {{ compiler('fortran') }}
     requirements:
       build:
         - {{ compiler('c') }}
@@ -97,7 +98,7 @@ outputs:
     requirements:
       run:
         - {{ pin_subpackage('openmpi', exact=True) }}
-        - {{ compiler('fortran') }}
+        - {{ fortran_compiler }}
     test:
       script: run_test.sh
       files:
