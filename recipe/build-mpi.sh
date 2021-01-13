@@ -132,6 +132,13 @@ fi
 
 export LIBRARY_PATH="$PREFIX/lib"
 
+## Replaced by the patch from open-mpi/ompi#8361
+# if [[ "$target_platform" == *-64 ]]; then
+#     # -march=skylake-avx512 -march=nocona invalidates AVX512 flag. Remove -march flags and -mtune flags
+#     export CFLAGS=$(echo $CFLAGS | sed 's/-march=[a-z0-9\-]*//g')
+#     export CFLAGS=$(echo $CFLAGS | sed 's/-mtune=[a-z0-9\-]*//g')
+# fi
+
 ./configure --prefix=$PREFIX \
             --disable-dependency-tracking \
             --enable-mpi-fortran \
@@ -156,14 +163,4 @@ if [ ! -z "$build_with_cuda" ]; then
     POST_LINK=$PREFIX/bin/.openmpi-post-link.sh
     cp $RECIPE_DIR/post-link.sh $POST_LINK
     chmod +x $POST_LINK
-fi
-
-if [[ "$target_platform" == osx-* ]]; then
-    # workaround for open-mpi/ompi#7516
-    echo "setting the mca gds to hash..."
-    echo "gds = hash" >> $PREFIX/etc/pmix-mca-params.conf
-
-    # workaround for open-mpi/ompi#5798
-    echo "setting the mca btl_vader_backing_directory to /tmp..."
-    echo "btl_vader_backing_directory = /tmp" >> $PREFIX/etc/openmpi-mca-params.conf
 fi
