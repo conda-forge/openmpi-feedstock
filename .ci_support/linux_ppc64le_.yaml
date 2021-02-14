@@ -7,7 +7,7 @@ cdt_name:
 channel_sources:
 - conda-forge,defaults
 channel_targets:
-- conda-forge main
+- conda-forge openmpi_rc
 cuda_compiler_version:
 - None
 cxx_compiler:
