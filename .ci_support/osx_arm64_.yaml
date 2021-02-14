@@ -5,9 +5,9 @@ c_compiler:
 c_compiler_version:
 - '11'
 channel_sources:
-- conda-forge
+- conda-forge/label/rust_dev,conda-forge
 channel_targets:
-- conda-forge main
+- conda-forge openmpi_rc
 cuda_compiler_version:
 - None
 cxx_compiler:
