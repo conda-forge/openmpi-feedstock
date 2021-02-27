@@ -16,7 +16,7 @@ source:
     - ompi-8361.diff
 
 build:
-  number: 2
+  number: 3
   skip: true  # [win or (linux64 and cuda_compiler_version != '10.2')]
 
 outputs:
