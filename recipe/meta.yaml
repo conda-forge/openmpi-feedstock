@@ -17,7 +17,7 @@ source:
 
 build:
   number: 3
-  skip: true  # [win or (linux64 and cuda_compiler_version != '10.2')]
+  skip: true  # [win or (linux64 and cuda_compiler_version != '10.2') or ((aarch64 or ppc64le) and cuda_compiler_version not in (undefined, "None"))]
 
 outputs:
   - name: openmpi
