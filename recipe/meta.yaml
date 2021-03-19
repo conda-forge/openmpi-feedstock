@@ -1,4 +1,4 @@
-{% set version = "4.1.1rc1" %}
+{% set version = "4.1.1rc2" %}
 {% set major = version.rpartition('.')[0] %}
 
 package:
@@ -9,11 +9,11 @@ package:
 source:
   fn: openmpi-{{ version }}.tar.bz2
   url: https://www.open-mpi.org/software/ompi/v{{ major }}/downloads/openmpi-{{ version }}.tar.bz2
-  sha256: c7bfdd96fd405d887875067d32c5b7a959c8d06ea2cc48e1c10448d22d29e0c7
+  sha256: f7d572621c93934b329281ee159c89124905ef05900d1a817efb7d262442d0f3
 
 build:
   number: 0
-  skip: true  # [win or (linux64 and cuda_compiler_version != '9.2')]
+  skip: true  # [win or (linux64 and cuda_compiler_version != '10.2') or ((aarch64 or ppc64le) and cuda_compiler_version not in (undefined, "None"))] 
 
 outputs:
   - name: openmpi
@@ -40,7 +40,7 @@ outputs:
         - zlib
         - mpi 1.0 openmpi
       run_constrained:
-        - cudatoolkit >={{ cuda_compiler_version }}  # [linux64]
+        - cudatoolkit >=9.2  # [linux64]
     test:
       script: run_test.sh
       files:
