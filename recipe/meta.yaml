@@ -12,7 +12,8 @@ source:
   sha256: f7d572621c93934b329281ee159c89124905ef05900d1a817efb7d262442d0f3
 
 build:
-  number: 0
+  number: 1
+  # remember to bump the CUDA version in build-mpi.sh too!
   skip: true  # [win or (linux64 and cuda_compiler_version != '10.2') or ((aarch64 or ppc64le) and cuda_compiler_version not in (undefined, "None"))] 
 
 outputs:
