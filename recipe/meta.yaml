@@ -39,11 +39,13 @@ outputs:
         - libtool   # [unix]
         - make  # [unix]
         - perl 5.26.2
+        - ucx
       host:
         - zlib
       run:
         - zlib
         - mpi 1.0 openmpi
+        - ucx
       run_constrained:
         - cudatoolkit >=9.2  # [linux64]
     test:
