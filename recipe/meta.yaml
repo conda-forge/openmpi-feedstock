@@ -39,7 +39,7 @@ outputs:
         - libtool   # [unix]
         - make  # [unix]
         - perl 5.26.2
-        - ucx 1.9.0  # [linux]
+        - ucx 1.9.0  # [linux64]
       host:
         - zlib
       run:
