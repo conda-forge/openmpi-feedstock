@@ -22,7 +22,7 @@ if [[ "$target_platform" == osx-* ]]; then
 fi
 
 if [ $cuda_compiler_version == '10.2' ]; then
-    build_with_cuda="--with-cuda"
+    build_with_cuda="--with-cuda --with-ucx"
 else
     build_with_cuda=""
 fi
@@ -159,6 +159,11 @@ if [ ! -z "$build_with_cuda" ]; then
     echo "opal_warn_on_missing_libcuda = 0" >> $PREFIX/etc/openmpi-mca-params.conf
     echo "setting the mca opal_cuda_support to 0..."
     echo "opal_cuda_support = 0" >> $PREFIX/etc/openmpi-mca-params.conf
+
+    echo "setting the mca pml to ^ucx..."
+    echo "pml = \"^ucx\"" >> $PREFIX/etc/openmpi-mca-params.conf
+    echo "setting the mca osc to ^ucx..."
+    echo "osc = \"^ucx\"" >> $PREFIX/etc/openmpi-mca-params.conf
     
     POST_LINK=$PREFIX/bin/.openmpi-post-link.sh
     cp $RECIPE_DIR/post-link.sh $POST_LINK
