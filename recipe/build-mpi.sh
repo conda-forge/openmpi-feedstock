@@ -161,9 +161,9 @@ if [ ! -z "$build_with_cuda" ]; then
     echo "opal_cuda_support = 0" >> $PREFIX/etc/openmpi-mca-params.conf
 
     echo "setting the mca pml to ^ucx..."
-    echo "pml = \"^ucx\"" >> $PREFIX/etc/openmpi-mca-params.conf
+    echo "pml = ^ucx" >> $PREFIX/etc/openmpi-mca-params.conf
     echo "setting the mca osc to ^ucx..."
-    echo "osc = \"^ucx\"" >> $PREFIX/etc/openmpi-mca-params.conf
+    echo "osc = ^ucx" >> $PREFIX/etc/openmpi-mca-params.conf
     
     POST_LINK=$PREFIX/bin/.openmpi-post-link.sh
     cp $RECIPE_DIR/post-link.sh $POST_LINK
