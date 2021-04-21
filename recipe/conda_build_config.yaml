@@ -3,12 +3,6 @@ docker_image:                                # [os.environ.get("BUILD_PLATFORM",
    - quay.io/condaforge/linux-anvil-cuda:9.2        # [linux64 and (os.environ.get("BUILD_PLATFORM") == "linux-64" or os.environ.get("CONFIG_VERSION", "1") == "1")]
    - quay.io/condaforge/linux-anvil-cuda:10.2       # [linux64 and (os.environ.get("BUILD_PLATFORM") == "linux-64" or os.environ.get("CONFIG_VERSION", "1") == "1")]
 
-
-c_compiler_version:     # [linux64]
-  - 7                   # [linux64]
-cxx_compiler_version:   # [linux64]
-  - 7                   # [linux64]
-
 cuda_compiler:   # [linux64]
   - nvcc         # [linux64]
 
