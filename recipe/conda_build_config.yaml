@@ -1,5 +1,5 @@
 docker_image:                                # [os.environ.get("BUILD_PLATFORM", "").startswith("linux") or (os.environ.get("CONFIG_VERSION", "1") == "1" and linux)]
-   - quay.io/condaforge/linux-anvil-comp6    # [os.environ.get("BUILD_PLATFORM") == "linux-64" or (os.environ.get("CONFIG_VERSION", "1") == "1" and linux64)]
+   - quay.io/condaforge/linux-anvil-comp7    # [os.environ.get("BUILD_PLATFORM") == "linux-64" or (os.environ.get("CONFIG_VERSION", "1") == "1" and linux64)]
    - quay.io/condaforge/linux-anvil-cuda:9.2        # [linux64 and (os.environ.get("BUILD_PLATFORM") == "linux-64" or os.environ.get("CONFIG_VERSION", "1") == "1")]
    - quay.io/condaforge/linux-anvil-cuda:10.2       # [linux64 and (os.environ.get("BUILD_PLATFORM") == "linux-64" or os.environ.get("CONFIG_VERSION", "1") == "1")]
 
@@ -17,6 +17,6 @@ cudnn:
   - 7                          # [linux64]
 
 cdt_name:  # [linux]
-  - cos6   # [linux64]
+  - cos7   # [linux64]
   - cos6   # [linux64]
   - cos6   # [linux64]
