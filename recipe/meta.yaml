@@ -18,7 +18,7 @@ source:
 build:
   number: 5
   # remember to bump the CUDA version in build-mpi.sh too!
-  skip: true  # [win or (linux64 and cuda_compiler_version != '10.2') or ((aarch64 or ppc64le) and cuda_compiler_version not in (undefined, "None"))]
+  skip: true  # [win or (linux64 and cuda_compiler_version not in ('9.2', '10.2')) or ((aarch64 or ppc64le) and cuda_compiler_version not in (undefined, "None"))]
 
 outputs:
   - name: openmpi
@@ -47,7 +47,8 @@ outputs:
         - zlib
         - mpi 1.0 openmpi
       run_constrained:
-        - cudatoolkit >=10.0  # [linux64]
+        - cudatoolkit 9.2     # [linux64 and cuda_compiler_version == '9.2']
+        - cudatoolkit >=10.0  # [linux64 and cuda_compiler_version != '9.2']
         - ucx 1.9.0  # [linux64]
     test:
       script: run_test.sh
