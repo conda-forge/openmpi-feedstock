@@ -18,7 +18,7 @@ source:
 build:
   number: 5
   # remember to bump the CUDA version in build-mpi.sh too!
-  skip: true  # [win or (linux64 and cuda_compiler_version not in ('None', '9.2', '10.2')) or ((aarch64 or ppc64le) and cuda_compiler_version not in (undefined, "None"))]
+  skip: true  # [win or (linux64 and cuda_compiler_version not in ('9.2', '10.2')) or ((aarch64 or ppc64le) and cuda_compiler_version not in (undefined, "None"))]
 
 outputs:
   - name: openmpi
@@ -27,13 +27,13 @@ outputs:
       run_exports:
         - {{ pin_subpackage('openmpi', min_pin='x.x.x', max_pin='x') }}
       ignore_run_exports_from:
-        - {{ compiler('cuda') }}  # [linux64 and cuda_compiler_version != 'None']
+        - {{ compiler('cuda') }}  # [linux64]
     requirements:
       build:
         - {{ compiler('c') }}
         - {{ compiler('cxx') }}
         - {{ compiler('fortran') }}
-        - {{ compiler('cuda') }}  # [linux64 and cuda_compiler_version != 'None']
+        - {{ compiler('cuda') }}  # [linux64]
         - autoconf  # [unix]
         - automake  # [unix]
         - libtool   # [unix]
@@ -42,8 +42,7 @@ outputs:
       host:
         - zlib
         - ucx 1.9.0  # [linux64]
-        - ucx-proc =*=gpu  # [linux64 and cuda_compiler_version != 'None']
-        - ucx-proc =*=cpu  # [linux64 and cuda_compiler_version == 'None']
+        - ucx-proc =*=gpu  # [linux64]
       run:
         - zlib
         - mpi 1.0 openmpi
