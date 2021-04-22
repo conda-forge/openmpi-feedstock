@@ -39,11 +39,11 @@ outputs:
         - libtool   # [unix]
         - make  # [unix]
         - perl 5.26.2
+      host:
+        - zlib
         - ucx 1.9.0  # [linux64]
         - ucx-proc =*=gpu  # [linux64 and cuda_compiler_version != 'None']
         - ucx-proc =*=cpu  # [linux64 and cuda_compiler_version == 'None']
-      host:
-        - zlib
       run:
         - zlib
         - mpi 1.0 openmpi

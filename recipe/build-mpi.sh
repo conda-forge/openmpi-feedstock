@@ -22,7 +22,7 @@ if [[ "$target_platform" == osx-* ]]; then
 fi
 
 if [[ $cuda_compiler_version == 9.2 || $cuda_compiler_version == 10.2 ]]; then
-    build_with_cuda="--with-cuda --with-ucx=$BUILD_PREFIX"
+    build_with_cuda="--with-cuda --with-ucx=$PREFIX"
 else
     build_with_cuda=""
 fi
