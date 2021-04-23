@@ -16,7 +16,7 @@ source:
     - ompi-8361.diff
 
 build:
-  number: 4
+  number: 5
   # remember to bump the CUDA version in build-mpi.sh too!
   skip: true  # [win or (linux64 and cuda_compiler_version != '10.2') or ((aarch64 or ppc64le) and cuda_compiler_version not in (undefined, "None"))]
 
@@ -27,7 +27,7 @@ outputs:
       run_exports:
         - {{ pin_subpackage('openmpi', min_pin='x.x.x', max_pin='x') }}
       ignore_run_exports_from:
-        - {{ compiler('cuda') }}
+        - {{ compiler('cuda') }}  # [linux64]
     requirements:
       build:
         - {{ compiler('c') }}
@@ -41,11 +41,14 @@ outputs:
         - perl 5.26.2
       host:
         - zlib
+        - ucx 1.9.0  # [linux64]
+        - ucx-proc =*=gpu  # [linux64]
       run:
         - zlib
         - mpi 1.0 openmpi
       run_constrained:
         - cudatoolkit >=9.2  # [linux64]
+        - ucx 1.9.0  # [linux64]
     test:
       script: run_test.sh
       files:
