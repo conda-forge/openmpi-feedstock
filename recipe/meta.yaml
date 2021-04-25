@@ -1,4 +1,4 @@
-{% set version = "4.1.0" %}
+{% set version = "4.1.1" %}
 {% set major = version.rpartition('.')[0] %}
 
 package:
@@ -9,14 +9,10 @@ package:
 source:
   fn: openmpi-{{ version }}.tar.bz2
   url: https://www.open-mpi.org/software/ompi/v{{ major }}/downloads/openmpi-{{ version }}.tar.bz2
-  sha256: 73866fb77090819b6a8c85cb8539638d37d6877455825b74e289d647a39fd5b5
-  patches:
-    # From open-mpi/ompi#8361: hotfix for the issue of building the op/avx module.
-    # TODO(leofang): remove this patch in the next release
-    - ompi-8361.diff
+  sha256: e24f7a778bd11a71ad0c14587a7f5b00e68a71aa5623e2157bafee3d44c07cda
 
 build:
-  number: 5
+  number: 0
   # remember to bump the CUDA version in build-mpi.sh too!
   skip: true  # [win or (linux64 and cuda_compiler_version != '10.2') or ((aarch64 or ppc64le) and cuda_compiler_version not in (undefined, "None"))]
 
