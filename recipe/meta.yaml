@@ -1,4 +1,4 @@
-{% set version = "4.1.1" %}
+{% set version = "4.1.2" %}
 {% set major = version.rpartition('.')[0] %}
 
 package:
@@ -9,12 +9,13 @@ package:
 source:
   fn: openmpi-{{ version }}.tar.bz2
   url: https://www.open-mpi.org/software/ompi/v{{ major }}/downloads/openmpi-{{ version }}.tar.bz2
-  sha256: e24f7a778bd11a71ad0c14587a7f5b00e68a71aa5623e2157bafee3d44c07cda
+  sha256: 9b78c7cf7fc32131c5cf43dd2ab9740149d9d87cadb2e2189f02685749a6b527
 
 build:
   number: 0
   # remember to bump the CUDA version in build-mpi.sh too!
-  skip: true  # [win or (linux64 and cuda_compiler_version != '10.2') or ((aarch64 or ppc64le) and cuda_compiler_version not in (undefined, "None"))]
+  ? skip__###conda-selector###__win or (linux64 and cuda_compiler_version != '10.2') or ((aarch64 or ppc64le) and cuda_compiler_version not in (undefined, "None"))
+  : true
 
 outputs:
   - name: openmpi
