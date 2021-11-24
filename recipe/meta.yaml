@@ -14,8 +14,7 @@ source:
 build:
   number: 0
   # remember to bump the CUDA version in build-mpi.sh too!
-  ? skip__###conda-selector###__win or (linux64 and cuda_compiler_version != '10.2') or ((aarch64 or ppc64le) and cuda_compiler_version not in (undefined, "None"))
-  : true
+  skip: true  # [win or (linux64 and cuda_compiler_version != '10.2') or ((aarch64 or ppc64le) and cuda_compiler_version not in (undefined, "None"))]
 
 outputs:
   - name: openmpi
