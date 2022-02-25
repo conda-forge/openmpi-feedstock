@@ -22,14 +22,7 @@ Current build status
 ====================
 
 
-<table><tr>
-    <td>Travis</td>
-    <td>
-      <a href="https://travis-ci.com/conda-forge/openmpi-feedstock">
-        <img alt="macOS" src="https://img.shields.io/travis/com/conda-forge/openmpi-feedstock/master.svg?label=macOS">
-      </a>
-    </td>
-  </tr>
+<table>
     
   <tr>
     <td>Azure</td>
@@ -43,10 +36,10 @@ Current build status
         <table>
           <thead><tr><th>Variant</th><th>Status</th></tr></thead>
           <tbody><tr>
-              <td>linux_64_cuda_compiler_version10.2</td>
+              <td>linux_64_c_compiler_version7cuda_compiler_version10.2cxx_compiler_version7fortran_compiler_version7</td>
               <td>
                 <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=720&branchName=master">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/openmpi-feedstock?branchName=master&jobName=linux&configuration=linux_64_cuda_compiler_version10.2" alt="variant">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/openmpi-feedstock?branchName=master&jobName=linux&configuration=linux_64_c_compiler_version7cuda_compiler_version10.2cxx_compiler_version7fortran_compiler_version7" alt="variant">
                 </a>
               </td>
             </tr><tr>
