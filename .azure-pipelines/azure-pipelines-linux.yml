@@ -8,6 +8,10 @@ jobs:
     vmImage: ubuntu-latest
   strategy:
     matrix:
+      linux_64_c_compiler_version10cuda_compiler_versionNonecxx_compiler_version10fortran_compiler_version10:
+        CONFIG: linux_64_c_compiler_version10cuda_compiler_versionNonecxx_compiler_version10fortran_compiler_version10
+        UPLOAD_PACKAGES: 'True'
+        DOCKER_IMAGE: quay.io/condaforge/linux-anvil-cos7-x86_64
       linux_64_c_compiler_version7cuda_compiler_version10.2cxx_compiler_version7fortran_compiler_version7:
         CONFIG: linux_64_c_compiler_version7cuda_compiler_version10.2cxx_compiler_version7fortran_compiler_version7
         UPLOAD_PACKAGES: 'True'
