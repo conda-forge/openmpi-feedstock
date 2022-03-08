@@ -23,13 +23,13 @@ outputs:
       run_exports:
         - {{ pin_subpackage('openmpi', min_pin='x.x.x', max_pin='x') }}
       ignore_run_exports_from:
-        - {{ compiler('cuda') }}  # [linux64]
+        - {{ compiler('cuda') }}  # [linux64 and cuda_compiler_version != "None"]
     requirements:
       build:
         - {{ compiler('c') }}
         - {{ compiler('cxx') }}
         - {{ compiler('fortran') }}
-        - {{ compiler('cuda') }}  # [linux64]
+        - {{ compiler('cuda') }}  # [linux64 and cuda_compiler_version != "None"]
         - autoconf  # [unix]
         - automake  # [unix]
         - libtool   # [unix]
