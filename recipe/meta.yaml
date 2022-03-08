@@ -62,7 +62,9 @@ outputs:
       run:
         - {{ pin_subpackage('openmpi', exact=True) }}
         # host C compilers work fine (better) on mac
-        - "{{ c_compiler }} >={{ c_compiler_version }}"
+        - {{ compiler('c') }}  # [osx]
+        # relax compiler version because CUDA compiler compatability
+        - "{{ c_compiler }} >={{ c_compiler_version }}"  # [not osx]
     test:
       script: run_test.sh
       files:
@@ -80,7 +82,9 @@ outputs:
       run:
         - {{ pin_subpackage('openmpi', exact=True) }}
         # host C compilers work fine (better) on mac
-        - "{{ cxx_compiler }} >={{ cxx_compiler_version }}"
+        - {{ compiler('fortran') }}  # [osx]
+        # relax compiler version because CUDA compiler compatability
+        - "{{ cxx_compiler }} >={{ cxx_compiler_version }}"  # [not osx]
     test:
       script: run_test.sh
       files:
@@ -97,9 +101,10 @@ outputs:
     requirements:
       run:
         - {{ pin_subpackage('openmpi', exact=True) }}
-        - {{ compiler('fortran') }}
-# There is some issue with libgfortran4/libgfortran5 swapping after gfortran=7
-#         - "{{ fortran_compiler }} >={{ fortran_compiler_version }}"
+        - {{ compiler('fortran') }}  # [osx]
+        # relax compiler version because CUDA compiler compatability
+        # FIXME: There is some issue with libgfortran4/libgfortran5?
+        - "{{ fortran_compiler }} >={{ fortran_compiler_version }}"  # [not osx]
     test:
       script: run_test.sh
       files:
