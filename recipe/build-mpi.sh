@@ -21,10 +21,8 @@ if [[ "$target_platform" == osx-* ]]; then
     fi
 fi
 
-if [[ $cuda_compiler_version == 10.2 ]]; then
+if [[ ! -z $cuda_compiler_version && $cuda_compiler_version != "None" ]]; then
     build_with_cuda="--with-cuda --with-ucx=$PREFIX"
-else
-    build_with_cuda=""
 fi
 
 if [[ $CONDA_BUILD_CROSS_COMPILATION == "1"  && $target_platform == osx-arm64 ]]; then
@@ -149,7 +147,7 @@ export LIBRARY_PATH="$PREFIX/lib"
             --with-wrapper-fcflags="-I$PREFIX/include" \
             --with-wrapper-ldflags="-L$PREFIX/lib -Wl,-rpath,$PREFIX/lib" \
             --with-sge \
-            $build_with_cuda
+            ${build_with_cuda:-}
 
 make -j"${CPU_COUNT:-1}"
 make install
@@ -164,7 +162,7 @@ if [ ! -z "$build_with_cuda" ]; then
     echo "pml = ^ucx" >> $PREFIX/etc/openmpi-mca-params.conf
     echo "setting the mca osc to ^ucx..."
     echo "osc = ^ucx" >> $PREFIX/etc/openmpi-mca-params.conf
-    
+
     POST_LINK=$PREFIX/bin/.openmpi-post-link.sh
     cp $RECIPE_DIR/post-link.sh $POST_LINK
     chmod +x $POST_LINK

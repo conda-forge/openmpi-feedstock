@@ -1,11 +1,15 @@
 {% set version = "4.1.3" %}
 {% set major = version.rpartition('.')[0] %}
-{% set build = 1 %}
+{% set build = 2 %}
 
 # give conda package a higher build number
 {% if mpi_type == 'conda' %}
 {% set build = build + 100 %}
 {% endif %}
+
+# avoid conda-forge's cuda compiler detection
+# which forces a complex build matrix
+{% set cooda = 'cuda' %}
 
 package:
   # must not match any outputs for requirements to be handled correctly
@@ -19,8 +23,8 @@ source:
 
 build:
   number: {{ build }}
-  # remember to bump the CUDA version in build-mpi.sh too!
-  skip: true  # [win or (linux64 and cuda_compiler_version != '10.2') or ((aarch64 or ppc64le) and cuda_compiler_version not in (undefined, "None"))]
+  number: 1
+  skip: true  # [win]
 
 outputs:
   {% if mpi_type == 'external' %}
@@ -41,13 +45,13 @@ outputs:
       run_exports:
         - {{ pin_subpackage('openmpi', min_pin='x.x.x', max_pin='x') }}
       ignore_run_exports_from:
-        - {{ compiler('cuda') }}  # [linux64]
+        - {{ compiler(cooda) }}  # [linux64]
     requirements:
       build:
         - {{ compiler('c') }}
         - {{ compiler('cxx') }}
         - {{ compiler('fortran') }}
-        - {{ compiler('cuda') }}  # [linux64]
+        - {{ compiler(cooda) }}  # [linux64]
         - autoconf  # [unix]
         - automake  # [unix]
         - libtool   # [unix]
@@ -61,7 +65,7 @@ outputs:
         - zlib
         - mpi 1.0 openmpi
       run_constrained:
-        - cudatoolkit >=9.2  # [linux64]
+        - cudatoolkit >={{ cuda_compiler_version }}  # [linux64]
         - ucx 1.9.0  # [linux64]
     test:
       script: run_test.sh
