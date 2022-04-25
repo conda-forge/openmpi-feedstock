@@ -59,7 +59,7 @@ outputs:
         - zlib
         - mpi 1.0 openmpi
       run_constrained:
-        - cudatoolkit        # [linux]
+        - cudatoolkit  >= {{ cudatoolkit }}       # [linux]
         - ucx                # [linux]
     test:
       script: run_test.sh
