@@ -1,6 +1,6 @@
 {% set version = "4.1.3" %}
 {% set major = version.rpartition('.')[0] %}
-{% set build = 1 %}
+{% set build = 2 %}
 
 # give conda package a higher build number
 {% if mpi_type == 'conda' %}
@@ -19,8 +19,9 @@ source:
 
 build:
   number: {{ build }}
-  # remember to bump the CUDA version in build-mpi.sh too!
-  skip: true  # [win or (linux64 and cuda_compiler_version != '10.2') or ((aarch64 or ppc64le) and cuda_compiler_version not in (undefined, "None"))]
+  script_env:
+    - CUDA_HOME
+  skip: true  # [win]
 
 outputs:
   {% if mpi_type == 'external' %}
@@ -40,14 +41,11 @@ outputs:
     build:
       run_exports:
         - {{ pin_subpackage('openmpi', min_pin='x.x.x', max_pin='x') }}
-      ignore_run_exports_from:
-        - {{ compiler('cuda') }}  # [linux64]
     requirements:
       build:
         - {{ compiler('c') }}
         - {{ compiler('cxx') }}
         - {{ compiler('fortran') }}
-        - {{ compiler('cuda') }}  # [linux64]
         - autoconf  # [unix]
         - automake  # [unix]
         - libtool   # [unix]
@@ -55,14 +53,15 @@ outputs:
         - perl 5.26.2
       host:
         - zlib
-        - ucx 1.9.0  # [linux64]
-        - ucx-proc =*=gpu  # [linux64]
+        - ucx                 # [linux]
+        - ucx-proc =*=gpu     # [linux]
       run:
         - zlib
         - mpi 1.0 openmpi
       run_constrained:
-        - cudatoolkit >=9.2  # [linux64]
-        - ucx 1.9.0  # [linux64]
+        - cudatoolkit >=10.2  # [linux and x86_64]
+        - cudatoolkit >=11.2  # [linux and not x86_64]
+        - ucx                 # [linux]
     test:
       script: run_test.sh
       files:

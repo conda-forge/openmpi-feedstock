@@ -21,10 +21,12 @@ if [[ "$target_platform" == osx-* ]]; then
     fi
 fi
 
-if [[ $cuda_compiler_version == 10.2 ]]; then
-    build_with_cuda="--with-cuda --with-ucx=$PREFIX"
-else
+if [[ -z $CUDA_HOME ]]; then
     build_with_cuda=""
+else
+    export CFLAGS="$CFLAGS -isystem $CUDA_HOME"
+    export CXXFLAGS="$CXXFLAGS -isystem $CUDA_HOME"
+    build_with_cuda="--with-cuda --with-ucx=$PREFIX"
 fi
 
 if [[ $CONDA_BUILD_CROSS_COMPILATION == "1"  && $target_platform == osx-arm64 ]]; then
