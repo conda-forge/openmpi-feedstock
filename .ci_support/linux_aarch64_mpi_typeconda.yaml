@@ -12,14 +12,12 @@ channel_sources:
 - conda-forge
 channel_targets:
 - conda-forge main
-cuda_compiler_version:
-- None
 cxx_compiler:
 - gxx
 cxx_compiler_version:
 - '10'
 docker_image:
-- quay.io/condaforge/linux-anvil-aarch64
+- quay.io/condaforge/linux-anvil-aarch64-cuda:11.2
 fortran_compiler:
 - gfortran
 fortran_compiler_version:
@@ -35,8 +33,5 @@ zip_keys:
 - - c_compiler_version
   - cxx_compiler_version
   - fortran_compiler_version
-  - cuda_compiler_version
-  - cdt_name
-  - docker_image
 zlib:
 - '1.2'
