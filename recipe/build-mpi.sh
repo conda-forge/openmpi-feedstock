@@ -151,7 +151,7 @@ export LIBRARY_PATH="$PREFIX/lib"
             --with-wrapper-fcflags="-I$PREFIX/include" \
             --with-wrapper-ldflags="-L$PREFIX/lib -Wl,-rpath,$PREFIX/lib" \
             --with-sge \
-            $build_with_cuda
+            $build_with_cuda || (cat config.log; false)
 
 make -j"${CPU_COUNT:-1}"
 make install
