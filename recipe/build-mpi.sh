@@ -24,8 +24,8 @@ fi
 if [[ -z $CUDA_HOME ]]; then
     build_with_cuda=""
 else
-    export CFLAGS="$CFLAGS -isystem $CUDA_HOME"
-    export CXXFLAGS="$CXXFLAGS -isystem $CUDA_HOME"
+    export CFLAGS="$CFLAGS -I$CUDA_HOME"
+    export CXXFLAGS="$CXXFLAGS -I$CUDA_HOME"
     build_with_cuda="--with-cuda --with-ucx=$PREFIX"
 fi
 
