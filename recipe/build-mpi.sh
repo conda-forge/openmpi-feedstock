@@ -3,7 +3,9 @@
 # unset unused old fortran compiler vars
 unset F90 F77
 
-set -e
+set -ex
+
+env
 
 export FCFLAGS="$FFLAGS"
 
@@ -166,7 +168,7 @@ if [ ! -z "$build_with_cuda" ]; then
     echo "pml = ^ucx" >> $PREFIX/etc/openmpi-mca-params.conf
     echo "setting the mca osc to ^ucx..."
     echo "osc = ^ucx" >> $PREFIX/etc/openmpi-mca-params.conf
-    
+
     POST_LINK=$PREFIX/bin/.openmpi-post-link.sh
     cp $RECIPE_DIR/post-link.sh $POST_LINK
     chmod +x $POST_LINK
