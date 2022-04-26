@@ -53,14 +53,14 @@ outputs:
         - perl 5.26.2
       host:
         - zlib
-        - ucx                 # [linux]
-        - ucx-proc =*=gpu     # [linux]
+        - ucx                 # [enable_cuda]
+        - ucx-proc =*=gpu     # [enable_cuda]
       run:
         - zlib
         - mpi 1.0 openmpi
       run_constrained:
-        - cudatoolkit  >= {{ cudatoolkit }}       # [linux]
-        - ucx                # [linux]
+        - cudatoolkit  >= {{ cudatoolkit }}       # [enable_cuda]
+        - ucx                # [enable_cuda]
     test:
       script: run_test.sh
       files:
