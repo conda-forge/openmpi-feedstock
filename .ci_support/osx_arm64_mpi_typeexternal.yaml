@@ -12,6 +12,8 @@ cxx_compiler:
 - clangxx
 cxx_compiler_version:
 - '13'
+enable_cuda:
+- 'False'
 fortran_compiler:
 - gfortran
 fortran_compiler_version:
