@@ -8,12 +8,12 @@ jobs:
     vmImage: ubuntu-latest
   strategy:
     matrix:
-      linux_64_cuda_compiler_version10.2mpi_typeconda:
-        CONFIG: linux_64_cuda_compiler_version10.2mpi_typeconda
+      linux_64_mpi_typeconda:
+        CONFIG: linux_64_mpi_typeconda
         UPLOAD_PACKAGES: 'True'
         DOCKER_IMAGE: quay.io/condaforge/linux-anvil-cos7-cuda:10.2
-      linux_64_cuda_compiler_version10.2mpi_typeexternal:
-        CONFIG: linux_64_cuda_compiler_version10.2mpi_typeexternal
+      linux_64_mpi_typeexternal:
+        CONFIG: linux_64_mpi_typeexternal
         UPLOAD_PACKAGES: 'True'
         DOCKER_IMAGE: quay.io/condaforge/linux-anvil-cos7-cuda:10.2
   timeoutInMinutes: 360
