@@ -40,7 +40,7 @@ outputs:
       run_exports:
         - {{ pin_subpackage('openmpi', min_pin='x.x.x', max_pin='x') }}
       script_env:
-        - CUDA_HOME
+        - CUDA_HOME     # [enable_cuda]
     requirements:
       build:
         - {{ compiler('c') }}
