@@ -1,6 +1,6 @@
 {% set version = "4.1.3" %}
 {% set major = version.rpartition('.')[0] %}
-{% set build = 2 %}
+{% set build = 3 %}
 
 # give conda package a higher build number
 {% if mpi_type == 'conda' %}
@@ -19,8 +19,6 @@ source:
 
 build:
   number: {{ build }}
-  script_env:
-    - CUDA_HOME
   skip: true  # [win]
 
 outputs:
@@ -41,6 +39,8 @@ outputs:
     build:
       run_exports:
         - {{ pin_subpackage('openmpi', min_pin='x.x.x', max_pin='x') }}
+      script_env:
+        - CUDA_HOME
     requirements:
       build:
         - {{ compiler('c') }}

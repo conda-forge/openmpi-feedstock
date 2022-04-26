@@ -5,8 +5,6 @@ unset F90 F77
 
 set -ex
 
-env
-
 export FCFLAGS="$FFLAGS"
 
 # avoid absolute-paths in compilers
