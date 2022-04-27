@@ -3,7 +3,7 @@
 # unset unused old fortran compiler vars
 unset F90 F77
 
-set -e
+set -ex
 
 export FCFLAGS="$FFLAGS"
 
@@ -24,8 +24,8 @@ fi
 if [[ -z $CUDA_HOME ]]; then
     build_with_cuda=""
 else
-    export CFLAGS="$CFLAGS -isystem $CUDA_HOME"
-    export CXXFLAGS="$CXXFLAGS -isystem $CUDA_HOME"
+    export CFLAGS="$CFLAGS -I$CUDA_HOME/include"
+    export CXXFLAGS="$CXXFLAGS -I$CUDA_HOME/include"
     build_with_cuda="--with-cuda --with-ucx=$PREFIX"
 fi
 
@@ -151,7 +151,7 @@ export LIBRARY_PATH="$PREFIX/lib"
             --with-wrapper-fcflags="-I$PREFIX/include" \
             --with-wrapper-ldflags="-L$PREFIX/lib -Wl,-rpath,$PREFIX/lib" \
             --with-sge \
-            $build_with_cuda
+            $build_with_cuda || (cat config.log; false)
 
 make -j"${CPU_COUNT:-1}"
 make install
@@ -166,7 +166,7 @@ if [ ! -z "$build_with_cuda" ]; then
     echo "pml = ^ucx" >> $PREFIX/etc/openmpi-mca-params.conf
     echo "setting the mca osc to ^ucx..."
     echo "osc = ^ucx" >> $PREFIX/etc/openmpi-mca-params.conf
-    
+
     POST_LINK=$PREFIX/bin/.openmpi-post-link.sh
     cp $RECIPE_DIR/post-link.sh $POST_LINK
     chmod +x $POST_LINK
