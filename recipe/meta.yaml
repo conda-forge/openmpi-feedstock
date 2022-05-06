@@ -22,18 +22,7 @@ build:
   skip: true  # [win]
 
 outputs:
-  {% if mpi_type == 'external' %}
-  - name: openmpi
-    string: {{ mpi_type }}_{{ build }}
-    track_features:
-      - openmpi_{{ mpi_type }}
-    requirements:
-      run:
-        - mpi 1.0 openmpi
-    test:
-      commands:
-        - echo "It works!"
-  {% else %}
+  {% if mpi_type == 'conda' %}
   - name: openmpi
     script: build-mpi.sh
     build:
@@ -122,6 +111,18 @@ outputs:
         - mpiexec.sh
         - tests/helloworld.f
         - tests/helloworld.f90
+  {% else %}
+  - name: openmpi
+    string: {{ mpi_type }}_{{ build }}
+    track_features:
+      - openmpi_{{ mpi_type }}
+    requirements:
+      host: []
+      run:
+        - mpi 1.0 openmpi
+    test:
+      commands:
+        - echo "It works!"
   {% endif %}
 
 about:
