@@ -113,9 +113,10 @@ outputs:
         - tests/helloworld.f90
   {% else %}
   - name: openmpi
-    string: {{ mpi_type }}_{{ build }}
-    track_features:
-      - openmpi_{{ mpi_type }}
+    build:
+      string: {{ mpi_type }}_{{ build }}
+      track_features:
+        - openmpi_{{ mpi_type }}
     requirements:
       host: []
       run:
