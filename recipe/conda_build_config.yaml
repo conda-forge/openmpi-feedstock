@@ -1,5 +1,5 @@
 mpi_type:
-  - external
+  - external  # [linux and x86_64]
   - conda
 docker_image:  # [linux and x86_64]
   - quay.io/condaforge/linux-anvil-cos7-cuda:10.2     # [linux and x86_64]
