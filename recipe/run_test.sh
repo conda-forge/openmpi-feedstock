@@ -12,6 +12,15 @@ if [[ $PKG_NAME == "openmpi" ]]; then
   command -v ompi_info
   ompi_info
 
+  if [[ ! -z "$(conda list | grep ucx)" ]]; then
+    echo "Improper UCX dependency!"
+    exit 1
+  fi
+  if [[ ! -z "$(conda list | grep cudatoolkit)" ]]; then
+    echo "Improper cuda dependency!"
+    exit 1
+  fi
+
   command -v mpiexec
   which mpiexec
   $MPIEXEC --help

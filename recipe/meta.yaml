@@ -1,6 +1,6 @@
 {% set version = "4.1.3" %}
 {% set major = version.rpartition('.')[0] %}
-{% set build = 4 %}
+{% set build = 5 %}
 
 # give conda package a higher build number
 {% if mpi_type == 'conda' %}
@@ -22,25 +22,14 @@ build:
   skip: true  # [win]
 
 outputs:
-  {% if mpi_type == 'external' %}
-  - name: openmpi
-    build:
-      noarch: generic
-    string: {{ mpi_type }}_{{ build }}
-    track_features:
-      - openmpi_{{ mpi_type }}
-    requirements:
-      run:
-        - mpi 1.0 openmpi
-    test:
-      commands:
-        - echo "It works!"
-  {% else %}
+  {% if mpi_type == 'conda' %}
   - name: openmpi
     script: build-mpi.sh
     build:
       run_exports:
         - {{ pin_subpackage('openmpi', min_pin='x.x.x', max_pin='x') }}
+      ignore_run_exports:
+        - ucx  # [enable_cuda]
       script_env:
         - CUDA_HOME     # [enable_cuda]
     requirements:
@@ -62,7 +51,7 @@ outputs:
         - mpi 1.0 openmpi
       run_constrained:
         - cudatoolkit  >= {{ cudatoolkit }}       # [enable_cuda]
-        - ucx                # [enable_cuda]
+        - {{ pin_compatible("ucx", max_pin="x.x") }}  # [enable_cuda]
     test:
       script: run_test.sh
       files:
@@ -122,6 +111,19 @@ outputs:
         - mpiexec.sh
         - tests/helloworld.f
         - tests/helloworld.f90
+  {% else %}
+  - name: openmpi
+    build:
+      string: {{ mpi_type }}_{{ build }}
+      track_features:
+        - openmpi_{{ mpi_type }}
+    requirements:
+      host: []
+      run:
+        - mpi 1.0 openmpi
+    test:
+      commands:
+        - echo "It works!"
   {% endif %}
 
 about:
