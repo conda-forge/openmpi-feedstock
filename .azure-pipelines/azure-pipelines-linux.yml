@@ -16,6 +16,10 @@ jobs:
         CONFIG: linux_64_mpi_typeexternal
         UPLOAD_PACKAGES: 'True'
         DOCKER_IMAGE: quay.io/condaforge/linux-anvil-cos7-cuda:10.2
+      linux_ppc64le_:
+        CONFIG: linux_ppc64le_
+        UPLOAD_PACKAGES: 'True'
+        DOCKER_IMAGE: quay.io/condaforge/linux-anvil-ppc64le
   timeoutInMinutes: 360
 
   steps:
