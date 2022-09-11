@@ -51,7 +51,7 @@ outputs:
         - mpi 1.0 openmpi
       run_constrained:
         - cudatoolkit  >= {{ cudatoolkit }}       # [enable_cuda]
-        - {{ pin_compatible("ucx", max_pin="x.x") }}  # [enable_cuda]
+        - {{ pin_compatible("ucx", max_pin="x") }}  # [enable_cuda]
     test:
       script: run_test.sh
       files:
