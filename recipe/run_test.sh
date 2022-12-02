@@ -22,10 +22,6 @@ if [[ $PKG_NAME == "openmpi" ]]; then
   fi
 
   command -v mpiexec
-  # try to avoid strange segfault
-  if [[ "$target_platform" != "linux-aarch64" ]]; then
-    which mpiexec
-  fi
   $MPIEXEC --help
   $MPIEXEC -n 4 ./helloworld.sh
 fi
