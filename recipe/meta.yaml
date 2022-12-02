@@ -30,6 +30,8 @@ outputs:
         - {{ pin_subpackage('openmpi', min_pin='x.x.x', max_pin='x') }}
       ignore_run_exports:
         - ucx  # [enable_cuda]
+      script_env:
+        - CUDA_HOME     # [enable_cuda]
     requirements:
       build:
         - {{ compiler('c') }}
