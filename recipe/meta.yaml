@@ -1,6 +1,6 @@
 {% set version = "4.1.4" %}
 {% set major = version.rpartition('.')[0] %}
-{% set build = 1 %}
+{% set build = 2 %}
 
 # give conda package a higher build number
 {% if mpi_type == 'conda' %}
@@ -30,8 +30,6 @@ outputs:
         - {{ pin_subpackage('openmpi', min_pin='x.x.x', max_pin='x') }}
       ignore_run_exports:
         - ucx  # [enable_cuda]
-      script_env:
-        - CUDA_HOME     # [enable_cuda]
     requirements:
       build:
         - {{ compiler('c') }}
@@ -50,7 +48,7 @@ outputs:
         - zlib
         - mpi 1.0 openmpi
       run_constrained:
-        - cudatoolkit  >= {{ cudatoolkit }}       # [enable_cuda]
+        - cudatoolkit  >= {{ cudatoolkit }}         # [enable_cuda]
         - {{ pin_compatible("ucx", max_pin="x") }}  # [enable_cuda]
     test:
       script: run_test.sh

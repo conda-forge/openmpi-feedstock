@@ -21,11 +21,11 @@ if [[ "$target_platform" == osx-* ]]; then
     fi
 fi
 
-if [[ -z $CUDA_HOME ]]; then
+if [[ -z $CUDA_PATH ]]; then
     build_with_cuda=""
 else
-    export CFLAGS="$CFLAGS -I$CUDA_HOME/include"
-    export CXXFLAGS="$CXXFLAGS -I$CUDA_HOME/include"
+    export CFLAGS="$CFLAGS -I$CUDA_PATH/include"
+    export CXXFLAGS="$CXXFLAGS -I$CUDA_PATH/include"
     build_with_cuda="--with-cuda --with-ucx=$PREFIX"
 fi
 
