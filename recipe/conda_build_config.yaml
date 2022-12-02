@@ -1,10 +1,14 @@
 mpi_type:
-  - external  # [linux and x86_64]
+  - external  # [linux]
   - conda
-docker_image:  # [linux and x86_64]
-  - quay.io/condaforge/linux-anvil-cos7-cuda:10.2     # [linux and x86_64]
-cudatoolkit:  # [linux and x86_64]
-  - 10.2      # [linux and x86_64]
+docker_image:  # [linux]
+  - quay.io/condaforge/linux-anvil-cos7-cuda:10.2      # [linux64]
+  - quay.io/condaforge/linux-anvil-ppc64le-cuda:11.0   # [ppc64le]
+  - quay.io/condaforge/linux-anvil-aarch64-cuda:11.0   # [aarch64]
+cudatoolkit:  # [linux]
+  - 10.2      # [linux64]
+  - 11.0      # [ppc64le]
+  - 11.0      # [aarch64]
 enable_cuda:
-  - True      # [linux and x86_64]
-  - False     # [not (linux and x86_64)]
+  - True      # [linux]
+  - False     # [not linux]

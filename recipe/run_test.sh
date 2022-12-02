@@ -22,7 +22,6 @@ if [[ $PKG_NAME == "openmpi" ]]; then
   fi
 
   command -v mpiexec
-  which mpiexec
   $MPIEXEC --help
   $MPIEXEC -n 4 ./helloworld.sh
 fi
