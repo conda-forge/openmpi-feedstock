@@ -3,7 +3,7 @@ BUILD:
 c_compiler:
 - gcc
 c_compiler_version:
-- '10'
+- '11'
 cdt_arch:
 - aarch64
 cdt_name:
@@ -17,7 +17,7 @@ cudatoolkit:
 cxx_compiler:
 - gxx
 cxx_compiler_version:
-- '10'
+- '11'
 docker_image:
 - quay.io/condaforge/linux-anvil-aarch64-cuda:11.0
 enable_cuda:
@@ -25,7 +25,7 @@ enable_cuda:
 fortran_compiler:
 - gfortran
 fortran_compiler_version:
-- '10'
+- '11'
 mpi_type:
 - external
 target_platform:
