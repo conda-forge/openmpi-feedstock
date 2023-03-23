@@ -27,7 +27,7 @@ mpi_type:
 target_platform:
 - linux-ppc64le
 ucx:
-- 1.12.1
+- 1.14.0
 zip_keys:
 - - c_compiler_version
   - cxx_compiler_version
