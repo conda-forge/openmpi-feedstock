@@ -28,10 +28,6 @@ outputs:
     build:
       run_exports:
         - {{ pin_subpackage('openmpi', min_pin='x.x.x', max_pin='x') }}
-      ignore_run_exports:
-        - ucx  # [enable_cuda]
-      script_env:
-        - CUDA_HOME     # [enable_cuda]
     requirements:
       build:
         - {{ compiler('c') }}
@@ -44,14 +40,10 @@ outputs:
         - perl 5.26.2
       host:
         - zlib
-        - ucx                 # [enable_cuda]
-        - ucx-proc =*=gpu     # [enable_cuda]
+        - ucx
       run:
         - zlib
         - mpi 1.0 openmpi
-      run_constrained:
-        - cudatoolkit  >= {{ cudatoolkit }}         # [enable_cuda]
-        - {{ pin_compatible("ucx", max_pin="x") }}  # [enable_cuda]
     test:
       script: run_test.sh
       files:
