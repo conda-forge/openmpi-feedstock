@@ -32,6 +32,7 @@ outputs:
       build:
         - {{ compiler('c') }}
         - {{ compiler('cxx') }}
+        - {{ compiler('cuda') }}  # [linux]
         - {{ compiler('fortran') }}
         - autoconf  # [unix]
         - automake  # [unix]
