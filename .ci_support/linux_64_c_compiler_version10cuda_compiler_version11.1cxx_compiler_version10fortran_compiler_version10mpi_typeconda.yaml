@@ -1,30 +1,39 @@
-MACOSX_DEPLOYMENT_TARGET:
-- '11.0'
 c_compiler:
-- clang
+- gcc
 c_compiler_version:
-- '14'
+- '10'
+cdt_name:
+- cos7
 channel_sources:
 - conda-forge
 channel_targets:
 - conda-forge main
+cuda_compiler:
+- nvcc
+cuda_compiler_version:
+- '11.1'
 cxx_compiler:
-- clangxx
+- gxx
 cxx_compiler_version:
-- '14'
+- '10'
+docker_image:
+- quay.io/condaforge/linux-anvil-cuda:11.1
 fortran_compiler:
 - gfortran
 fortran_compiler_version:
-- '11'
-macos_machine:
-- arm64-apple-darwin20.0.0
+- '10'
 mpi_type:
 - conda
 target_platform:
-- osx-arm64
+- linux-64
+ucx:
+- 1.14.0
 zip_keys:
 - - c_compiler_version
   - cxx_compiler_version
   - fortran_compiler_version
+  - cuda_compiler_version
+  - cdt_name
+  - docker_image
 zlib:
 - '1.2'

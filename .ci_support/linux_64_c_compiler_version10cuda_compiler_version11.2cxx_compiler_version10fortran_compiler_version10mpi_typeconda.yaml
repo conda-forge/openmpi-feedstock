@@ -1,25 +1,29 @@
 c_compiler:
 - gcc
 c_compiler_version:
-- '11'
+- '10'
 cdt_name:
-- cos6
+- cos7
 channel_sources:
 - conda-forge
 channel_targets:
 - conda-forge main
+cuda_compiler:
+- nvcc
+cuda_compiler_version:
+- '11.2'
 cxx_compiler:
 - gxx
 cxx_compiler_version:
-- '11'
+- '10'
 docker_image:
-- quay.io/condaforge/linux-anvil-cos7-cuda:10.2
+- quay.io/condaforge/linux-anvil-cuda:11.2
 fortran_compiler:
 - gfortran
 fortran_compiler_version:
-- '11'
+- '10'
 mpi_type:
-- external
+- conda
 target_platform:
 - linux-64
 ucx:
@@ -28,5 +32,8 @@ zip_keys:
 - - c_compiler_version
   - cxx_compiler_version
   - fortran_compiler_version
+  - cuda_compiler_version
+  - cdt_name
+  - docker_image
 zlib:
 - '1.2'

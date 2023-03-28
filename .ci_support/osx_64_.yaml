@@ -22,8 +22,6 @@ mpi_type:
 - conda
 target_platform:
 - osx-64
-ucx:
-- 1.14.0
 zip_keys:
 - - c_compiler_version
   - cxx_compiler_version
