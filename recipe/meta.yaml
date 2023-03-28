@@ -40,7 +40,7 @@ outputs:
         - perl 5.26.2
       host:
         - zlib
-        - ucx
+        - ucx  # [linux]
       run:
         - zlib
         - mpi 1.0 openmpi
