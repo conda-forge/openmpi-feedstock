@@ -29,11 +29,13 @@ outputs:
     build:
       run_exports:
         - {{ pin_subpackage('openmpi', min_pin='x.x.x', max_pin='x') }}
+      ignore_run_exports_from:
+         - {{ compiler('cuda') }}  # [linux]
     requirements:
       build:
         - {{ compiler('c') }}
         - {{ compiler('cxx') }}
-        - {{ compiler('cuda') }}  # [linux]
+        - {{ compiler('cuda') }}     # [linux]
         - {{ compiler('fortran') }}
         - autoconf  # [unix]
         - automake  # [unix]
@@ -46,6 +48,8 @@ outputs:
       run:
         - zlib
         - mpi 1.0 openmpi
+      run_constrained:
+        - cudatoolkit  >={{ cuda_compiler_version }}  # [linux]
     test:
       script: run_test.sh
       files:
