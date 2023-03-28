@@ -20,6 +20,7 @@ source:
 build:
   number: {{ build }}
   skip: true  # [win]
+  skip: true  # [linux and cuda_compiler_version in (undefined, "None")]
 
 outputs:
   {% if mpi_type == 'conda' %}
