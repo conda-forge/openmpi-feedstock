@@ -11,27 +11,27 @@ jobs:
       linux_64_mpi_typeconda:
         CONFIG: linux_64_mpi_typeconda
         UPLOAD_PACKAGES: 'True'
-        DOCKER_IMAGE: quay.io/condaforge/linux-anvil-cuda:11.0
+        DOCKER_IMAGE: quay.io/condaforge/linux-anvil-cuda:11.1
       linux_64_mpi_typeexternal:
         CONFIG: linux_64_mpi_typeexternal
         UPLOAD_PACKAGES: 'True'
-        DOCKER_IMAGE: quay.io/condaforge/linux-anvil-cuda:11.0
+        DOCKER_IMAGE: quay.io/condaforge/linux-anvil-cuda:11.1
       linux_aarch64_mpi_typeconda:
         CONFIG: linux_aarch64_mpi_typeconda
         UPLOAD_PACKAGES: 'True'
-        DOCKER_IMAGE: quay.io/condaforge/linux-anvil-aarch64-cuda:11.0
+        DOCKER_IMAGE: quay.io/condaforge/linux-anvil-aarch64-cuda:11.1
       linux_aarch64_mpi_typeexternal:
         CONFIG: linux_aarch64_mpi_typeexternal
         UPLOAD_PACKAGES: 'True'
-        DOCKER_IMAGE: quay.io/condaforge/linux-anvil-aarch64-cuda:11.0
+        DOCKER_IMAGE: quay.io/condaforge/linux-anvil-aarch64-cuda:11.1
       linux_ppc64le_mpi_typeconda:
         CONFIG: linux_ppc64le_mpi_typeconda
         UPLOAD_PACKAGES: 'True'
-        DOCKER_IMAGE: quay.io/condaforge/linux-anvil-ppc64le-cuda:11.0
+        DOCKER_IMAGE: quay.io/condaforge/linux-anvil-ppc64le-cuda:11.1
       linux_ppc64le_mpi_typeexternal:
         CONFIG: linux_ppc64le_mpi_typeexternal
         UPLOAD_PACKAGES: 'True'
-        DOCKER_IMAGE: quay.io/condaforge/linux-anvil-ppc64le-cuda:11.0
+        DOCKER_IMAGE: quay.io/condaforge/linux-anvil-ppc64le-cuda:11.1
   timeoutInMinutes: 360
 
   steps:
