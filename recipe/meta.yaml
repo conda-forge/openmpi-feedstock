@@ -142,7 +142,6 @@ about:
 extra:
   recipe-maintainers:
     - astrofrog
-    - astrofrog-conda-forge
     - bekozi
     - dalcinl
     - leofang
