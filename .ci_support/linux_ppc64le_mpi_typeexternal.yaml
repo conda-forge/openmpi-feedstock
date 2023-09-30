@@ -1,7 +1,7 @@
 c_compiler:
 - gcc
 c_compiler_version:
-- '11'
+- '12'
 cdt_name:
 - cos7
 channel_sources:
@@ -13,7 +13,7 @@ cudatoolkit:
 cxx_compiler:
 - gxx
 cxx_compiler_version:
-- '11'
+- '12'
 docker_image:
 - quay.io/condaforge/linux-anvil-ppc64le-cuda:11.0
 enable_cuda:
@@ -21,7 +21,7 @@ enable_cuda:
 fortran_compiler:
 - gfortran
 fortran_compiler_version:
-- '11'
+- '12'
 mpi_type:
 - external
 target_platform:
