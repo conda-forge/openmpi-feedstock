@@ -1,25 +1,33 @@
 #!/bin/bash
 set -ex
 
-export OMPI_MCA_plm=isolated
-export OMPI_MCA_btl_vader_single_copy_mechanism=none
-export OMPI_MCA_rmaps_base_oversubscribe=yes
-MPIEXEC="${PWD}/mpiexec.sh"
+export OMPI_MCA_pml=ob1
+export OMPI_MCA_btl=sm,self
+export OMPI_MCA_plm_ssh_agent=false
+export OMPI_MCA_rmaps_default_mapping_policy=:oversubscribe
+export OMPI_ALLOW_RUN_AS_ROOT=1
+export OMPI_ALLOW_RUN_AS_ROOT_CONFIRM=1
+MPIEXEC="mpiexec"
 
 pushd "tests"
 
 if [[ $PKG_NAME == "openmpi" ]]; then
-  command -v ompi_info
-  ompi_info
 
-  if [[ ! -z "$(conda list | grep ucx)" ]]; then
+  if [[ -n "$(conda list | grep ucx)" ]]; then
     echo "Improper UCX dependency!"
     exit 1
   fi
-  if [[ ! -z "$(conda list | grep cudatoolkit)" ]]; then
-    echo "Improper cuda dependency!"
+
+  if [[ -n "$(conda list | grep cuda-version)" ]]; then
+    echo "Improper CUDA dependency!"
     exit 1
   fi
+
+  command -v ompi_info
+  ompi_info
+
+  command -v prte_info
+  prte_info
 
   command -v mpiexec
   $MPIEXEC --help

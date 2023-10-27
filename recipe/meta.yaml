@@ -29,33 +29,43 @@ outputs:
       run_exports:
         - {{ pin_subpackage('openmpi', min_pin='x.x.x', max_pin='x') }}
       ignore_run_exports:
-        - ucx  # [enable_cuda]
+        - ucx  # [enable_ucx]
       script_env:
-        - CUDA_HOME     # [enable_cuda]
+        - CUDA_HOME  # [enable_cuda]
     requirements:
       build:
         - {{ compiler('c') }}
         - {{ compiler('cxx') }}
         - {{ compiler('fortran') }}
-        - autoconf  # [unix]
-        - automake  # [unix]
+        #- autoconf  # [unix]
+        #- automake  # [unix]
         - libtool   # [unix]
         - make  # [unix]
-        - perl 5.26.2
       host:
+        #- openpmix
+        #- prrte
+        - libhwloc
+        - libevent
         - zlib
-        - ucx                 # [enable_cuda]
-        - ucx-proc =*=gpu     # [enable_cuda]
+        - ucx  # [enable_ucx]
+        - cuda-version {{ cuda_version }}  # [enable_cuda]
       run:
-        - zlib
         - mpi 1.0 openmpi
+        #- openpmix
+        #- prrte
+        - libhwloc
+        - libevent
+        - zlib
       run_constrained:
-        - cudatoolkit  >= {{ cudatoolkit }}         # [enable_cuda]
-        - {{ pin_compatible("ucx", max_pin="x") }}  # [enable_cuda]
+        - {{ pin_compatible("ucx", max_pin="x.x") }}  # [enable_ucx]
+        # Open MPI only uses CUDA Driver APIs, set the minimal driver version
+        - __cuda  >= {{ cuda_version }}  # [enable_cuda]
+        # Ensure a consistent CUDA environment
+        - cuda-version  >= {{ cuda_version }}  # [enable_cuda]
+        - cudatoolkit   >= {{ cuda_version }}  # [enable_cuda]
     test:
       script: run_test.sh
       files:
-        - mpiexec.sh
         - tests/helloworld.sh
 
   - name: openmpi-mpicc
@@ -73,7 +83,6 @@ outputs:
     test:
       script: run_test.sh
       files:
-        - mpiexec.sh
         - tests/helloworld.c
 
   - name: openmpi-mpicxx
@@ -91,7 +100,6 @@ outputs:
     test:
       script: run_test.sh
       files:
-        - mpiexec.sh
         - tests/helloworld.cxx
 
   - name: openmpi-mpifort
@@ -108,7 +116,6 @@ outputs:
     test:
       script: run_test.sh
       files:
-        - mpiexec.sh
         - tests/helloworld.f
         - tests/helloworld.f90
   {% else %}
