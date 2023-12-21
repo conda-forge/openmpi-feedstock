@@ -8,20 +8,24 @@ channel_sources:
 - conda-forge
 channel_targets:
 - conda-forge main
-cudatoolkit:
-- '10.2'
+cuda_version:
+- '11.2'
 cxx_compiler:
 - gxx
 cxx_compiler_version:
 - '12'
 docker_image:
-- quay.io/condaforge/linux-anvil-cos7-cuda:10.2
+- quay.io/condaforge/linux-anvil-cuda:11.2
 enable_cuda:
+- 'True'
+enable_ucx:
 - 'True'
 fortran_compiler:
 - gfortran
 fortran_compiler_version:
 - '12'
+libevent:
+- 2.1.12
 mpi_type:
 - external
 target_platform:

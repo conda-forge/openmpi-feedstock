@@ -11,27 +11,27 @@ jobs:
       linux_64_mpi_typeconda:
         CONFIG: linux_64_mpi_typeconda
         UPLOAD_PACKAGES: 'True'
-        DOCKER_IMAGE: quay.io/condaforge/linux-anvil-cos7-cuda:10.2
+        DOCKER_IMAGE: quay.io/condaforge/linux-anvil-cuda:11.2
       linux_64_mpi_typeexternal:
         CONFIG: linux_64_mpi_typeexternal
         UPLOAD_PACKAGES: 'True'
-        DOCKER_IMAGE: quay.io/condaforge/linux-anvil-cos7-cuda:10.2
+        DOCKER_IMAGE: quay.io/condaforge/linux-anvil-cuda:11.2
       linux_aarch64_mpi_typeconda:
         CONFIG: linux_aarch64_mpi_typeconda
         UPLOAD_PACKAGES: 'True'
-        DOCKER_IMAGE: quay.io/condaforge/linux-anvil-aarch64-cuda:11.0
+        DOCKER_IMAGE: quay.io/condaforge/linux-anvil-aarch64-cuda:11.2
       linux_aarch64_mpi_typeexternal:
         CONFIG: linux_aarch64_mpi_typeexternal
         UPLOAD_PACKAGES: 'True'
-        DOCKER_IMAGE: quay.io/condaforge/linux-anvil-aarch64-cuda:11.0
+        DOCKER_IMAGE: quay.io/condaforge/linux-anvil-aarch64-cuda:11.2
       linux_ppc64le_mpi_typeconda:
         CONFIG: linux_ppc64le_mpi_typeconda
         UPLOAD_PACKAGES: 'True'
-        DOCKER_IMAGE: quay.io/condaforge/linux-anvil-ppc64le-cuda:11.0
+        DOCKER_IMAGE: quay.io/condaforge/linux-anvil-ppc64le-cuda:11.2
       linux_ppc64le_mpi_typeexternal:
         CONFIG: linux_ppc64le_mpi_typeexternal
         UPLOAD_PACKAGES: 'True'
-        DOCKER_IMAGE: quay.io/condaforge/linux-anvil-ppc64le-cuda:11.0
+        DOCKER_IMAGE: quay.io/condaforge/linux-anvil-ppc64le-cuda:11.2
   timeoutInMinutes: 360
 
   steps:
@@ -45,6 +45,9 @@ jobs:
 
   - script: |
         export CI=azure
+        export flow_run_id=azure_$(Build.BuildNumber).$(System.JobAttempt)
+        export remote_url=$(Build.Repository.Uri)
+        export sha=$(Build.SourceVersion)
         export GIT_BRANCH=$BUILD_SOURCEBRANCHNAME
         export FEEDSTOCK_NAME=$(basename ${BUILD_REPOSITORY_NAME})
         if [[ "${BUILD_REASON:-}" == "PullRequest" ]]; then
