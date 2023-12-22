@@ -46,6 +46,7 @@ outputs:
         #- prrte
         - libhwloc
         - libevent
+        - libnl  # [linux]
         - zlib
         - ucx  # [enable_ucx]
         - cuda-version {{ cuda_version }}  # [enable_cuda]
@@ -55,6 +56,7 @@ outputs:
         #- prrte
         - libhwloc
         - libevent
+        - libnl  # [linux]
         - zlib
       run_constrained:
         - {{ pin_compatible("ucx", max_pin="x.x") }}  # [enable_ucx]
