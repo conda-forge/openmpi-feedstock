@@ -54,10 +54,6 @@ outputs:
         - mpi 1.0 openmpi
         #- openpmix
         #- prrte
-        - libhwloc
-        - libevent
-        - libnl  # [linux]
-        - zlib
       run_constrained:
         - {{ pin_compatible("ucx", max_pin="x.x") }}  # [enable_ucx]
         # Open MPI only uses CUDA Driver APIs, set the minimal driver version
