@@ -167,6 +167,8 @@ if [ -n "$build_with_ucx" ]; then
     cat $RECIPE_DIR/post-link-ucx.sh >> $POST_LINK
 fi
 if [ -n "$build_with_cuda" ]; then
+    echo "setting MCA mca_base_component_show_load_errors to 0..."
+    echo "mca_base_component_show_load_errors = 0" >> $PREFIX/etc/openmpi-mca-params.conf
     echo "setting MCA opal_warn_on_missing_libcuda to 0..."
     echo "opal_warn_on_missing_libcuda = 0" >> $PREFIX/etc/openmpi-mca-params.conf
     echo "setting MCA opal_cuda_support to 0..."
