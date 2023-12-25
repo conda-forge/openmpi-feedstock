@@ -28,10 +28,7 @@ fi
 # CUDA support
 build_with_cuda=""
 if [[ -n "$CUDA_HOME" ]]; then
-    build_with_cuda="--with-cuda=yes"
-    export CFLAGS="$CFLAGS -I$CUDA_HOME/include"
-    export CXXFLAGS="$CXXFLAGS -I$CUDA_HOME/include"
-    export LDFLAGS="$LDFLAGS -L$CUDA_HOME/lib64/stubs"
+    build_with_cuda="--with-cuda=$CUDA_HOME --with-cuda-libdir=$CUDA_HOME/lib64/stubs"
 fi
 
 if [[ $CONDA_BUILD_CROSS_COMPILATION == "1"  && $target_platform == osx-arm64 ]]; then
