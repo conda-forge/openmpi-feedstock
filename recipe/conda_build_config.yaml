@@ -1,6 +1,3 @@
 mpi_type:
   - external  # [linux]
   - conda
-enable_cuda:
-  - True       # [linux]
-  - False      # [not linux]
