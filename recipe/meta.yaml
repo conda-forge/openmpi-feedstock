@@ -53,6 +53,7 @@ outputs:
         - libnl  # [linux]
         - zlib
         - ucx  # [linux]
+        - cuda-version {{ cuda_compiler_version }}  # [cuda_compiler != "None"]
       run:
         - mpi 1.0 openmpi
         #- openpmix
