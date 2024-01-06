@@ -1,32 +1,34 @@
 #!/bin/bash
 
-# unset unused old fortran compiler vars
-unset F90 F77
-
 set -ex
-
-export FCFLAGS="$FFLAGS"
 
 # avoid absolute-paths in compilers
 export CC=$(basename "$CC")
 export CXX=$(basename "$CXX")
 export FC=$(basename "$FC")
 
-./autogen.pl --force
+# unset unused Fortran compiler variables
+unset FFLAGS F77 F90 F95
 
+# tweak compiler flags
+export LIBRARY_PATH="$PREFIX/lib"
 if [[ "$target_platform" == osx-* ]]; then
-    if [[ ! -z "$CONDA_BUILD_SYSROOT" ]]; then
+    if [[ -n "$CONDA_BUILD_SYSROOT" ]]; then
         export CFLAGS="$CFLAGS -isysroot $CONDA_BUILD_SYSROOT"
         export CXXFLAGS="$CXXFLAGS -isysroot $CONDA_BUILD_SYSROOT"
     fi
 fi
 
-if [[ -z $CUDA_HOME ]]; then
-    build_with_cuda=""
-else
-    export CFLAGS="$CFLAGS -I$CUDA_HOME/include"
-    export CXXFLAGS="$CXXFLAGS -I$CUDA_HOME/include"
-    build_with_cuda="--with-cuda --with-ucx=$PREFIX"
+# UCX support
+build_with_ucx=""
+if [[ "$target_platform" == linux-* ]]; then
+    build_with_ucx="--with-ucx=$PREFIX"
+fi
+
+# CUDA support
+build_with_cuda=""
+if [[ -n "$CUDA_HOME" ]]; then
+    build_with_cuda="--with-cuda=$CUDA_HOME --with-cuda-libdir=$CUDA_HOME/lib64/stubs"
 fi
 
 if [[ $CONDA_BUILD_CROSS_COMPILATION == "1"  && $target_platform == osx-arm64 ]]; then
@@ -132,15 +134,6 @@ if [[ $CONDA_BUILD_CROSS_COMPILATION == "1"  && $target_platform == osx-arm64 ]]
     export ompi_cv_fortran_use_only=yes
 fi
 
-export LIBRARY_PATH="$PREFIX/lib"
-
-## Replaced by the patch from open-mpi/ompi#8361
-# if [[ "$target_platform" == *-64 ]]; then
-#     # -march=skylake-avx512 -march=nocona invalidates AVX512 flag. Remove -march flags and -mtune flags
-#     export CFLAGS=$(echo $CFLAGS | sed 's/-march=[a-z0-9\-]*//g')
-#     export CFLAGS=$(echo $CFLAGS | sed 's/-mtune=[a-z0-9\-]*//g')
-# fi
-
 ./configure --prefix=$PREFIX \
             --disable-dependency-tracking \
             --enable-mpi-fortran \
@@ -151,23 +144,34 @@ export LIBRARY_PATH="$PREFIX/lib"
             --with-wrapper-fcflags="-I$PREFIX/include" \
             --with-wrapper-ldflags="-L$PREFIX/lib -Wl,-rpath,$PREFIX/lib" \
             --with-sge \
-            $build_with_cuda || (cat config.log; false)
+            --with-hwloc=$PREFIX \
+            --with-libevent=$PREFIX \
+            --with-zlib=$PREFIX \
+            --enable-mca-dso \
+            $build_with_ucx \
+            $build_with_cuda \
+    || (cat config.log; false)
 
 make -j"${CPU_COUNT:-1}"
 make install
 
-if [ ! -z "$build_with_cuda" ]; then
-    echo "setting the mca opal_warn_on_missing_libcuda to 0..."
-    echo "opal_warn_on_missing_libcuda = 0" >> $PREFIX/etc/openmpi-mca-params.conf
-    echo "setting the mca opal_cuda_support to 0..."
-    echo "opal_cuda_support = 0" >> $PREFIX/etc/openmpi-mca-params.conf
-
-    echo "setting the mca pml to ^ucx..."
+POST_LINK=$PREFIX/bin/.openmpi-post-link.sh
+if [ -n "$build_with_ucx" ]; then
+    echo "setting MCA pml to ^ucx..."
     echo "pml = ^ucx" >> $PREFIX/etc/openmpi-mca-params.conf
-    echo "setting the mca osc to ^ucx..."
+    echo "setting MCA osc to ^ucx..."
     echo "osc = ^ucx" >> $PREFIX/etc/openmpi-mca-params.conf
-
-    POST_LINK=$PREFIX/bin/.openmpi-post-link.sh
-    cp $RECIPE_DIR/post-link.sh $POST_LINK
+    cat $RECIPE_DIR/post-link-ucx.sh >> $POST_LINK
+fi
+if [ -n "$build_with_cuda" ]; then
+    echo "setting MCA mca_base_component_show_load_errors to 0..."
+    echo "mca_base_component_show_load_errors = 0" >> $PREFIX/etc/openmpi-mca-params.conf
+    echo "setting MCA opal_warn_on_missing_libcuda to 0..."
+    echo "opal_warn_on_missing_libcuda = 0" >> $PREFIX/etc/openmpi-mca-params.conf
+    echo "setting MCA opal_cuda_support to 0..."
+    echo "opal_cuda_support = 0" >> $PREFIX/etc/openmpi-mca-params.conf
+    cat $RECIPE_DIR/post-link-cuda.sh >> $POST_LINK
+fi
+if [ -f $POST_LINK ]; then
     chmod +x $POST_LINK
 fi

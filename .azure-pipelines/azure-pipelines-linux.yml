@@ -8,30 +8,30 @@ jobs:
     vmImage: ubuntu-latest
   strategy:
     matrix:
-      linux_64_mpi_typeconda:
-        CONFIG: linux_64_mpi_typeconda
+      ? linux_64_c_compiler_version10cuda_compilernvcccuda_compiler_version11.2cxx_compiler_version10fortran_compiler_version10mpi_typeconda
+      : CONFIG: linux_64_c_compiler_version10cuda_compilernvcccuda_compiler_version11.2cxx_compiler_version10fortran_compiler_version10mpi_typeconda
         UPLOAD_PACKAGES: 'True'
-        DOCKER_IMAGE: quay.io/condaforge/linux-anvil-cuda:11.1
-      linux_64_mpi_typeexternal:
-        CONFIG: linux_64_mpi_typeexternal
+        DOCKER_IMAGE: quay.io/condaforge/linux-anvil-cuda:11.2
+      ? linux_64_c_compiler_version10cuda_compilernvcccuda_compiler_version11.2cxx_compiler_version10fortran_compiler_version10mpi_typeexternal
+      : CONFIG: linux_64_c_compiler_version10cuda_compilernvcccuda_compiler_version11.2cxx_compiler_version10fortran_compiler_version10mpi_typeexternal
         UPLOAD_PACKAGES: 'True'
-        DOCKER_IMAGE: quay.io/condaforge/linux-anvil-cuda:11.1
-      linux_aarch64_mpi_typeconda:
-        CONFIG: linux_aarch64_mpi_typeconda
+        DOCKER_IMAGE: quay.io/condaforge/linux-anvil-cuda:11.2
+      ? linux_aarch64_c_compiler_version10cuda_compilernvcccuda_compiler_version11.2cxx_compiler_version10fortran_compiler_version10mpi_typeconda
+      : CONFIG: linux_aarch64_c_compiler_version10cuda_compilernvcccuda_compiler_version11.2cxx_compiler_version10fortran_compiler_version10mpi_typeconda
         UPLOAD_PACKAGES: 'True'
-        DOCKER_IMAGE: quay.io/condaforge/linux-anvil-aarch64-cuda:11.1
-      linux_aarch64_mpi_typeexternal:
-        CONFIG: linux_aarch64_mpi_typeexternal
+        DOCKER_IMAGE: quay.io/condaforge/linux-anvil-cuda:11.2
+      ? linux_aarch64_c_compiler_version10cuda_compilernvcccuda_compiler_version11.2cxx_compiler_version10fortran_compiler_version10mpi_typeexternal
+      : CONFIG: linux_aarch64_c_compiler_version10cuda_compilernvcccuda_compiler_version11.2cxx_compiler_version10fortran_compiler_version10mpi_typeexternal
         UPLOAD_PACKAGES: 'True'
-        DOCKER_IMAGE: quay.io/condaforge/linux-anvil-aarch64-cuda:11.1
-      linux_ppc64le_mpi_typeconda:
-        CONFIG: linux_ppc64le_mpi_typeconda
+        DOCKER_IMAGE: quay.io/condaforge/linux-anvil-cuda:11.2
+      ? linux_ppc64le_c_compiler_version10cuda_compilernvcccuda_compiler_version11.2cxx_compiler_version10fortran_compiler_version10mpi_typeconda
+      : CONFIG: linux_ppc64le_c_compiler_version10cuda_compilernvcccuda_compiler_version11.2cxx_compiler_version10fortran_compiler_version10mpi_typeconda
         UPLOAD_PACKAGES: 'True'
-        DOCKER_IMAGE: quay.io/condaforge/linux-anvil-ppc64le-cuda:11.1
-      linux_ppc64le_mpi_typeexternal:
-        CONFIG: linux_ppc64le_mpi_typeexternal
+        DOCKER_IMAGE: quay.io/condaforge/linux-anvil-ppc64le-cuda:11.2
+      ? linux_ppc64le_c_compiler_version10cuda_compilernvcccuda_compiler_version11.2cxx_compiler_version10fortran_compiler_version10mpi_typeexternal
+      : CONFIG: linux_ppc64le_c_compiler_version10cuda_compilernvcccuda_compiler_version11.2cxx_compiler_version10fortran_compiler_version10mpi_typeexternal
         UPLOAD_PACKAGES: 'True'
-        DOCKER_IMAGE: quay.io/condaforge/linux-anvil-ppc64le-cuda:11.1
+        DOCKER_IMAGE: quay.io/condaforge/linux-anvil-ppc64le-cuda:11.2
   timeoutInMinutes: 360
 
   steps:
