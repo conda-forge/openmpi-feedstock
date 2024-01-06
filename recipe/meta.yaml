@@ -20,7 +20,7 @@ source:
 build:
   number: {{ build }}
   skip: true  # [win]
-  skip: true  # [enable_cuda and cuda_compiler_version != "11.2"]
+  skip: true  # [enable_cuda and cuda_compiler_version != "11.8"]
   skip: true  # [not enable_cuda and cuda_compiler_version != "None"]
 
 outputs:
