@@ -27,11 +27,12 @@ mpi_type:
 target_platform:
 - linux-64
 ucx:
-- 1.14.0
+- 1.15.0
 zip_keys:
 - - c_compiler_version
   - cxx_compiler_version
   - fortran_compiler_version
+  - cuda_compiler
   - cuda_compiler_version
   - cdt_name
   - docker_image
