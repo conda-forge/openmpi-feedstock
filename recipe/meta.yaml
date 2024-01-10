@@ -1,6 +1,7 @@
 {% set version = "5.0.1" %}
 {% set major = version.rpartition('.')[0] %}
-{% set build = 0 %}
+{% set cuda_major = (cuda_compiler_version|default("11.8")).rpartition('.')[0] %}
+{% set build = 1 %}
 
 # give conda package a higher build number
 {% if mpi_type == 'conda' %}
@@ -20,6 +21,7 @@ source:
 build:
   number: {{ build }}
   skip: true  # [win]
+  skip: true  # [linux and cuda_compiler_version != "11.8"]
 
 outputs:
   {% if mpi_type == 'conda' %}
@@ -29,13 +31,14 @@ outputs:
       run_exports:
         - {{ pin_subpackage('openmpi', min_pin='x.x.x', max_pin='x') }}
       ignore_run_exports:
-        - ucx  # [enable_ucx]
-      script_env:
-        - CUDA_HOME  # [enable_cuda]
+        - ucx  # [linux]
+      ignore_run_exports_from:
+         - {{ compiler('cuda') }}  # [cuda_compiler != "None"]
     requirements:
       build:
         - {{ compiler('c') }}
         - {{ compiler('cxx') }}
+        - {{ compiler('cuda') }}     # [cuda_compiler != "None"]
         - {{ compiler('fortran') }}
         #- autoconf  # [unix]
         #- automake  # [unix]
@@ -48,19 +51,18 @@ outputs:
         - libevent
         - libnl  # [linux]
         - zlib
-        - ucx  # [enable_ucx]
-        - cuda-version {{ cuda_version }}  # [enable_cuda]
+        - ucx  # [linux]
+        - cuda-version {{ cuda_compiler_version }}  # [cuda_compiler != "None"]
       run:
         - mpi 1.0 openmpi
         #- openpmix
         #- prrte
       run_constrained:
-        - {{ pin_compatible("ucx", max_pin="x.x") }}  # [enable_ucx]
+        - {{ pin_compatible("ucx", max_pin="x.x") }}  # [linux]
         # Open MPI only uses CUDA Driver APIs, set the minimal driver version
-        - __cuda  >= {{ cuda_version }}  # [enable_cuda]
+        - __cuda  >= {{ cuda_major ~ ".0" }}  # [cuda_compiler != "None"]
         # Ensure a consistent CUDA environment
-        - cuda-version  >= {{ cuda_version }}  # [enable_cuda]
-        - cudatoolkit   >= {{ cuda_version }}  # [enable_cuda]
+        - cuda-version  >= {{ cuda_major ~ ".0" }}  # [cuda_compiler != "None"]
     test:
       script: run_test.sh
       files:

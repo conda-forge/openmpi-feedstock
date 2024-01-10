@@ -1,17 +1,3 @@
 mpi_type:
   - external  # [linux]
   - conda
-docker_image:  # [linux]
-  - quay.io/condaforge/linux-anvil-cuda:11.2           # [linux64]
-  - quay.io/condaforge/linux-anvil-ppc64le-cuda:11.2   # [ppc64le]
-  - quay.io/condaforge/linux-anvil-aarch64-cuda:11.2   # [aarch64]
-enable_ucx:
-  - True       # [linux]
-  - False      # [not linux]
-enable_cuda:
-  - True       # [linux]
-  - False      # [not linux]
-cuda_version:  # [linux]
-  - 11.2       # [linux64]
-  - 11.2       # [ppc64le]
-  - 11.2       # [aarch64]
