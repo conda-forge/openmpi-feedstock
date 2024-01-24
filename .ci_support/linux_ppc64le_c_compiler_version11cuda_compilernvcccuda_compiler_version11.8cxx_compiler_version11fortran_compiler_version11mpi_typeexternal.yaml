@@ -24,6 +24,8 @@ fortran_compiler_version:
 - '11'
 libevent:
 - 2.1.12
+libhwloc:
+- 2.9.3
 mpi_type:
 - external
 target_platform:
