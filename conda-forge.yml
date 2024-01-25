@@ -1,5 +1,6 @@
 build_platform:
   linux_aarch64: linux_64
+  linux_ppc64le: linux_64
   osx_arm64: osx_64
 conda_build:
   pkg_format: '2'
@@ -9,5 +10,6 @@ github:
   tooling_branch_name: main
 provider:
   linux_aarch64: default
-  linux_ppc64le: azure
-test_on_native_only: true
+  linux_ppc64le: default
+  osx_arm64: default
+test: native_and_emulated
