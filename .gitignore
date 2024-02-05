@@ -18,7 +18,7 @@
 # build_artifacts gets ignored which trips some build systems.
 # To avoid that we 'un-ignore' all files/folders recursively
 # and only ignore the root build_artifacts folder.
-!/build_artifacts/**
-/build_artifacts
+# !/build_artifacts/**
+# /build_artifacts
 
 *.pyc
