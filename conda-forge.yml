@@ -15,3 +15,5 @@ provider:
 test: native_and_emulated
 azure:
   free_disk_space: true
+  settings_linux:
+    swapfile_size: 10GiB
