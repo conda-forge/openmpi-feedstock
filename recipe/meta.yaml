@@ -52,6 +52,7 @@ outputs:
         - libevent
         - libnl  # [linux]
         - zlib
+        - rdma-core 49  # [linux]
         - ucx  # [linux]
         - cuda-version {{ cuda_compiler_version }}  # [cuda_compiler != "None"]
       run:
