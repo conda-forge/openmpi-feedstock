@@ -22,7 +22,6 @@ build:
   number: {{ build }}
   skip: true  # [win]
   skip: true  # [linux and cuda_compiler_version != "11.8"]
-  rpaths_patcher: patchelf  # [linux]
 
 outputs:
   {% if mpi_type == 'conda' %}
