@@ -1,7 +1,7 @@
-{% set version = "5.0.1" %}
+{% set version = "5.0.2" %}
 {% set major = version.rpartition('.')[0] %}
 {% set cuda_major = (cuda_compiler_version|default("11.8")).rpartition('.')[0] %}
-{% set build = 3 %}
+{% set build = 0 %}
 
 # give conda package a higher build number
 {% if mpi_type == 'conda' %}
@@ -16,7 +16,7 @@ package:
 source:
   fn: openmpi-{{ version }}.tar.bz2
   url: https://www.open-mpi.org/software/ompi/v{{ major }}/downloads/openmpi-{{ version }}.tar.bz2
-  sha256: e357043e65fd1b956a47d0dae6156a90cf0e378df759364936c1781f1a25ef80
+  sha256: ee46ad8eeee2c3ff70772160bff877cbf38c330a0bc3b3ddc811648b3396698f
 
 build:
   number: {{ build }}
@@ -33,7 +33,7 @@ outputs:
       ignore_run_exports:
         - ucx  # [linux]
       ignore_run_exports_from:
-         - {{ compiler('cuda') }}  # [cuda_compiler != "None"]
+        - {{ compiler('cuda') }}   # [cuda_compiler != "None"]
     requirements:
       build:
         - {{ compiler('c') }}
