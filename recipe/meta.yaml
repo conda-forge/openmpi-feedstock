@@ -77,6 +77,8 @@ outputs:
         # so that conda-build knows to pass it to the test env
         - echo "{{ CONDA_BUILD_SYSROOT }}"  # [osx]
     requirements:
+      build:
+        - sysroot_{{ target_platform }} 2.17  # [linux]
       run:
         - {{ pin_subpackage('openmpi', exact=True) }}
         # host C compilers work fine (better) on mac
@@ -94,6 +96,8 @@ outputs:
         # so that conda-build knows to pass it to the test env
         - echo "{{ CONDA_BUILD_SYSROOT }}"  # [osx]
     requirements:
+      build:
+        - sysroot_{{ target_platform }} 2.17  # [linux]
       run:
         - {{ pin_subpackage('openmpi', exact=True) }}
         # host C compilers work fine (better) on mac
@@ -111,6 +115,8 @@ outputs:
         # so that conda-build knows to pass it to the test env
         - echo "{{ CONDA_BUILD_SYSROOT }}"  # [osx]
     requirements:
+      build:
+        - sysroot_{{ target_platform }} 2.17  # [linux]
       run:
         - {{ pin_subpackage('openmpi', exact=True) }}
         - {{ compiler('fortran') }}
