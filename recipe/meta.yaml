@@ -40,7 +40,7 @@ outputs:
         - {{ compiler('cxx') }}
         - {{ compiler('cuda') }}     # [cuda_compiler != "None"]
         - {{ compiler('fortran') }}
-        - sysroot_{{ target_platform }} 2.17  # [linux]
+        - {{ stdlib('c') }}
         #- autoconf  # [unix]
         #- automake  # [unix]
         - libtool   # [unix]
@@ -78,7 +78,7 @@ outputs:
         - echo "{{ CONDA_BUILD_SYSROOT }}"  # [osx]
     requirements:
       build:
-        - sysroot_{{ target_platform }} 2.17  # [linux]
+        - {{ stdlib('c') }}
       run:
         - {{ pin_subpackage('openmpi', exact=True) }}
         # host C compilers work fine (better) on mac
@@ -97,7 +97,7 @@ outputs:
         - echo "{{ CONDA_BUILD_SYSROOT }}"  # [osx]
     requirements:
       build:
-        - sysroot_{{ target_platform }} 2.17  # [linux]
+        - {{ stdlib('c') }}
       run:
         - {{ pin_subpackage('openmpi', exact=True) }}
         # host C compilers work fine (better) on mac
@@ -116,7 +116,7 @@ outputs:
         - echo "{{ CONDA_BUILD_SYSROOT }}"  # [osx]
     requirements:
       build:
-        - sysroot_{{ target_platform }} 2.17  # [linux]
+        - {{ stdlib('c') }}
       run:
         - {{ pin_subpackage('openmpi', exact=True) }}
         - {{ compiler('fortran') }}
