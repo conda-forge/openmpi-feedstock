@@ -39,7 +39,7 @@ mpi_type:
 target_platform:
 - linux-aarch64
 ucx:
-- 1.15.0
+- 1.16.0
 zip_keys:
 - - c_compiler_version
   - cxx_compiler_version
