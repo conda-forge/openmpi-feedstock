@@ -29,7 +29,7 @@ fortran_compiler_version:
 libevent:
 - 2.1.12
 libhwloc:
-- 2.9.3
+- 2.10.0
 mpi_type:
 - external
 target_platform:
