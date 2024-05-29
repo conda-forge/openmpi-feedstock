@@ -24,12 +24,19 @@ build:
   skip: true  # [linux and cuda_compiler_version != "11.8"]
 
 outputs:
-  {% if mpi_type == 'conda' %}
   - name: openmpi
+    {% if mpi_type == 'conda' %}
     script: build-mpi.sh
+    {% endif %}
     build:
+      {% if mpi_type == 'conda' %}
       run_exports:
         - {{ pin_subpackage('openmpi', min_pin='x.x.x', max_pin='x') }}
+      {% else %}
+      string: {{ mpi_type }}_h{{ PKG_HASH }}_{{ build }}
+      track_features:
+        - openmpi_{{ mpi_type }}
+      {% endif %}
       ignore_run_exports:
         - ucx  # [linux]
       ignore_run_exports_from:
@@ -65,10 +72,16 @@ outputs:
         # Ensure a consistent CUDA environment
         - cuda-version  >= {{ cuda_major ~ ".0" }}  # [cuda_compiler != "None"]
     test:
+      {% if mpi_type == 'conda' %}
       script: run_test.sh
       files:
         - tests/helloworld.sh
+      {% else %}
+      commands:
+        - echo "It works!"
+      {% endif %}
 
+  {% if mpi_type == 'conda' %}
   - name: openmpi-mpicc
     build:
       script:
@@ -125,19 +138,6 @@ outputs:
       files:
         - tests/helloworld.f
         - tests/helloworld.f90
-  {% else %}
-  - name: openmpi
-    build:
-      string: {{ mpi_type }}_{{ build }}
-      track_features:
-        - openmpi_{{ mpi_type }}
-    requirements:
-      host: []
-      run:
-        - mpi 1.0 openmpi
-    test:
-      commands:
-        - echo "It works!"
   {% endif %}
 
 about:
