@@ -1,7 +1,7 @@
 {% set version = "5.0.3" %}
 {% set major = version.rpartition('.')[0] %}
 {% set cuda_major = (cuda_compiler_version|default("11.8")).rpartition('.')[0] %}
-{% set build = 2 %}
+{% set build = 3 %}
 
 # give conda package a higher build number
 {% if mpi_type == 'conda' %}
