@@ -1,12 +1,6 @@
 #!/bin/bash
 set -ex
 
-export OMPI_MCA_pml=ob1
-export OMPI_MCA_btl=sm,self
-export OMPI_MCA_plm_ssh_agent=false
-export OMPI_MCA_rmaps_default_mapping_policy=:oversubscribe
-export OMPI_ALLOW_RUN_AS_ROOT=1
-export OMPI_ALLOW_RUN_AS_ROOT_CONFIRM=1
 MPIEXEC="mpiexec"
 
 pushd "tests"
