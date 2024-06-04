@@ -93,3 +93,6 @@ fi
 if [ -f $POST_LINK ]; then
     chmod +x $POST_LINK
 fi
+
+mkdir -p $PREFIX/etc/conda/activate.d
+cp -v $RECIPE_DIR/openmpi_activate.sh $PREFIX/etc/conda/activate.d/
