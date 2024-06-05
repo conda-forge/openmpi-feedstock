@@ -28,7 +28,8 @@ if [[ $PKG_NAME == "openmpi" ]]; then
   $MPIEXEC -n 4 ./helloworld.sh
 
   test -f $PREFIX/include/mpi.mod
-  test ! -f $PREFIX/lib/mpi.mod
+  # keep duplicates in original location for now
+  test -f $PREFIX/lib/mpi.mod
 fi
 
 if [[ $PKG_NAME == "openmpi-mpicc" ]]; then

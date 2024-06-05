@@ -74,8 +74,11 @@ make -j"${CPU_COUNT:-1}"
 make install
 
 # openmpi installs .mod files in the wrong prefix (/lib instead of /include)
-ls -l $PREFIX/lib/*.mod
-mv -v $PREFIX/lib/*.mod $PREFIX/include/
+# symlink instead of copy to avoid breaking anything (unlikely)
+for f in $PREFIX/lib/*.mod; do
+  modname=$(basename "$f")
+  ln -sv "../lib/${modname}" "$PREFIX/include/${modname}"
+done
 
 POST_LINK=$PREFIX/bin/.openmpi-post-link.sh
 if [ -n "$build_with_ucx" ]; then
