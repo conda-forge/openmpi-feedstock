@@ -35,6 +35,8 @@ if [[ $PKG_NAME == "openmpi-mpicc" ]]; then
   command -v mpicc
   mpicc -show
 
+  env | grep OMPI
+
   test ! -z "${OMPI_CC:-}"
   test ! -z "${OMPI_CFLAGS:-}"
   test ! -z "${OMPI_CPPFLAGS:-}"
