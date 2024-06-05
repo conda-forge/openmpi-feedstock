@@ -26,6 +26,9 @@ if [[ $PKG_NAME == "openmpi" ]]; then
   command -v mpiexec
   $MPIEXEC --help
   $MPIEXEC -n 4 ./helloworld.sh
+
+  test -f $PREFIX/include/mpi.mod
+  test ! -f $PREFIX/include/mpi.mod
 fi
 
 if [[ $PKG_NAME == "openmpi-mpicc" ]]; then

@@ -73,6 +73,10 @@ fi
 make -j"${CPU_COUNT:-1}"
 make install
 
+# openmpi installs .mod files in the wrong prefix (/lib instead of /include)
+ls -l $PREFIX/lib/*.mod
+mv -v $PREFIX/lib/*.mod $PREFIX/include/
+
 POST_LINK=$PREFIX/bin/.openmpi-post-link.sh
 if [ -n "$build_with_ucx" ]; then
     echo "setting MCA pml to ^ucx..."
