@@ -7,7 +7,8 @@ if [[ "${CONDA_BUILD:-}" = "1" ]]; then
       export OMPI_${_var}="${!_var}"
     fi
     if [[ -z "${OMPI_FCFLAGS}" && ! -z "${FFLAGS}" ]]; then
-      export OMPI_FCFLAGS="$FFLAGS"
+      echo OMPI_FCFLAGS="-I$PREFIX/include $FFLAGS"
+      export OMPI_FCFLAGS="-I$PREFIX/include $FFLAGS"
     fi
   done
   export OPAL_PREFIX="$PREFIX"
