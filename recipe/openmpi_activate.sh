@@ -4,7 +4,7 @@ if [[ "${CONDA_BUILD:-}" = "1" ]]; then
   for _var in CC CXX FC CPPFLAGS CFLAGS CXXFLAGS FCFLAGS LDFLAGS; do
     if [[ ! -z "${!_var:-}" ]]; then
       echo "OMPI_${_var}=${!_var}"
-      declare -gx "OMPI_${_var}=${!_var}"
+      export OMPI_${_var}="${!_var}"
     fi
   done
   export OPAL_PREFIX="$PREFIX"
