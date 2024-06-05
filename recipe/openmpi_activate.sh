@@ -1,5 +1,13 @@
 if [[ "${CONDA_BUILD:-}" = "1" ]]; then
   echo "setting openmpi environment variables for conda-build"
+  # build-time variables
+  for _var in CC CXX FC CPPFLAGS CFLAGS CXXFLAGS FCFLAGS LDFLAGS; do
+    if [[ ! -z "${!_var:-}" ]]; then
+      declare -x OMPI_${_var}=${!_var}
+    fi
+  done
+
+  # runtime variables
   export OMPI_MCA_plm_ssh_agent=false
   export OMPI_MCA_pml=ob1
   export OMPI_MCA_mpi_yield_when_idle=true
