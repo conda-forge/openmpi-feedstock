@@ -6,6 +6,7 @@ if [[ "${CONDA_BUILD:-}" = "1" ]]; then
       declare -x "OMPI_${_var}=${!_var}"
     fi
   done
+  export OPAL_PREFIX="$PREFIX"
 
   # runtime variables
   export OMPI_MCA_plm_ssh_agent=false
