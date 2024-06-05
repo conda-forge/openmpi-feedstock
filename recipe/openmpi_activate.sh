@@ -3,7 +3,7 @@ if [[ "${CONDA_BUILD:-}" = "1" ]]; then
   # build-time variables
   for _var in CC CXX FC CPPFLAGS CFLAGS CXXFLAGS FCFLAGS LDFLAGS; do
     if [[ ! -z "${!_var:-}" ]]; then
-      declare -x OMPI_${_var}=${!_var}
+      declare -x "OMPI_${_var}=${!_var}"
     fi
   done
 
