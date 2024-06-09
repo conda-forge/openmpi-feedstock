@@ -1,7 +1,7 @@
 {% set version = "5.0.3" %}
 {% set major = version.rpartition('.')[0] %}
 {% set cuda_major = (cuda_compiler_version|default("11.8")).rpartition('.')[0] %}
-{% set build = 5 %}
+{% set build = 6 %}
 
 # give conda package a higher build number
 {% if mpi_type == 'conda' %}
@@ -66,6 +66,9 @@ outputs:
         #- openpmix
         #- prrte
       run_constrained:
+        # prevent downstream packages from building
+        # with older sysroot
+        - {{ c_stdlib }}_{{ target_platform }} >={{ c_stdlib_version }}  # [linux]
         - {{ pin_compatible("ucx", max_pin="x.x") }}  # [linux]
         # Open MPI only uses CUDA Driver APIs, set the minimal driver version
         - __cuda  >= {{ cuda_major ~ ".0" }}  # [cuda_compiler != "None"]
