@@ -11,6 +11,7 @@ export FC=$(basename "$FC")
 unset FFLAGS F77 F90 F95
 
 # tweak compiler flags
+wrapper_ldflags="-L$PREFIX/lib -Wl,-rpath,$PREFIX/lib"
 export LIBRARY_PATH="$PREFIX/lib"
 if [[ "$target_platform" == osx-* ]]; then
     if [[ -n "$CONDA_BUILD_SYSROOT" ]]; then
@@ -23,6 +24,9 @@ fi
 build_with_ucx=""
 if [[ "$target_platform" == linux-* ]]; then
     build_with_ucx="--with-ucx=$PREFIX"
+    # allow-shlib-undefined required for dependencies to link against older sysroot
+    # avoids undefined
+    wrapper_ldflags="${wrapper_ldflags} -Wl,--allow-shlib-undefined"
 fi
 
 # CUDA support
@@ -60,7 +64,7 @@ fi
             --with-wrapper-cflags="-I$PREFIX/include" \
             --with-wrapper-cxxflags="-I$PREFIX/include" \
             --with-wrapper-fcflags="-I$PREFIX/include" \
-            --with-wrapper-ldflags="-L$PREFIX/lib -Wl,-rpath,$PREFIX/lib" \
+            --with-wrapper-ldflags="${wrapper_ldflags}" \
             --with-sge \
             --with-hwloc=$PREFIX \
             --with-libevent=$PREFIX \

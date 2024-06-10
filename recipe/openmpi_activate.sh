@@ -24,6 +24,9 @@ if [[ "${CONDA_BUILD:-}" = "1" ]]; then
     if [[ -z "${OMPI_LDFLAGS:-}" ]]; then
       # pkg-config --libs-only-L --libs-only-other ompi
       export OMPI_LDFLAGS="-L$PREFIX/lib -Wl,-rpath,$PREFIX/lib"
+      if [[ "${target_platform:-}" == linux-* ]]; then
+        export OMPI_LDFLAGS="${OMPI_LDFLAGS} -Wl,--allow-shlib-undefined"
+      fi
     fi
     export OPAL_PREFIX="$PREFIX"
   fi
