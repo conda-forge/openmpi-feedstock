@@ -1,4 +1,4 @@
-if [[ "${CONDA_BUILD:-}" = "1" ]]; then
+if [ "${CONDA_BUILD:-}" = "1" ]; then
   echo "setting openmpi environment variables for conda-build"
   # build-time variables
   for _var in CC CXX FC CPPFLAGS CFLAGS CXXFLAGS FCFLAGS LDFLAGS; do
