@@ -2,12 +2,21 @@ if [ "${CONDA_BUILD:-}" = "1" ]; then
   echo "setting openmpi environment variables for conda-build"
   if [[ "${CONDA_BUILD_CROSS_COMPILATION:-}" = "1" ]]; then
     # set compilation variables during cross compilation
-    for _var in CC CXX FC; do
-      if [[ ! -z "${!_var:-}" ]]; then
-        echo "OMPI_${_var}=${!_var}"
-        export OMPI_${_var}="${!_var}"
-      fi
-    done
+    if [[ -z "${OMPI_CC:-}" && ! -z "${CC:-}" ]]; then
+      echo "OMPI_CC=${CC}"
+      export "OMPI_CC=${CC}"
+    fi
+
+    if [[ -z "${OMPI_CXX:-}" && ! -z "${CXX:-}" ]]; then
+      echo "OMPI_CXX=${CXX}"
+      export "OMPI_CXX=${CXX}"
+    fi
+
+    if [[ -z "${OMPI_FC:-}" && ! -z "${FC:-}" ]]; then
+      echo "OMPI_FC=${FC}"
+      export "OMPI_FC=${FC}"
+    fi
+
     # require pkg-config?
     if [[ -z "${OMPI_CFLAGS:-}" ]]; then
       # pkg-config --cflags ompi
