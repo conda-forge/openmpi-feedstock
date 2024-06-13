@@ -50,4 +50,4 @@ zip_keys:
   - cuda_compiler_version
   - docker_image
 zlib:
-- '1.2'
+- '1'

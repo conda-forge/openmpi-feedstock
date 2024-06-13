@@ -38,10 +38,10 @@ if [[ $PKG_NAME == "openmpi-mpicc" ]]; then
 
   env | grep OMPI
 
-  test ! -z "${OMPI_CC:-}"
-  test ! -z "${OMPI_CFLAGS:-}"
-  test ! -z "${OMPI_CPPFLAGS:-}"
-  test ! -z "${OMPI_LDFLAGS:-}"
+  test -z "${OMPI_CC:-}"
+  test -z "${OMPI_CFLAGS:-}"
+  test -z "${OMPI_CPPFLAGS:-}"
+  test -z "${OMPI_LDFLAGS:-}"
 
   mpicc helloworld.c -o helloworld_c
   $MPIEXEC -n 4 ./helloworld_c
@@ -51,8 +51,8 @@ if [[ $PKG_NAME == "openmpi-mpicxx" ]]; then
   command -v mpicxx
   mpicxx -show
 
-  test ! -z "${OMPI_CXX:-}"
-  test ! -z "${OMPI_CXXFLAGS:-}"
+  test -z "${OMPI_CXX:-}"
+  test -z "${OMPI_CXXFLAGS:-}"
 
   mpicxx helloworld.cxx -o helloworld_cxx
   $MPIEXEC -n 4 ./helloworld_cxx
@@ -62,8 +62,8 @@ if [[ $PKG_NAME == "openmpi-mpifort" ]]; then
   command -v mpifort
   mpifort -show
   
-  test ! -z "${OMPI_FC:-}"
-  test ! -z "${OMPI_FCFLAGS:-}"
+  test -z "${OMPI_FC:-}"
+  test -z "${OMPI_FCFLAGS:-}"
 
   mpifort helloworld.f -o helloworld1_f
   $MPIEXEC -n 4 ./helloworld1_f
