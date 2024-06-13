@@ -2,15 +2,16 @@ if [ "${CONDA_BUILD:-}" = "1" ]; then
   echo "setting openmpi environment variables for conda-build"
   # build-time variables
   for _var in CC CXX FC CPPFLAGS CFLAGS CXXFLAGS FCFLAGS LDFLAGS; do
-    if [[ ! -z "${!_var:-}" ]]; then
-      echo "OMPI_${_var}=${!_var}"
-      export OMPI_${_var}="${!_var}"
-    fi
-    if [[ -z "${OMPI_FCFLAGS}" && ! -z "${FFLAGS}" ]]; then
-      echo OMPI_FCFLAGS="-I$PREFIX/include $FFLAGS"
-      export OMPI_FCFLAGS="-I$PREFIX/include $FFLAGS"
+    _var_val=$(eval echo \$\{${_var}:-\})
+    if [ ! -z "${_var_val}" ]; then
+      echo "OMPI_${_var}=${_var_val}"
+      export OMPI_${_var}="${_var_val}"
     fi
   done
+  if [ -z "${OMPI_FCFLAGS}" && ! -z "${FFLAGS}" ]; then
+    echo OMPI_FCFLAGS="-I$PREFIX/include $FFLAGS"
+    export OMPI_FCFLAGS="-I$PREFIX/include $FFLAGS"
+  fi
   export OPAL_PREFIX="$PREFIX"
 
   # runtime variables
