@@ -1,4 +1,4 @@
-if [[ "${CONDA_BUILD:-}" = "1" ]]; then
+if [ "${CONDA_BUILD:-}" = "1" ]; then
   echo "setting openmpi environment variables for conda-build"
   if [[ "${CONDA_BUILD_CROSS_COMPILATION:-}" = "1" ]]; then
     # set compilation variables during cross compilation
