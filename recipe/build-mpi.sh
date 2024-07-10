@@ -70,6 +70,7 @@ fi
             --with-libevent=$PREFIX \
             --with-zlib=$PREFIX \
             --enable-mca-dso \
+            --enable-ipv6 \
             $build_with_ucx \
             $build_with_cuda \
     || (cat config.log; false)
