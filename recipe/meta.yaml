@@ -17,6 +17,8 @@ source:
   fn: openmpi-{{ version }}.tar.bz2
   url: https://www.open-mpi.org/software/ompi/v{{ major }}/downloads/openmpi-{{ version }}.tar.bz2
   sha256: 64526852cdd88b2d30e022087c16ab3e03806c451b10cd691d5c1ac887d8ef9d
+  patches:
+    - pr12694.patch
 
 build:
   number: {{ build }}
