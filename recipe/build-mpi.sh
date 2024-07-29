@@ -63,6 +63,7 @@ fi
             --enable-mpi-fortran \
             --disable-wrapper-rpath \
             --disable-wrapper-runpath \
+            --with-mpi-moduledir="$PREFIX/include" \
             --with-wrapper-cflags="-I$PREFIX/include" \
             --with-wrapper-cxxflags="-I$PREFIX/include" \
             --with-wrapper-fcflags="-I$PREFIX/include" \
@@ -79,13 +80,6 @@ fi
 
 make -j"${CPU_COUNT:-1}"
 make install
-
-# openmpi installs .mod files in the wrong prefix (/lib instead of /include)
-# symlink instead of copy to avoid breaking anything (unlikely)
-for f in $PREFIX/lib/*.mod; do
-  modname=$(basename "$f")
-  ln -sv "../lib/${modname}" "$PREFIX/include/${modname}"
-done
 
 POST_LINK=$PREFIX/bin/.openmpi-post-link.sh
 if [ -n "$build_with_ucx" ]; then
