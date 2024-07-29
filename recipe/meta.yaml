@@ -50,8 +50,9 @@ outputs:
         - {{ compiler('cuda') }}     # [cuda_compiler != "None"]
         - {{ compiler('fortran') }}
         - {{ stdlib('c') }}
-        #- autoconf  # [unix]
-        #- automake  # [unix]
+        # FIXME: autotools required for ldflags-mac.patch
+        - autoconf  # [osx]
+        - automake  # [osx]
         - libtool   # [unix]
         - make  # [unix]
       host:
