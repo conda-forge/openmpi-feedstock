@@ -63,7 +63,7 @@ fi
             --enable-mpi-fortran \
             --disable-wrapper-rpath \
             --disable-wrapper-runpath \
-            --with-mpi-moduledir="$PREFIX/include" \
+            --with-mpi-moduledir='${includedir}' \
             --with-wrapper-cflags="-I$PREFIX/include" \
             --with-wrapper-cxxflags="-I$PREFIX/include" \
             --with-wrapper-fcflags="-I$PREFIX/include" \
