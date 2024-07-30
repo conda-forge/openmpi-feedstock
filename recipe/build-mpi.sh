@@ -11,7 +11,6 @@ export FC=$(basename "$FC")
 unset FFLAGS F77 F90 F95
 
 # tweak compiler flags
-wrapper_ldflags="-L$PREFIX/lib -Wl,-rpath,$PREFIX/lib"
 export LIBRARY_PATH="$PREFIX/lib"
 if [[ "$target_platform" == osx-* ]]; then
     # FIXME: remove autogen when autotools patch no longer required
@@ -22,13 +21,22 @@ if [[ "$target_platform" == osx-* ]]; then
     fi
 fi
 
+# tweak wrapper ldflags
+wrapper_ldflags=""
+if [[ "$target_platform" == linux-* ]]; then
+    # allow-shlib-undefined required for dependencies to link against older sysroot
+    # avoids undefined
+    wrapper_ldflags='-Wl,--allow-shlib-undefined'
+fi
+if [[ "$target_platform" == osx-* ]]; then
+    # rpath required for '@rpath/libmpi.*.dylib' to be found at runtime
+    wrapper_ldflags='-Wl,-rpath,${libdir}'
+fi
+
 # UCX support
 build_with_ucx=""
 if [[ "$target_platform" == linux-* ]]; then
     build_with_ucx="--with-ucx=$PREFIX"
-    # allow-shlib-undefined required for dependencies to link against older sysroot
-    # avoids undefined
-    wrapper_ldflags="${wrapper_ldflags} -Wl,--allow-shlib-undefined"
 fi
 
 # CUDA support
@@ -61,12 +69,7 @@ fi
 ./configure --prefix=$PREFIX \
             --disable-dependency-tracking \
             --enable-mpi-fortran \
-            --disable-wrapper-rpath \
-            --disable-wrapper-runpath \
             --with-mpi-moduledir='${includedir}' \
-            --with-wrapper-cflags="-I$PREFIX/include" \
-            --with-wrapper-cxxflags="-I$PREFIX/include" \
-            --with-wrapper-fcflags="-I$PREFIX/include" \
             --with-wrapper-ldflags="${wrapper_ldflags}" \
             --with-sge \
             --with-hwloc=$PREFIX \
