@@ -1,0 +1,24 @@
+From 2085433c0977d37cbd1631fa7695a29de3f578c5 Mon Sep 17 00:00:00 2001
+From: Jeff Squyres <jeff@squyres.com>
+Date: Thu, 6 Jun 2024 11:22:53 -0400
+Subject: [PATCH] aarch64_functions.c: fix trivial typo
+
+Signed-off-by: Jeff Squyres <jeff@squyres.com>
+(cherry picked from commit 7c5ef484b6f8ee4d13a40e2d6cd84dc11c19c6fe)
+---
+ ompi/mca/op/aarch64/op_aarch64_functions.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/ompi/mca/op/aarch64/op_aarch64_functions.c b/ompi/mca/op/aarch64/op_aarch64_functions.c
+index ea4fd488655..d5878913f2f 100644
+--- a/ompi/mca/op/aarch64/op_aarch64_functions.c
++++ b/ompi/mca/op/aarch64/op_aarch64_functions.c
+@@ -119,7 +119,7 @@ _Generic((*(out)), \
+         int left_over = *count;                                                               \
+         type##type_size##_t *in = (type##type_size##_t *) _in,                                \
+                             *out = (type##type_size##_t *) _out;                              \
+-        OP_CONCAT(OMPI_OP_TYPE_PREPEND, type##type_size####x##type_cnt##_t) vsrc, vdst;       \
++        OP_CONCAT(OMPI_OP_TYPE_PREPEND, type##type_size##x##type_cnt##_t) vsrc, vdst;         \
+         for (; left_over >= type_cnt; left_over -= type_cnt) {                                \
+             vsrc = vld1q##_##type_name##type_size(in);                                        \
+             vdst = vld1q##_##type_name##type_size(out);                                       \
