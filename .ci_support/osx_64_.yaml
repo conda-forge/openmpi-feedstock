@@ -34,6 +34,8 @@ macos_machine:
 - x86_64-apple-darwin13.4.0
 mpi_type:
 - conda
+perl:
+- 5.32.1
 target_platform:
 - osx-64
 zip_keys:

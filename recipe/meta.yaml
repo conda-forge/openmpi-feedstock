@@ -1,4 +1,4 @@
-{% set version = "5.0.4" %}
+{% set version = "5.0.5" %}
 {% set major = version.rpartition('.')[0] %}
 {% set cuda_major = (cuda_compiler_version|default("11.8")).rpartition('.')[0] %}
 {% set build = 0 %}
@@ -16,9 +16,8 @@ package:
 source:
   fn: openmpi-{{ version }}.tar.bz2
   url: https://www.open-mpi.org/software/ompi/v{{ major }}/downloads/openmpi-{{ version }}.tar.bz2
-  sha256: 64526852cdd88b2d30e022087c16ab3e03806c451b10cd691d5c1ac887d8ef9d
+  sha256: 6588d57c0a4bd299a24103f4e196051b29e8b55fbda49e11d5b3d32030a32776
   patches:
-    - pr12694.patch  # remove after 5.0.5
     - ldflags-mac.patch  # [osx]
 
 build:

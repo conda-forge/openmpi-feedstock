@@ -66,8 +66,11 @@ if [[ $CONDA_BUILD_CROSS_COMPILATION == "1" ]]; then
     source $RECIPE_DIR/cross-gfortran.$target_platform.sh
 fi
 
+# disable wrapper-runpath for consistency with conda-forge wrt dtags
+# openmpi's runpath adds new dtags to compiler wrappers
 ./configure --prefix=$PREFIX \
             --disable-dependency-tracking \
+            --disable-wrapper-runpath \
             --enable-mpi-fortran \
             --with-mpi-moduledir='${includedir}' \
             --with-wrapper-ldflags="${wrapper_ldflags}" \
