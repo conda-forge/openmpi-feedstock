@@ -18,7 +18,6 @@ source:
   url: https://www.open-mpi.org/software/ompi/v{{ major }}/downloads/openmpi-{{ version }}.tar.bz2
   sha256: 6588d57c0a4bd299a24103f4e196051b29e8b55fbda49e11d5b3d32030a32776
   patches:
-    - pr12694.patch  # remove after 5.0.5
     - ldflags-mac.patch  # [osx]
 
 build:
