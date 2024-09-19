@@ -40,6 +40,7 @@ fi
 build_with_ucx=""
 build_with_ucc=""
 if [[ "$target_platform" == linux-* ]]; then
+    echo "Build with UCX/UCC support"
     build_with_ucx="--with-ucx=$PREFIX"
     build_with_ucc="--with-ucc=$PREFIX"
 fi
@@ -47,6 +48,7 @@ fi
 # CUDA support
 build_with_cuda=""
 if [[ -n "$CUDA_HOME" ]]; then
+    echo "Build with CUDA support"
     build_with_cuda="--with-cuda=$CUDA_HOME --with-cuda-libdir=$CUDA_HOME/lib64/stubs"
 fi
 
@@ -80,7 +82,7 @@ fi
             --with-mpi-moduledir='${includedir}' \
             --with-wrapper-ldflags="${wrapper_ldflags}" \
             --with-sge \
-	    --with-pmix=internal \
+            --with-pmix=internal \
             --with-hwloc=$PREFIX \
             --with-libevent=$PREFIX \
             --with-zlib=$PREFIX \
@@ -95,14 +97,16 @@ make -j"${CPU_COUNT:-1}"
 make install
 
 POST_LINK=$PREFIX/bin/.openmpi-post-link.sh
-if [ -n "$build_with_ucx" ]; then
+if [ -z "$build_with_ucx" ]; then
+    echo "No UCX/UCC support"
     echo "setting MCA pml to ^ucx..."
     echo "pml = ^ucx" >> $PREFIX/etc/openmpi-mca-params.conf
     echo "setting MCA osc to ^ucx..."
     echo "osc = ^ucx" >> $PREFIX/etc/openmpi-mca-params.conf
     cat $RECIPE_DIR/post-link-ucx.sh >> $POST_LINK
 fi
-if [ -n "$build_with_cuda" ]; then
+if [ -z "$build_with_cuda" ]; then
+    echo "No CUDA support"
     echo "setting MCA mca_base_component_show_load_errors to 0..."
     echo "mca_base_component_show_load_errors = 0" >> $PREFIX/etc/openmpi-mca-params.conf
     echo "setting MCA opal_warn_on_missing_libcuda to 0..."
