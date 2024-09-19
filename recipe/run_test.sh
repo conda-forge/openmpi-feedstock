@@ -7,7 +7,10 @@ pushd "tests"
 
 if [[ $PKG_NAME == "openmpi" ]]; then
 
-  if [[ -n "$(conda list | grep ucx)" ]]; then
+# -n : string is not null
+# -z : string is null, that is, has zero length
+
+  if [[ -z "$(conda list | grep ucx)" ]]; then
     echo "Improper UCX dependency!"
     exit 1
   fi

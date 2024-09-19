@@ -10,6 +10,9 @@ export FC=$(basename "$FC")
 # unset unused Fortran compiler variables
 unset FFLAGS F77 F90 F95
 
+# add -fallow-argument-mismatch to FCFLAGS
+export FCFLAGS="-fallow-argument-mismatch ${FCFLAGS}"
+
 # tweak compiler flags
 export LIBRARY_PATH="$PREFIX/lib"
 if [[ "$target_platform" == osx-* ]]; then
@@ -33,10 +36,12 @@ if [[ "$target_platform" == osx-* ]]; then
     wrapper_ldflags='-Wl,-rpath,${libdir}'
 fi
 
-# UCX support
+# UCX/UCC support
 build_with_ucx=""
+build_with_ucc=""
 if [[ "$target_platform" == linux-* ]]; then
     build_with_ucx="--with-ucx=$PREFIX"
+    build_with_ucc="--with-ucc=$PREFIX"
 fi
 
 # CUDA support
@@ -75,12 +80,14 @@ fi
             --with-mpi-moduledir='${includedir}' \
             --with-wrapper-ldflags="${wrapper_ldflags}" \
             --with-sge \
+	    --with-pmix=internal \
             --with-hwloc=$PREFIX \
             --with-libevent=$PREFIX \
             --with-zlib=$PREFIX \
             --enable-mca-dso \
             --enable-ipv6 \
             $build_with_ucx \
+            $build_with_ucc \
             $build_with_cuda \
     || (cat config.log; false)
 
