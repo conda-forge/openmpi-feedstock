@@ -92,8 +92,7 @@ fi
             $build_with_cuda \
     || (cat config.log; false)
 
-# Building with 16 CPUs
-make -j16
+make -j"${CPU_COUNT:-1}"
 make install
 
 POST_LINK=$PREFIX/bin/.openmpi-post-link.sh
