@@ -86,14 +86,14 @@ fi
             --with-hwloc=$PREFIX \
             --with-libevent=$PREFIX \
             --with-zlib=$PREFIX \
-            --enable-mca-dso \
             --enable-ipv6 \
             $build_with_ucx \
             $build_with_ucc \
             $build_with_cuda \
     || (cat config.log; false)
 
-make -j"${CPU_COUNT:-1}"
+# Building with 16 CPUs
+make -j16
 make install
 
 POST_LINK=$PREFIX/bin/.openmpi-post-link.sh

@@ -1,7 +1,7 @@
 {% set version = "5.0.5" %}
 {% set major = version.rpartition('.')[0] %}
 {% set cuda_major = (cuda_compiler_version|default("11.8")).rpartition('.')[0] %}
-{% set build = 0 %}
+{% set build = 1 %}
 
 # give conda package a higher build number
 {% if mpi_type == 'conda' %}
@@ -69,14 +69,24 @@ outputs:
         - ucc        # [linux]
         - ucx        # [linux]
         - zlib       # [linux]
+          
       host:
         #- openpmix
         #- prrte
-        - libhwloc
-        - libevent
+        - binutils   # [linux]
+        - libevent   # [linux]
+        - libhwloc   # [linux]
+        - libmagic   # [linux]
         - libnl      # [linux]
-        - zlib
+        - libnuma    # [linux]
+        - libudev1   # [linux]
+        - make       # [linux]
+        - numactl    # [linux]
+        - pkg-config # [linux]
+        - rdma-core  # [linux]
         - ucc        # [linux]
+        - ucx        # [linux]
+        - zlib       # [linux]
         - cuda-version {{ cuda_compiler_version }}  # [cuda_compiler != "None"]
       run:
         - mpi 1.0 openmpi
@@ -125,6 +135,19 @@ outputs:
         # host C compilers work fine (better) on mac
         - {{ compiler('c') }}
     test:
+      # Ensure the correct dependencies are available for testing
+      requires:      
+        - mpi 1.0 openmpi
+        - libevent   # [linux]
+        - libhwloc   # [linux]
+        - libnl      # [linux]
+        - libnuma    # [linux]
+        - libudev1   # [linux]
+        - numactl    # [linux]
+        - rdma-core  # [linux]
+        - ucc        # [linux]
+        - ucx        # [linux]
+        - zlib       # [linux]       
       script: run_test.sh
       files:
         - tests/helloworld.c
@@ -175,6 +198,18 @@ outputs:
         - {{ pin_subpackage('openmpi', exact=True) }}
         - {{ compiler('fortran') }}
     test:
+      requires:
+        - mpi 1.0 openmpi
+        - libevent   # [linux]
+        - libhwloc   # [linux]
+        - libnl      # [linux]
+        - libnuma    # [linux]
+        - libudev1   # [linux]
+        - numactl    # [linux]
+        - rdma-core  # [linux]
+        - ucc        # [linux]
+        - ucx        # [linux]
+        - zlib       # [linux]       
       script: run_test.sh
       files:
         - tests/helloworld.f
