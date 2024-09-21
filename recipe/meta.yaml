@@ -52,23 +52,23 @@ outputs:
         - {{ compiler('fortran') }}
         - {{ stdlib('c') }}
         # FIXME: autotools, perl required for ldflags-mac.patch
-        - perl  # [osx]
-        - autoconf  # [osx]
-        - automake  # [osx]
-        - binutils  # [linux]
-        - libevent  # [linux]
-        - libhwloc  # [linux]
-        - libmagic  # [linux]
-        - libnl # [linux]
-        - libnuma  # [linux]
-        - libudev1  # [linux]
-        - make  # [linux]
-        - numactl  # [linux]
-        - pkg-config  # [linux]
-        - rdma-core  # [linux]
-        - ucc  # [linux]
-        - ucx  # [linux]
-        - zlib  # [linux]
+        - perl
+        - autoconf
+        - automake
+        - binutils
+        - libevent
+        - libhwloc
+        - libmagic
+        - libnl 
+        - libnuma 
+        - libudev1 
+        - make 
+        - numactl 
+        - pkg-config 
+        - rdma-core 
+        - ucc 
+        - ucx 
+        - zlib
           
       host:
         #- openpmix
