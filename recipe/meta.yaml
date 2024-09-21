@@ -52,56 +52,56 @@ outputs:
         - {{ compiler('fortran') }}
         - {{ stdlib('c') }}
         # FIXME: autotools, perl required for ldflags-mac.patch
-        - perl      # [osx]
+        - perl  # [osx]
         - autoconf  # [osx]
         - automake  # [osx]
-        - binutils   # [linux]
-        - libevent   # [linux]
-        - libhwloc   # [linux]
-        - libmagic   # [linux]
-        - libnl      # [linux]
-        - libnuma    # [linux]
-        - libudev1   # [linux]
-        - make       # [linux]
-        - numactl    # [linux]
-        - pkg-config # [linux]
+        - binutils  # [linux]
+        - libevent  # [linux]
+        - libhwloc  # [linux]
+        - libmagic  # [linux]
+        - libnl # [linux]
+        - libnuma  # [linux]
+        - libudev1  # [linux]
+        - make  # [linux]
+        - numactl  # [linux]
+        - pkg-config  # [linux]
         - rdma-core  # [linux]
-        - ucc        # [linux]
-        - ucx        # [linux]
-        - zlib       # [linux]
+        - ucc  # [linux]
+        - ucx  # [linux]
+        - zlib  # [linux]
           
       host:
         #- openpmix
         #- prrte
-        - binutils   # [linux]
-        - libevent   # [linux]
-        - libhwloc   # [linux]
-        - libmagic   # [linux]
-        - libnl      # [linux]
-        - libnuma    # [linux]
-        - libudev1   # [linux]
-        - make       # [linux]
-        - numactl    # [linux]
-        - pkg-config # [linux]
+        - binutils  # [linux]
+        - libevent  # [linux]
+        - libhwloc  # [linux]
+        - libmagic  # [linux]
+        - libnl  # [linux]
+        - libnuma  # [linux]
+        - libudev1  # [linux]
+        - make  # [linux]
+        - numactl  # [linux]
+        - pkg-config  # [linux]
         - rdma-core  # [linux]
-        - ucc        # [linux]
-        - ucx        # [linux]
-        - zlib       # [linux]
+        - ucc  # [linux]
+        - ucx  # [linux]
+        - zlib  # [linux]
         - cuda-version {{ cuda_compiler_version }}  # [cuda_compiler != "None"]
       run:
         - mpi 1.0 openmpi
         #- openpmix
         #- prrte
-        - libevent   # [linux]
-        - libhwloc   # [linux]
-        - libnl      # [linux]
-        - libnuma    # [linux]
-        - libudev1   # [linux]
-        - numactl    # [linux]
+        - libevent  # [linux]
+        - libhwloc  # [linux]
+        - libnl  # [linux]
+        - libnuma  # [linux]
+        - libudev1  # [linux]
+        - numactl  # [linux]
         - rdma-core  # [linux]
-        - ucc        # [linux]
-        - ucx        # [linux]
-        - zlib       # [linux]
+        - ucc  # [linux]
+        - ucx  # [linux]
+        - zlib  # [linux]
       run_constrained:
         - {{ pin_compatible("ucx", max_pin="x.x") }}  # [linux]
         - {{ pin_compatible("ucc", max_pin="x.x") }}  # [linux]
@@ -138,16 +138,16 @@ outputs:
       # Ensure the correct dependencies are available for testing
       requires:      
         - mpi 1.0 openmpi
-        - libevent   # [linux]
-        - libhwloc   # [linux]
-        - libnl      # [linux]
-        - libnuma    # [linux]
-        - libudev1   # [linux]
-        - numactl    # [linux]
+        - libevent  # [linux]
+        - libhwloc  # [linux]
+        - libnl  # [linux]
+        - libnuma  # [linux]
+        - libudev1  # [linux]
+        - numactl  # [linux]
         - rdma-core  # [linux]
-        - ucc        # [linux]
-        - ucx        # [linux]
-        - zlib       # [linux]       
+        - ucc  # [linux]
+        - ucx  # [linux]
+        - zlib  # [linux]       
       script: run_test.sh
       files:
         - tests/helloworld.c
@@ -170,16 +170,16 @@ outputs:
       # Ensure the correct dependencies are available for testing
       requires:
         - mpi 1.0 openmpi
-        - libevent   # [linux]
-        - libhwloc   # [linux]
-        - libnl      # [linux]
-        - libnuma    # [linux]
-        - libudev1   # [linux]
-        - numactl    # [linux]
+        - libevent  # [linux]
+        - libhwloc  # [linux]
+        - libnl  # [linux]
+        - libnuma  # [linux]
+        - libudev1  # [linux]
+        - numactl  # [linux]
         - rdma-core  # [linux]
-        - ucc        # [linux]
-        - ucx        # [linux]
-        - zlib       # [linux]          
+        - ucc  # [linux]
+        - ucx  # [linux]
+        - zlib  # [linux]          
       script: run_test.sh
       files:
         - tests/helloworld.cxx
@@ -200,16 +200,16 @@ outputs:
     test:
       requires:
         - mpi 1.0 openmpi
-        - libevent   # [linux]
-        - libhwloc   # [linux]
-        - libnl      # [linux]
-        - libnuma    # [linux]
-        - libudev1   # [linux]
-        - numactl    # [linux]
+        - libevent  # [linux]
+        - libhwloc  # [linux]
+        - libnl  # [linux]
+        - libnuma  # [linux]
+        - libudev1  # [linux]
+        - numactl  # [linux]
         - rdma-core  # [linux]
-        - ucc        # [linux]
-        - ucx        # [linux]
-        - zlib       # [linux]       
+        - ucc  # [linux]
+        - ucx  # [linux]
+        - zlib  # [linux]       
       script: run_test.sh
       files:
         - tests/helloworld.f
