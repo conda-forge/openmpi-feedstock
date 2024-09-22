@@ -73,6 +73,9 @@ if [[ $CONDA_BUILD_CROSS_COMPILATION == "1" ]]; then
     source $RECIPE_DIR/cross-gfortran.$target_platform.sh
 fi
 
+# Ensure a log directory exists
+mkdir -p ${SRC_DIR}/logs
+
 # disable wrapper-runpath for consistency with conda-forge wrt dtags
 # openmpi's runpath adds new dtags to compiler wrappers
 ./configure --prefix=$PREFIX \
@@ -90,10 +93,20 @@ fi
             $build_with_ucx \
             $build_with_ucc \
             $build_with_cuda \
-    || (cat config.log; false)
+            2>&1 | tee ${SRC_DIR}/logs/configure.log
 
-make -j"${CPU_COUNT:-1}"
-make install
+# Capture the exit status of configure
+configure_status=$?
+
+# If configure fails, copy config.log for debugging
+if [ $configure_status -ne 0 ]; then
+  cat config.log || true  # Concatenate config.log to stdout
+  cp config.log ${SRC_DIR}/logs/
+  exit 1
+fi
+
+make -j"${CPU_COUNT:-1}" 2>&1 | tee ${SRC_DIR}/logs/make.log
+make install 2>&1 | tee ${SRC_DIR}/logs/make_install.log
 
 POST_LINK=$PREFIX/bin/.openmpi-post-link.sh
 if [ -z "$build_with_ucx" ]; then
