@@ -39,10 +39,13 @@ fi
 # UCX/UCC support
 build_with_ucx=""
 build_with_ucc=""
-if [[ "$target_platform" == linux-* ]]; then
+if [[ "$target_platform" == "linux-64" ]]; then
     echo "Build with UCX/UCC support"
     build_with_ucx="--with-ucx=$PREFIX"
     build_with_ucc="--with-ucc=$PREFIX"
+else
+    echo "UCC support not available for $target_platform, proceeding without it"
+    build_with_ucx="--with-ucx=$PREFIX"
 fi
 
 # CUDA support
@@ -73,9 +76,6 @@ if [[ $CONDA_BUILD_CROSS_COMPILATION == "1" ]]; then
     source $RECIPE_DIR/cross-gfortran.$target_platform.sh
 fi
 
-# Ensure a log directory exists
-mkdir -p ${SRC_DIR}/logs
-
 # disable wrapper-runpath for consistency with conda-forge wrt dtags
 # openmpi's runpath adds new dtags to compiler wrappers
 ./configure --prefix=$PREFIX \
@@ -93,20 +93,10 @@ mkdir -p ${SRC_DIR}/logs
             $build_with_ucx \
             $build_with_ucc \
             $build_with_cuda \
-            2>&1 | tee ${SRC_DIR}/logs/configure.log
+    || (cat config.log; false)
 
-# Capture the exit status of configure
-configure_status=$?
-
-# If configure fails, copy config.log for debugging
-if [ $configure_status -ne 0 ]; then
-  cat config.log || true  # Concatenate config.log to stdout
-  cp config.log ${SRC_DIR}/logs/
-  exit 1
-fi
-
-make -j"${CPU_COUNT:-1}" 2>&1 | tee ${SRC_DIR}/logs/make.log
-make install 2>&1 | tee ${SRC_DIR}/logs/make_install.log
+make -j"${CPU_COUNT:-1}"
+make install
 
 POST_LINK=$PREFIX/bin/.openmpi-post-link.sh
 if [ -z "$build_with_ucx" ]; then
