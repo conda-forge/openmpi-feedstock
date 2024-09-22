@@ -39,15 +39,15 @@ fi
 # UCX/UCC support
 build_with_ucx=""
 build_with_ucc=""
-if [[ "$target_platform" == "linux-64" ]]; then
-    echo "Build with UCX/UCC support"
+
+if [[ "$target_platform" == "linux-64" || "$target_platform" == "linux-aarch64" ]]; then
+    echo "Building on $target_platform: UCX and UCC support"
     build_with_ucx="--with-ucx=$PREFIX"
     build_with_ucc="--with-ucc=$PREFIX"
-elif [[ "$target_platform" == linux-* ]]; then
-    echo "Build with UCX support, without UCC"
-    build_with_ucx="--with-ucx=$PREFIX"
+elif [[ "$target_platform" == "linux-ppc64le" ]]; then
+    echo "Building on ppc64le: UCX support skipped for now"
 else
-    echo "UCX and UCC support not available for $target_platform, proceeding without them"
+    echo "Other platform: No UCX/UCC support"
 fi
 
 # CUDA support
