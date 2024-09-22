@@ -67,8 +67,8 @@ outputs:
         - numactl  # [linux]
         - pkg-config 
         - rdma-core  # [linux]
-        - ucc  # [linux and not ppc64le and not osx]
-        - ucx  # [linux]
+        - ucc  # [linux_64]
+        - ucx  # [linux and not osx]
         - zlib
           
       host:
@@ -84,8 +84,8 @@ outputs:
         - numactl  # [linux]
         - pkg-config  # [linux]
         - rdma-core  # [linux]
-        - ucc  # [linux and not ppc64le and not osx]
-        - ucx  # [linux]
+        - ucc  # [linux_64]
+        - ucx  # [linux and not osx]
         - zlib
         - cuda-version {{ cuda_compiler_version }}  # [cuda_compiler != "None"]
       run:
@@ -99,8 +99,8 @@ outputs:
         - libudev1  # [linux]
         - numactl  # [linux]
         - rdma-core  # [linux]
-        - ucc  # [linux and not ppc64le and not osx]
-        - ucx  # [linux]
+        - ucc  # [linux_64]
+        - ucx  # [linux and not osx]
         - zlib
       run_constrained:
         - {{ pin_compatible("ucx", max_pin="x.x") }}  # [linux]
@@ -145,8 +145,8 @@ outputs:
         - libudev1  # [linux]
         - numactl  # [linux]
         - rdma-core  # [linux]
-        - ucc  # [linux and not ppc64le and not osx]
-        - ucx  # [linux]
+        - ucc  # [linux_64]
+        - ucx  # [linux and not osx]
         - zlib   
       script: run_test.sh
       files:
@@ -177,8 +177,8 @@ outputs:
         - libudev1  # [linux]
         - numactl  # [linux]
         - rdma-core  # [linux]
-        - ucc  # [linux and not ppc64le and not osx]
-        - ucx  # [linux]
+        - ucc  # [linux_64]
+        - ucx  # [linux and not osx]
         - zlib       
       script: run_test.sh
       files:
@@ -207,8 +207,8 @@ outputs:
         - libudev1  # [linux]
         - numactl  # [linux]
         - rdma-core  # [linux]
-        - ucc  # [linux and not ppc64le and not osx]
-        - ucx  # [linux]
+        - ucc  # [linux_64]
+        - ucx  # [linux and not osx]
         - zlib 
       script: run_test.sh
       files:
