@@ -10,13 +10,17 @@ if [[ $PKG_NAME == "openmpi" ]]; then
 # -n : string is not null
 # -z : string is null, that is, has zero length
 
-  if [[ -z "$(conda list | grep ucx)" ]]; then
-    echo "Improper UCX dependency!"
-    exit 1
+# No UCX available on osx_64 platform
+
+  if [[ "$target_platform" != osx_64 ]]; then
+    if [[ -z "$(ompi_info | grep ucx)" ]]; then
+       echo "OpenMPI configured without UCX support!"
+       exit 1
+    fi
   fi
 
-  if [[ -n "$(conda list | grep cuda-version)" ]]; then
-    echo "Improper CUDA dependency!"
+  if [[ -z "$(ompi_info | grep cuda)" ]]; then
+    echo "OpenMPI configured without CUDA support!"
     exit 1
   fi
 
