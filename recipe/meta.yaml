@@ -67,7 +67,7 @@ outputs:
         - numactl  # [linux]
         - pkg-config 
         - rdma-core  # [linux]
-        - ucc  # [linux and not osx]
+        - ucc  # [linux and not osx and not ppc64le]
         - ucx  # [linux and not osx]
         - zlib
           
@@ -84,7 +84,7 @@ outputs:
         - numactl  # [linux]
         - pkg-config  # [linux]
         - rdma-core  # [linux]
-        - ucc  # [linux and not osx]
+        - ucc  # [linux and not osx and not ppc64le]
         - ucx  # [linux and not osx]
         - zlib
         - cuda-version {{ cuda_compiler_version }}  # [cuda_compiler != "None"]
@@ -99,12 +99,12 @@ outputs:
         - libudev1  # [linux]
         - numactl  # [linux]
         - rdma-core  # [linux]
-        - ucc  # [linux and not osx]
+        - ucc  # [linux and not osx and not ppc64le]
         - ucx  # [linux and not osx]
         - zlib
       run_constrained:
         - {{ pin_compatible("ucx", max_pin="x.x") }}  # [linux]
-        - {{ pin_compatible("ucc", max_pin="x.x") }}  # [linux]
+        - {{ pin_compatible("ucc", max_pin="x.x") }}  # [linux and not ppc64le]
         # Open MPI only uses CUDA Driver APIs, set the minimal driver version
         - __cuda  >= {{ cuda_major ~ ".0" }}  # [cuda_compiler != "None"]
         # Ensure a consistent CUDA environment
@@ -145,7 +145,7 @@ outputs:
         - libudev1  # [linux]
         - numactl  # [linux]
         - rdma-core  # [linux]
-        - ucc  # [linux and not osx]
+        - ucc  # [linux and not osx and not ppc64le]
         - ucx  # [linux and not osx]
         - zlib   
       script: run_test.sh
@@ -177,7 +177,7 @@ outputs:
         - libudev1  # [linux]
         - numactl  # [linux]
         - rdma-core  # [linux]
-        - ucc  # [linux and not osx]
+        - ucc  # [linux and not osx and not ppc64le]
         - ucx  # [linux and not osx]
         - zlib       
       script: run_test.sh
@@ -207,7 +207,7 @@ outputs:
         - libudev1  # [linux]
         - numactl  # [linux]
         - rdma-core  # [linux]
-        - ucc  # [linux and not osx]
+        - ucc  # [linux and not osx and not ppc64le]
         - ucx  # [linux and not osx]
         - zlib 
       script: run_test.sh
