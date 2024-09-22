@@ -55,7 +55,7 @@ outputs:
         - perl  # [osx]
         - autoconf  # [osx]
         - automake  # [osx]
-        - binutils
+        - binutils  # [linux]
         - libevent
         - libhwloc
         - libmagic
@@ -74,7 +74,7 @@ outputs:
       host:
         #- openpmix
         #- prrte
-        - binutils
+        - binutils  # [linux]
         - libevent
         - libhwloc
         - libmagic
