@@ -43,9 +43,11 @@ if [[ "$target_platform" == "linux-64" ]]; then
     echo "Build with UCX/UCC support"
     build_with_ucx="--with-ucx=$PREFIX"
     build_with_ucc="--with-ucc=$PREFIX"
-else
-    echo "UCC support not available for $target_platform, proceeding without it"
+elif [[ "$target_platform" == linux-* ]]; then
+    echo "Build with UCX support, without UCC"
     build_with_ucx="--with-ucx=$PREFIX"
+else
+    echo "UCX and UCC support not available for $target_platform, proceeding without them"
 fi
 
 # CUDA support
