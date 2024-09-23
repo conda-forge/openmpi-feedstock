@@ -34,7 +34,7 @@ if [[ $PKG_NAME == "openmpi" ]]; then
   $MPIEXEC --help
   $MPIEXEC -n 4 ./helloworld.sh
 
-# test -f $PREFIX/include/mpi.mod
+  test -f $PREFIX/include/mpi.mod
 
 fi
 
