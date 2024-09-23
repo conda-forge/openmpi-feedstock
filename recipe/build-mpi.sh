@@ -15,7 +15,6 @@ export FCFLAGS="-fallow-argument-mismatch ${FCFLAGS}"
 
 # tweak compiler flags
 export LIBRARY_PATH="$PREFIX/lib:$LIBRARY_PATH"
-export LIBRARY_PATH="$PREFIX/lib64:$LIBRARY_PATH"
 if [[ "$target_platform" == osx-* ]]; then
     # FIXME: remove autogen when autotools patch no longer required
     perl autogen.pl --force
@@ -54,7 +53,7 @@ if [[ -n "$CUDA_HOME" ]]; then
     echo "Build with CUDA support"
     build_with_cuda="--with-cuda=$CUDA_HOME --with-cuda-libdir=$CUDA_HOME/lib64/stubs"
 else
-    "No CUDA support"    
+    echo "No CUDA support"    
 fi
 
 if [[ $CONDA_BUILD_CROSS_COMPILATION == "1" ]]; then
