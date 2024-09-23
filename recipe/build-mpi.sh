@@ -40,9 +40,19 @@ fi
 build_with_ucx=""
 build_with_ucc=""
 if [[ "$target_platform" == linux-* ]]; then
-    echo "Build with UCX/UCC support"
+    echo "Build with UCX support"
     build_with_ucx="--with-ucx=$PREFIX"
-    build_with_ucc="--with-ucc=$PREFIX"
+    if [[ "$target_platform" != linux-ppc64le ]]; then
+        echo "Build with UCC support also"
+        build_with_ucc="--with-ucc=$PREFIX"
+    fi
+fi
+
+# PMIx support
+build_with_pmix=""
+if [[ "$target_platform" == linux-* && "$target_platform" != linux-ppc64le* ]]; then
+    echo "Build with PMIx support"
+    build_with_pmix="--with-pmix=internal"
 fi
 
 # CUDA support
@@ -82,11 +92,11 @@ fi
             --with-mpi-moduledir='${includedir}' \
             --with-wrapper-ldflags="${wrapper_ldflags}" \
             --with-sge \
-            --with-pmix=internal \
             --with-hwloc=$PREFIX \
             --with-libevent=$PREFIX \
             --with-zlib=$PREFIX \
             --enable-ipv6 \
+            $build_with_pmix \	    
             $build_with_ucx \
             $build_with_ucc \
             $build_with_cuda \
