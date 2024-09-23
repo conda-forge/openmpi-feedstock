@@ -10,9 +10,9 @@ if [[ $PKG_NAME == "openmpi" ]]; then
 # -n : string is not null
 # -z : string is null, that is, has zero length
 
-# No UCX available on osx_64 platform
+# No UCX support on osx-64 and ppc64le platforms
 
-  if [[ "$target_platform" != osx-64 ]]; then
+  if [[ "$target_platform" != osx-64 && "$target_platform" != ppc64le ]]; then
     if [[ -z "$(ompi_info | grep ucx)" ]]; then
        echo "OpenMPI configured without UCX support!"
        exit 1
