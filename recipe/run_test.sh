@@ -7,30 +7,34 @@ pushd "tests"
 
 if [[ $PKG_NAME == "openmpi" ]]; then
 
+# -n : string is not null
+# -z : string is null, that is, has zero length
+
+# No UCX available on osx_64 platform
+
+  if [[ "$target_platform" != osx-64 ]]; then
+    if [[ -z "$(ompi_info | grep ucx)" ]]; then
+       echo "OpenMPI configured without UCX support!"
+       exit 1
+    fi
+  fi
+
+  if [[ -z "$(ompi_info | grep cuda)" ]]; then
+    echo "OpenMPI configured without CUDA support!"
+    exit 1
+  fi
+
   command -v ompi_info
   ompi_info
 
   command -v prte_info
   prte_info
 
-  echo "Ttarget_platform=$target_platform"
-  # Skip UCX checks for platforms not supporting it
-  if [[ "$target_platform" == "linux-*" ]]; then
-      if [[ -z "$(ompi_info | grep ucx)" ]]; then
-          echo "OpenMPI configured without UCX support on $target_platform!"
-          exit 1
-      fi
-  fi
-
-  # CUDA checks for all platforms
-  if [[ -z "$(ompi_info | grep cuda)" ]]; then
-       echo "OpenMPI configured without CUDA support on $target_platform!"
-       exit 1
-  fi
-
   command -v mpiexec
   $MPIEXEC --help
   $MPIEXEC -n 4 ./helloworld.sh
+
+# test -f $PREFIX/include/mpi.mod
 
 fi
 

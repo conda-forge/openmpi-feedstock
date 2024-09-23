@@ -14,7 +14,7 @@ unset FFLAGS F77 F90 F95
 export FCFLAGS="-fallow-argument-mismatch ${FCFLAGS}"
 
 # tweak compiler flags
-export LIBRARY_PATH="$PREFIX/lib:$LIBRARY_PATH"
+export LIBRARY_PATH="$PREFIX/lib"
 if [[ "$target_platform" == osx-* ]]; then
     # FIXME: remove autogen when autotools patch no longer required
     perl autogen.pl --force
@@ -39,12 +39,10 @@ fi
 # UCX/UCC support
 build_with_ucx=""
 build_with_ucc=""
-if [[ "$target_platform" == "linux-*" ]]; then
-    echo "Building on $target_platform with UCX and UCC support"
+if [[ "$target_platform" == linux-* ]]; then
+    echo "Build with UCX/UCC support"
     build_with_ucx="--with-ucx=$PREFIX"
     build_with_ucc="--with-ucc=$PREFIX"
-else
-    echo "Other platform: No UCX/UCC support"
 fi
 
 # CUDA support
@@ -52,8 +50,6 @@ build_with_cuda=""
 if [[ -n "$CUDA_HOME" ]]; then
     echo "Build with CUDA support"
     build_with_cuda="--with-cuda=$CUDA_HOME --with-cuda-libdir=$CUDA_HOME/lib64/stubs"
-else
-    echo "No CUDA support"    
 fi
 
 if [[ $CONDA_BUILD_CROSS_COMPILATION == "1" ]]; then
@@ -91,14 +87,12 @@ fi
             --with-libevent=$PREFIX \
             --with-zlib=$PREFIX \
             --enable-ipv6 \
-            --enable-debug \
             $build_with_ucx \
             $build_with_ucc \
             $build_with_cuda \
     || (cat config.log; false)
 
-make -j16
-###make -j"${CPU_COUNT:-1}"
+make -j"${CPU_COUNT:-1}"
 make install
 
 POST_LINK=$PREFIX/bin/.openmpi-post-link.sh
