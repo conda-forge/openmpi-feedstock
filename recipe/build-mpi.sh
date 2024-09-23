@@ -36,7 +36,7 @@ if [[ "$target_platform" == osx-* ]]; then
     wrapper_ldflags='-Wl,-rpath,${libdir}'
 fi
 
-# UCX/UCC support
+# UCX and UCC support
 build_with_ucx=""
 build_with_ucc=""
 if [[ "$target_platform" == linux-* ]]; then
