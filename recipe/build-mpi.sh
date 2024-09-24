@@ -39,13 +39,10 @@ fi
 # UCX and UCC support
 build_with_ucx=""
 build_with_ucc=""
-if [[ "$target_platform" == linux-* ]]; then
-    echo "Build with UCX support"
+if [[ "$target_platform" == linux-* && "$target_platform" != linux-ppc64le ]]; then
+    echo "Build with UCX/UCC support"
     build_with_ucx="--with-ucx=$PREFIX"
-    if [[ "$target_platform" != linux-ppc64le ]]; then
-        echo "Build with UCC support also"
-        build_with_ucc="--with-ucc=$PREFIX"
-    fi
+    build_with_ucc="--with-ucc=$PREFIX"
 fi
 
 # PMIx support
