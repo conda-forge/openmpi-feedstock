@@ -10,17 +10,21 @@ if [[ $PKG_NAME == "openmpi" ]]; then
   # -n : string is not null
   # -z : string is null, that is, has zero length
 
-  # UCX support on linux-64 platforms
+  # UCX support
   echo "Target platform = $target_platform"
   if [[ "$target_platform" == linux-64 ]]; then
-    if [[ -z "$(ompi_info | grep ucx)" ]]; then
-       echo "OpenMPI configured without UCX support!"
-    fi
+     if [[ -z "$(ompi_info | grep ucx)" ]]; then
+        echo "OpenMPI configured without UCX support!"
+	exit 1
+     fi
   fi
 
-  # CUDA support on all platforms
-  if [[ -z "$(ompi_info | grep cuda)" ]]; then
-    echo "OpenMPI configured without CUDA support!"
+  # CUDA support 
+  if [[ "$target_platform" != linux-ppc64le ]]; then
+     if [[ -z "$(ompi_info | grep cuda)" ]]; then
+        echo "OpenMPI configured without CUDA support!"
+	exit 1
+     fi
   fi
 
   command -v ompi_info

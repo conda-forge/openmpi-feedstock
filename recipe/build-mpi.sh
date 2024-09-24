@@ -11,7 +11,9 @@ export FC=$(basename "$FC")
 unset FFLAGS F77 F90 F95
 
 # add -fallow-argument-mismatch to FCFLAGS
-export FCFLAGS="-fallow-argument-mismatch ${FCFLAGS}"
+if [[ "$target_platform" != linux-ppc64le ]]; then
+   export FCFLAGS="-fallow-argument-mismatch ${FCFLAGS}"
+fi
 
 # tweak compiler flags
 export LIBRARY_PATH="$PREFIX/lib"
@@ -92,13 +94,31 @@ fi
             --with-hwloc=$PREFIX \
             --with-libevent=$PREFIX \
             --with-zlib=$PREFIX \
-            --enable-ipv6 \
 	    --enable-mca-dso \
+            --enable-ipv6 \
             $build_with_pmix \
             $build_with_ucx \
             $build_with_ucc \
             $build_with_cuda \
     || (cat config.log; false)
+
+echo "./configure --prefix=$PREFIX \
+            --disable-dependency-tracking \
+            --disable-wrapper-runpath \
+            --enable-mpi-fortran \
+            --with-mpi-moduledir='${includedir}' \
+            --with-wrapper-ldflags="${wrapper_ldflags}" \
+            --with-sge \
+            --with-hwloc=$PREFIX \
+            --with-libevent=$PREFIX \
+            --with-zlib=$PREFIX \
+            --enable-mca-dso \
+            --enable-ipv6 \
+            $build_with_pmix \
+            $build_with_ucx \
+            $build_with_ucc \
+            $build_with_cuda \
+    || (cat config.log; false)"
 
 make -j"${CPU_COUNT:-1}" 
 make install
