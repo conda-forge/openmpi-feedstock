@@ -41,7 +41,7 @@ outputs:
       {% endif %}
       ignore_run_exports:
         - ucx  # [linux]
-        - ucc  # [linux and not ppc64le]
+        - ucc  # [linux]
       ignore_run_exports_from:
         - {{ compiler('cuda') }}   # [cuda_compiler != "None"]
     requirements:
@@ -78,7 +78,7 @@ outputs:
         - ucc  # [linux and not ppc64le]
         - ucx  # [linux and not ppc64le]
       run_constrained:
-        - {{ pin_compatible("ucx", max_pin="x.x") }}  # [linux]
+        - {{ pin_compatible("ucx", max_pin="x.x") }}  # [linux and not ppc64le]
         - {{ pin_compatible("ucc", max_pin="x.x") }}  # [linux and not ppc64le]
         # Open MPI only uses CUDA Driver APIs, set the minimal driver version
         - __cuda  >= {{ cuda_major ~ ".0" }}  # [cuda_compiler != "None"]

@@ -88,7 +88,7 @@ fi
             --disable-dependency-tracking \
             --disable-wrapper-runpath \
             --enable-mpi-fortran \
-            --with-mpi-moduledir="${includedir}" \
+            --with-mpi-moduledir='${includedir}' \
             --with-wrapper-ldflags="${wrapper_ldflags}" \
             --with-sge \
             --with-hwloc=$PREFIX \
