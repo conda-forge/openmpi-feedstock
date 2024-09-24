@@ -88,13 +88,13 @@ fi
             --disable-dependency-tracking \
             --disable-wrapper-runpath \
             --enable-mpi-fortran \
-            --with-mpi-moduledir='${includedir}' \
+            --with-mpi-moduledir="${includedir}" \
             --with-wrapper-ldflags="${wrapper_ldflags}" \
             --with-sge \
             --with-hwloc=$PREFIX \
             --with-libevent=$PREFIX \
             --with-zlib=$PREFIX \
-	    --enable-mca-dso \
+            --enable-mca-dso \
             --enable-ipv6 \
             $build_with_pmix \
             $build_with_ucx \
@@ -107,7 +107,7 @@ echo "./configure --prefix=$PREFIX \
             --disable-wrapper-runpath \
             --enable-mpi-fortran \
             --with-mpi-moduledir='${includedir}' \
-            --with-wrapper-ldflags="${wrapper_ldflags}" \
+            --with-wrapper-ldflags='${wrapper_ldflags}' \
             --with-sge \
             --with-hwloc=$PREFIX \
             --with-libevent=$PREFIX \
