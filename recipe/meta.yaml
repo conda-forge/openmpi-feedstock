@@ -55,23 +55,20 @@ outputs:
         - perl  # [osx]
         - autoconf  # [osx]
         - automake  # [osx]
-        - binutils  # [linux]
-        - libmagic  # [linux]
         - libtool  # [unix]
-        - pkg-config 
+        - make  # [unix]
       host:
         #- openpmix
         #- prrte
-        - binutils  # [linux]
         - libevent
         - libhwloc
         - libnl  # [linux]
-        - libnuma  # [linux]
-        - libudev1  # [linux]
-        - numactl  # [linux]
-        - rdma-core  # [linux]
+        - libnuma  # [linux and not ppc64le]
+        - libudev1  # [linux and not ppc64le]
+        - numactl  # [linux and not ppc64le]
+        - rdma-core  # [linux and not ppc64le]
         - ucc  # [linux and not ppc64le]
-        - ucx  # [linux]
+        - ucx  # [linux and not ppc64le]
         - zlib
         - cuda-version {{ cuda_compiler_version }}  # [cuda_compiler != "None"]
       run:
@@ -79,7 +76,7 @@ outputs:
         #- openpmix
         #- prrte
         - ucc  # [linux and not ppc64le]
-        - ucx  # [linux]
+        - ucx  # [linux and not ppc64le]
       run_constrained:
         - {{ pin_compatible("ucx", max_pin="x.x") }}  # [linux]
         - {{ pin_compatible("ucc", max_pin="x.x") }}  # [linux and not ppc64le]
@@ -117,7 +114,7 @@ outputs:
       requires:      
         - mpi 1.0 openmpi
         - ucc  # [linux and not ppc64le]
-        - ucx  # [linux]
+        - ucx  # [linux and not ppc64le]
       script: run_test.sh
       files:
         - tests/helloworld.c
@@ -141,7 +138,7 @@ outputs:
       requires:
         - mpi 1.0 openmpi
         - ucc  # [linux and not ppc64le]
-        - ucx  # [linux]
+        - ucx  # [linux and not ppc64le]
       script: run_test.sh
       files:
         - tests/helloworld.cxx
@@ -163,7 +160,7 @@ outputs:
       requires:
         - mpi 1.0 openmpi
         - ucc  # [linux and not ppc64le]
-        - ucx  # [linux]
+        - ucx  # [linux and not ppc64le]
       script: run_test.sh
       files:
         - tests/helloworld.f
