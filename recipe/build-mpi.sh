@@ -102,24 +102,6 @@ fi
             $build_with_cuda \
     || (cat config.log; false)
 
-echo "./configure --prefix=$PREFIX \
-            --disable-dependency-tracking \
-            --disable-wrapper-runpath \
-            --enable-mpi-fortran \
-            --with-mpi-moduledir='${includedir}' \
-            --with-wrapper-ldflags='${wrapper_ldflags}' \
-            --with-sge \
-            --with-hwloc=$PREFIX \
-            --with-libevent=$PREFIX \
-            --with-zlib=$PREFIX \
-            --enable-mca-dso \
-            --enable-ipv6 \
-            $build_with_pmix \
-            $build_with_ucx \
-            $build_with_ucc \
-            $build_with_cuda \
-    || (cat config.log; false)"
-
 make -j"${CPU_COUNT:-1}" 
 make install
 

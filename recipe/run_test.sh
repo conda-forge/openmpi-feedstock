@@ -25,12 +25,13 @@ if [[ $PKG_NAME == "openmpi" ]]; then
         echo "OpenMPI configured without CUDA support!"
         exit 1
      fi
-     command -v ompi_info
-     ompi_info
-
-     command -v prte_info
-     prte_info
   fi
+
+  command -v ompi_info
+  ompi_info
+
+  command -v prte_info
+  prte_info
 
   command -v mpiexec
   $MPIEXEC --help
