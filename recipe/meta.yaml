@@ -63,23 +63,23 @@ outputs:
         - libevent
         - libhwloc
         - libnl  # [linux]
-        - libnuma  # [linux and not ppc64le]
-        - libudev1  # [linux and not ppc64le]
-        - numactl  # [linux and not ppc64le]
-        - rdma-core  # [linux and not ppc64le]
-        - ucc  # [linux and not ppc64le]
-        - ucx  # [linux and not ppc64le]
+        - libnuma  # [linux and not linux-ppc64le]
+        - libudev1  # [linux and not linux-ppc64le]
+        - numactl  # [linux and not linux-ppc64le]
+        - rdma-core  # [linux and not linux-ppc64le]
+        - ucc  # [linux and not linux-ppc64le]
+        - ucx  # [linux and not linux-ppc64le]
         - zlib
         - cuda-version {{ cuda_compiler_version }}  # [cuda_compiler != "None"]
       run:
         - mpi 1.0 openmpi
         #- openpmix
         #- prrte
-        - ucc  # [linux and not ppc64le]
-        - ucx  # [linux and not ppc64le]
+        - ucc  # [linux and not linux-ppc64le]
+        - ucx  # [linux and not linux-ppc64le]
       run_constrained:
         - {{ pin_compatible("ucx", max_pin="x.x") }}  # [linux]
-        - {{ pin_compatible("ucc", max_pin="x.x") }}  # [linux and not ppc64le]
+        - {{ pin_compatible("ucc", max_pin="x.x") }}  # [linux and not linux-ppc64le]
         # Open MPI only uses CUDA Driver APIs, set the minimal driver version
         - __cuda  >= {{ cuda_major ~ ".0" }}  # [cuda_compiler != "None"]
         # Ensure a consistent CUDA environment
@@ -113,8 +113,8 @@ outputs:
       # Ensure the correct dependencies are available for testing
       requires:      
         - mpi 1.0 openmpi
-        - ucc  # [linux and not ppc64le]
-        - ucx  # [linux and not ppc64le]
+        - ucc  # [linux and not linux-ppc64le]
+        - ucx  # [linux and not linux-ppc64le]
       script: run_test.sh
       files:
         - tests/helloworld.c
@@ -137,8 +137,8 @@ outputs:
       # Ensure the correct dependencies are available for testing
       requires:
         - mpi 1.0 openmpi
-        - ucc  # [linux and not ppc64le]
-        - ucx  # [linux and not ppc64le]
+        - ucc  # [linux and not linux-ppc64le]
+        - ucx  # [linux and not linux-ppc64le]
       script: run_test.sh
       files:
         - tests/helloworld.cxx
@@ -159,8 +159,8 @@ outputs:
     test:
       requires:
         - mpi 1.0 openmpi
-        - ucc  # [linux and not ppc64le]
-        - ucx  # [linux and not ppc64le]
+        - ucc  # [linux and not linux-ppc64le]
+        - ucx  # [linux and not linux-ppc64le]
       script: run_test.sh
       files:
         - tests/helloworld.f
