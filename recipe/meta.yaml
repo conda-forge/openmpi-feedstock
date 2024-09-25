@@ -110,7 +110,6 @@ outputs:
     test:
       # Ensure the correct dependencies are available for testing
       requires:      
-        - mpi 1.0 openmpi
         - ucc  # [linux and not ppc64le]
         - ucx  # [linux and not ppc64le]
       script: run_test.sh
