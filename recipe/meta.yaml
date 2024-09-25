@@ -75,8 +75,6 @@ outputs:
         - mpi 1.0 openmpi
         #- openpmix
         #- prrte
-        - ucc  # [linux and not ppc64le]
-        - ucx  # [linux and not ppc64le]
       run_constrained:
         - {{ pin_compatible("ucx", max_pin="x.x") }}  # [linux and not ppc64le]
         - {{ pin_compatible("ucc", max_pin="x.x") }}  # [linux and not ppc64le]
