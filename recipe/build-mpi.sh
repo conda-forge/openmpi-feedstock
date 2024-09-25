@@ -106,8 +106,7 @@ make -j"${CPU_COUNT:-1}"
 make install
 
 POST_LINK=$PREFIX/bin/.openmpi-post-link.sh
-if [ -z "$build_with_ucx" ]; then
-    echo "No UCX/UCC support"
+if [ -n "$build_with_ucx" ]; then
     echo "setting MCA pml to ^ucx..."
     echo "pml = ^ucx" >> $PREFIX/etc/openmpi-mca-params.conf
     echo "setting MCA osc to ^ucx..."
