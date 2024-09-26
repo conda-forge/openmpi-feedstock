@@ -1,7 +1,7 @@
 About openmpi-mpi-feedstock
 ===========================
 
-Feedstock license: [BSD-3-Clause](https://github.com/conda-forge/openmpi-feedstock/blob/main/LICENSE.txt)
+Feedstock license: [BSD-3-Clause](https://github.com/conda-forge/openmpi-feedstock-renderer-feedstock/blob/main/LICENSE.txt)
 
 Home: https://www.open-mpi.org/
 
@@ -29,8 +29,8 @@ Current build status
     <td>
       <details>
         <summary>
-          <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=720&branchName=main">
-            <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/openmpi-feedstock?branchName=main">
+          <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=None&branchName=main">
+            <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/openmpi-feedstock-renderer-feedstock?branchName=main">
           </a>
         </summary>
         <table>
@@ -38,57 +38,57 @@ Current build status
           <tbody><tr>
               <td>linux_64_c_compiler_version11cuda_compilernvcccuda_compiler_version11.8cxx_compiler_version11fortran_compiler_version11mpi_typeconda</td>
               <td>
-                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=720&branchName=main">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/openmpi-feedstock?branchName=main&jobName=linux&configuration=linux%20linux_64_c_compiler_version11cuda_compilernvcccuda_compiler_version11.8cxx_compiler_version11fortran_compiler_version11mpi_typeconda" alt="variant">
+                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=None&branchName=main">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/openmpi-feedstock-renderer-feedstock?branchName=main&jobName=linux&configuration=linux%20linux_64_c_compiler_version11cuda_compilernvcccuda_compiler_version11.8cxx_compiler_version11fortran_compiler_version11mpi_typeconda" alt="variant">
                 </a>
               </td>
             </tr><tr>
               <td>linux_64_c_compiler_version11cuda_compilernvcccuda_compiler_version11.8cxx_compiler_version11fortran_compiler_version11mpi_typeexternal</td>
               <td>
-                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=720&branchName=main">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/openmpi-feedstock?branchName=main&jobName=linux&configuration=linux%20linux_64_c_compiler_version11cuda_compilernvcccuda_compiler_version11.8cxx_compiler_version11fortran_compiler_version11mpi_typeexternal" alt="variant">
+                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=None&branchName=main">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/openmpi-feedstock-renderer-feedstock?branchName=main&jobName=linux&configuration=linux%20linux_64_c_compiler_version11cuda_compilernvcccuda_compiler_version11.8cxx_compiler_version11fortran_compiler_version11mpi_typeexternal" alt="variant">
                 </a>
               </td>
             </tr><tr>
               <td>linux_aarch64_c_compiler_version11cuda_compilernvcccuda_compiler_version11.8cxx_compiler_version11fortran_compiler_version11mpi_typeconda</td>
               <td>
-                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=720&branchName=main">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/openmpi-feedstock?branchName=main&jobName=linux&configuration=linux%20linux_aarch64_c_compiler_version11cuda_compilernvcccuda_compiler_version11.8cxx_compiler_version11fortran_compiler_version11mpi_typeconda" alt="variant">
+                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=None&branchName=main">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/openmpi-feedstock-renderer-feedstock?branchName=main&jobName=linux&configuration=linux%20linux_aarch64_c_compiler_version11cuda_compilernvcccuda_compiler_version11.8cxx_compiler_version11fortran_compiler_version11mpi_typeconda" alt="variant">
                 </a>
               </td>
             </tr><tr>
               <td>linux_aarch64_c_compiler_version11cuda_compilernvcccuda_compiler_version11.8cxx_compiler_version11fortran_compiler_version11mpi_typeexternal</td>
               <td>
-                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=720&branchName=main">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/openmpi-feedstock?branchName=main&jobName=linux&configuration=linux%20linux_aarch64_c_compiler_version11cuda_compilernvcccuda_compiler_version11.8cxx_compiler_version11fortran_compiler_version11mpi_typeexternal" alt="variant">
+                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=None&branchName=main">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/openmpi-feedstock-renderer-feedstock?branchName=main&jobName=linux&configuration=linux%20linux_aarch64_c_compiler_version11cuda_compilernvcccuda_compiler_version11.8cxx_compiler_version11fortran_compiler_version11mpi_typeexternal" alt="variant">
                 </a>
               </td>
             </tr><tr>
               <td>linux_ppc64le_c_compiler_version11cuda_compilernvcccuda_compiler_version11.8cxx_compiler_version11fortran_compiler_version11mpi_typeconda</td>
               <td>
-                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=720&branchName=main">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/openmpi-feedstock?branchName=main&jobName=linux&configuration=linux%20linux_ppc64le_c_compiler_version11cuda_compilernvcccuda_compiler_version11.8cxx_compiler_version11fortran_compiler_version11mpi_typeconda" alt="variant">
+                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=None&branchName=main">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/openmpi-feedstock-renderer-feedstock?branchName=main&jobName=linux&configuration=linux%20linux_ppc64le_c_compiler_version11cuda_compilernvcccuda_compiler_version11.8cxx_compiler_version11fortran_compiler_version11mpi_typeconda" alt="variant">
                 </a>
               </td>
             </tr><tr>
               <td>linux_ppc64le_c_compiler_version11cuda_compilernvcccuda_compiler_version11.8cxx_compiler_version11fortran_compiler_version11mpi_typeexternal</td>
               <td>
-                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=720&branchName=main">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/openmpi-feedstock?branchName=main&jobName=linux&configuration=linux%20linux_ppc64le_c_compiler_version11cuda_compilernvcccuda_compiler_version11.8cxx_compiler_version11fortran_compiler_version11mpi_typeexternal" alt="variant">
+                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=None&branchName=main">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/openmpi-feedstock-renderer-feedstock?branchName=main&jobName=linux&configuration=linux%20linux_ppc64le_c_compiler_version11cuda_compilernvcccuda_compiler_version11.8cxx_compiler_version11fortran_compiler_version11mpi_typeexternal" alt="variant">
                 </a>
               </td>
             </tr><tr>
               <td>osx_64</td>
               <td>
-                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=720&branchName=main">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/openmpi-feedstock?branchName=main&jobName=osx&configuration=osx%20osx_64_" alt="variant">
+                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=None&branchName=main">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/openmpi-feedstock-renderer-feedstock?branchName=main&jobName=osx&configuration=osx%20osx_64_" alt="variant">
                 </a>
               </td>
             </tr><tr>
               <td>osx_arm64</td>
               <td>
-                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=720&branchName=main">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/openmpi-feedstock?branchName=main&jobName=osx&configuration=osx%20osx_arm64_" alt="variant">
+                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=None&branchName=main">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/openmpi-feedstock-renderer-feedstock?branchName=main&jobName=osx&configuration=osx%20osx_arm64_" alt="variant">
                 </a>
               </td>
             </tr>
@@ -227,6 +227,7 @@ Feedstock Maintainers
 * [@beckermr](https://github.com/beckermr/)
 * [@bekozi](https://github.com/bekozi/)
 * [@dalcinl](https://github.com/dalcinl/)
+* [@j34ni](https://github.com/j34ni/)
 * [@leofang](https://github.com/leofang/)
 * [@minrk](https://github.com/minrk/)
 * [@msarahan](https://github.com/msarahan/)
