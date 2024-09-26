@@ -92,7 +92,12 @@ outputs:
         - echo 'ok'  # [not osx]
         # make CONDA_BUILD_SYSROOT a 'used variable'
         # so that conda-build knows to pass it to the test env
-        - echo "{{ CONDA_BUILD_SYSROOT }}"  # [osx]
+        {% if CONDA_BUILD_SYSROOT is defined %}      # [osx]
+        - echo "{{ CONDA_BUILD_SYSROOT }}"           # [osx]
+        {% else %}                                   # [osx]
+        - echo "CONDA_BUILD_SYSROOT is undefined"    # [osx]
+        - exit 1                                     # [osx]
+        {% endif %}                                  # [osx]
     requirements:
       build:
         - {{ stdlib('c') }}
@@ -111,7 +116,12 @@ outputs:
         - echo 'ok'  # [not osx]
         # make CONDA_BUILD_SYSROOT a 'used variable'
         # so that conda-build knows to pass it to the test env
-        - echo "{{ CONDA_BUILD_SYSROOT }}"  # [osx]
+        {% if CONDA_BUILD_SYSROOT is defined %}      # [osx]
+        - echo "{{ CONDA_BUILD_SYSROOT }}"           # [osx]
+        {% else %}                                   # [osx]
+        - echo "CONDA_BUILD_SYSROOT is undefined"    # [osx]
+        - exit 1                                     # [osx]
+        {% endif %}                                  # [osx]
     requirements:
       build:
         - {{ stdlib('c') }}
@@ -130,7 +140,12 @@ outputs:
         - echo 'ok'  # [not osx]
         # make CONDA_BUILD_SYSROOT a 'used variable'
         # so that conda-build knows to pass it to the test env
-        - echo "{{ CONDA_BUILD_SYSROOT }}"  # [osx]
+        {% if CONDA_BUILD_SYSROOT is defined %}      # [osx]
+        - echo "{{ CONDA_BUILD_SYSROOT }}"           # [osx]
+        {% else %}                                   # [osx]
+        - echo "CONDA_BUILD_SYSROOT is undefined"    # [osx]
+        - exit 1                                     # [osx]
+        {% endif %}                                  # [osx]
     requirements:
       build:
         - {{ stdlib('c') }}
