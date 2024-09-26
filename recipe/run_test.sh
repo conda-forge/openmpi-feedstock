@@ -7,20 +7,22 @@ pushd "tests"
 
 if [[ $PKG_NAME == "openmpi" ]]; then
 
-  # -n : string is not null
-  # -z : string is null, that is, has zero length
+  if [[ -n "$(conda list | grep ucx)" ]]; then
+    echo "Improper UCX dependency!"
+    exit 1
 
-  # UCX support
-  echo "Target platform = $target_platform"
-  if [[ "$target_platform" == linux-64 ]]; then
+  if [[ "$target_platform" == linux-64 || "$target_platform" == linux-aarch64 ]]; then
      if [[ -z "$(ompi_info | grep ucx)" ]]; then
         echo "OpenMPI configured without UCX support!"
         exit 1
      fi
   fi
 
-  # CUDA support 
-  if [[ "$target_platform" != linux-ppc64le ]]; then
+  if [[ -n "$(conda list | grep cuda-version)" ]]; then
+    echo "Improper CUDA dependency!"
+    exit 1
+
+  if [[ "$target_platform" == linux-64 || "$target_platform" == linux-aarch64 ]]; then
      if [[ -z "$(ompi_info | grep cuda)" ]]; then
         echo "OpenMPI configured without CUDA support!"
         exit 1
@@ -94,4 +96,3 @@ if [[ $PKG_NAME == "openmpi-mpifort" ]]; then
 fi
 
 popd
-
