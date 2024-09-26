@@ -102,7 +102,7 @@ fi
             $build_with_cuda \
     || (cat config.log; false)
 
-make -j"${CPU_COUNT:-1}" 
+make -j"${CPU_COUNT:-1}"
 make install
 
 POST_LINK=$PREFIX/bin/.openmpi-post-link.sh
