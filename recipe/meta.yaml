@@ -89,10 +89,7 @@ outputs:
   - name: openmpi-mpicc
     build:
       script:
-        - echo 'ok'  # [not osx]
-        # make CONDA_BUILD_SYSROOT a 'used variable'
-        # so that conda-build knows to pass it to the test env
-        - echo "{{ CONDA_BUILD_SYSROOT }}"  # [osx]
+        - echo 'ok'
     requirements:
       build:
         - {{ stdlib('c') }}
@@ -108,10 +105,7 @@ outputs:
   - name: openmpi-mpicxx
     build:
       script:
-        - echo 'ok'  # [not osx]
-        # make CONDA_BUILD_SYSROOT a 'used variable'
-        # so that conda-build knows to pass it to the test env
-        - echo "{{ CONDA_BUILD_SYSROOT }}"  # [osx]
+        - echo 'ok'
     requirements:
       build:
         - {{ stdlib('c') }}
@@ -127,10 +121,7 @@ outputs:
   - name: openmpi-mpifort
     build:
       script:
-        - echo 'ok'  # [not osx]
-        # make CONDA_BUILD_SYSROOT a 'used variable'
-        # so that conda-build knows to pass it to the test env
-        - echo "{{ CONDA_BUILD_SYSROOT }}"  # [osx]
+        - echo 'ok'
     requirements:
       build:
         - {{ stdlib('c') }}
