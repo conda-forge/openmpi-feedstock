@@ -113,6 +113,11 @@ if [ -n "$build_with_ucx" ]; then
     echo "osc = ^ucx" >> $PREFIX/etc/openmpi-mca-params.conf
     cat $RECIPE_DIR/post-link-ucx.sh >> $POST_LINK
 fi
+if [ -n "$build_with_ucc" ]; then
+    echo "setting MCA coll_ucc_enable to 0..."
+    echo "coll_ucc_enable = 0" >> $PREFIX/etc/openmpi-mca-params.conf
+    cat $RECIPE_DIR/post-link-ucc.sh >> $POST_LINK
+fi
 if [ -n "$build_with_cuda" ]; then
     echo "setting MCA mca_base_component_show_load_errors to 0..."
     echo "mca_base_component_show_load_errors = 0" >> $PREFIX/etc/openmpi-mca-params.conf
