@@ -47,12 +47,6 @@ if [[ "$target_platform" == linux-* && "$target_platform" != linux-ppc64le ]]; t
     build_with_ucc="--with-ucc=$PREFIX"
 fi
 
-# PMIx support
-build_with_pmix=""
-if [[ "$target_platform" == linux-* && "$target_platform" != linux-ppc64le* ]]; then
-    echo "Build with PMIx support"
-    build_with_pmix="--with-pmix=internal"
-fi
 
 # CUDA support
 build_with_cuda=""
@@ -96,7 +90,6 @@ fi
             --with-zlib=$PREFIX \
             --enable-mca-dso \
             --enable-ipv6 \
-            $build_with_pmix \
             $build_with_ucx \
             $build_with_ucc \
             $build_with_cuda \
