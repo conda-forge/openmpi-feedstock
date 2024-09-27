@@ -10,11 +10,6 @@ export FC=$(basename "$FC")
 # unset unused Fortran compiler variables
 unset FFLAGS F77 F90 F95
 
-# add -fallow-argument-mismatch to FCFLAGS
-if [[ "$target_platform" != linux-ppc64le ]]; then
-   export FCFLAGS="-fallow-argument-mismatch ${FCFLAGS}"
-fi
-
 # tweak compiler flags
 export LIBRARY_PATH="$PREFIX/lib"
 if [[ "$target_platform" == osx-* ]]; then
