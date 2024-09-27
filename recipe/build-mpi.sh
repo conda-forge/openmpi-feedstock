@@ -33,15 +33,20 @@ if [[ "$target_platform" == osx-* ]]; then
     wrapper_ldflags='-Wl,-rpath,${libdir}'
 fi
 
-# UCX support
+# UCX and UCC support
 build_with_ucx=""
-if [[ "$target_platform" == linux-* ]]; then
+build_with_ucc=""
+if [[ "$target_platform" == linux-* && "$target_platform" != linux-ppc64le ]]; then
+    echo "Build with UCX/UCC support"
     build_with_ucx="--with-ucx=$PREFIX"
+    build_with_ucc="--with-ucc=$PREFIX"
 fi
+
 
 # CUDA support
 build_with_cuda=""
 if [[ -n "$CUDA_HOME" ]]; then
+    echo "Build with CUDA support"
     build_with_cuda="--with-cuda=$CUDA_HOME --with-cuda-libdir=$CUDA_HOME/lib64/stubs"
 fi
 
@@ -81,6 +86,7 @@ fi
             --enable-mca-dso \
             --enable-ipv6 \
             $build_with_ucx \
+            $build_with_ucc \
             $build_with_cuda \
     || (cat config.log; false)
 
@@ -94,6 +100,11 @@ if [ -n "$build_with_ucx" ]; then
     echo "setting MCA osc to ^ucx..."
     echo "osc = ^ucx" >> $PREFIX/etc/openmpi-mca-params.conf
     cat $RECIPE_DIR/post-link-ucx.sh >> $POST_LINK
+fi
+if [ -n "$build_with_ucc" ]; then
+    echo "setting MCA coll_ucc_enable to 0..."
+    echo "coll_ucc_enable = 0" >> $PREFIX/etc/openmpi-mca-params.conf
+    cat $RECIPE_DIR/post-link-ucc.sh >> $POST_LINK
 fi
 if [ -n "$build_with_cuda" ]; then
     echo "setting MCA mca_base_component_show_load_errors to 0..."
