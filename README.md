@@ -227,6 +227,7 @@ Feedstock Maintainers
 * [@beckermr](https://github.com/beckermr/)
 * [@bekozi](https://github.com/bekozi/)
 * [@dalcinl](https://github.com/dalcinl/)
+* [@j34ni](https://github.com/j34ni/)
 * [@leofang](https://github.com/leofang/)
 * [@minrk](https://github.com/minrk/)
 * [@msarahan](https://github.com/msarahan/)

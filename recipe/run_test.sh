@@ -12,9 +12,23 @@ if [[ $PKG_NAME == "openmpi" ]]; then
     exit 1
   fi
 
+  if [[ "$target_platform" == linux-64 || "$target_platform" == linux-aarch64 ]]; then
+     if [[ -z "$(ompi_info | grep ucx)" ]]; then
+        echo "OpenMPI configured without UCX support!"
+        exit 1
+     fi
+  fi
+
   if [[ -n "$(conda list | grep cuda-version)" ]]; then
     echo "Improper CUDA dependency!"
     exit 1
+  fi
+
+  if [[ "$target_platform" == linux-64 || "$target_platform" == linux-aarch64 ]]; then
+     if [[ -z "$(ompi_info | grep cuda)" ]]; then
+        echo "OpenMPI configured without CUDA support!"
+        exit 1
+     fi
   fi
 
   command -v ompi_info
