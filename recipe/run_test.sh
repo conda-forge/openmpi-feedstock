@@ -42,6 +42,13 @@ if [[ $PKG_NAME == "openmpi" ]]; then
   $MPIEXEC -n 4 ./helloworld.sh
 
   test -f $PREFIX/include/mpi.mod
+
+  export MPIEXEC_TIMEOUT=1
+
+  if $MPIEXEC -n 2 sleep 5; then
+    echo "should have timed out"
+    exit 1
+  fi
 fi
 
 if [[ $PKG_NAME == "openmpi-mpicc" ]]; then
