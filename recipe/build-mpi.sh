@@ -1,5 +1,4 @@
 #!/bin/bash
-
 set -ex
 
 # avoid absolute-paths in compilers
@@ -83,12 +82,11 @@ fi
             --with-hwloc=$PREFIX \
             --with-libevent=$PREFIX \
             --with-zlib=$PREFIX \
-            --enable-mca-dso \
             --enable-ipv6 \
             $build_with_ucx \
             $build_with_ucc \
             $build_with_cuda \
-    || (cat config.log; false)
+    || (cat config.log; exit 1)
 
 make -j"${CPU_COUNT:-1}"
 make install
