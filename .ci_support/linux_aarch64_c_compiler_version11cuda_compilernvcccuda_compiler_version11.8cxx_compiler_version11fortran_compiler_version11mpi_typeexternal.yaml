@@ -38,6 +38,8 @@ mpi_type:
 - external
 target_platform:
 - linux-aarch64
+ucc:
+- '1'
 ucx:
 - '1.17'
 zip_keys:

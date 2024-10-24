@@ -34,8 +34,6 @@ mpi_type:
 - conda
 target_platform:
 - linux-ppc64le
-ucx:
-- '1.17'
 zip_keys:
 - - c_compiler_version
   - cxx_compiler_version
