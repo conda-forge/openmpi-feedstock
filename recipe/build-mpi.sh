@@ -1,5 +1,4 @@
 #!/bin/bash
-
 set -ex
 
 # avoid absolute-paths in compilers
@@ -83,29 +82,16 @@ fi
             --with-hwloc=$PREFIX \
             --with-libevent=$PREFIX \
             --with-zlib=$PREFIX \
-            --enable-mca-dso \
             --enable-ipv6 \
             $build_with_ucx \
             $build_with_ucc \
             $build_with_cuda \
-    || (cat config.log; false)
+    || (cat config.log; exit 1)
 
 make -j"${CPU_COUNT:-1}"
 make install
 
 POST_LINK=$PREFIX/bin/.openmpi-post-link.sh
-if [ -n "$build_with_ucx" ]; then
-    echo "setting MCA pml to ^ucx..."
-    echo "pml = ^ucx" >> $PREFIX/etc/openmpi-mca-params.conf
-    echo "setting MCA osc to ^ucx..."
-    echo "osc = ^ucx" >> $PREFIX/etc/openmpi-mca-params.conf
-    cat $RECIPE_DIR/post-link-ucx.sh >> $POST_LINK
-fi
-if [ -n "$build_with_ucc" ]; then
-    echo "setting MCA coll_ucc_enable to 0..."
-    echo "coll_ucc_enable = 0" >> $PREFIX/etc/openmpi-mca-params.conf
-    cat $RECIPE_DIR/post-link-ucc.sh >> $POST_LINK
-fi
 if [ -n "$build_with_cuda" ]; then
     echo "setting MCA mca_base_component_show_load_errors to 0..."
     echo "mca_base_component_show_load_errors = 0" >> $PREFIX/etc/openmpi-mca-params.conf
