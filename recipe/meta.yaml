@@ -79,7 +79,6 @@ outputs:
       script: run_test.sh
       requires:
         - python
-        - psutil
       files:
         - tests/helloworld.sh
         - tests/test_ldd.py
