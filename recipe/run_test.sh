@@ -23,11 +23,13 @@ if [[ $PKG_NAME == "openmpi" ]]; then
     exit 1
   fi
 
-  if [[ "$target_platform" == linux-64 || "$target_platform" == linux-aarch64 ]]; then
+  if [[ "$target_platform" == linux-* ]]; then
     if [[ -z "$(ompi_info | grep cuda)" ]]; then
       echo "OpenMPI configured without CUDA support!"
       exit 1
     fi
+    
+    python3 test_ldd.py
   fi
 
   command -v ompi_info
