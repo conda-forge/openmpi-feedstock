@@ -77,9 +77,10 @@ outputs:
     test:
       {% if mpi_type == 'conda' %}
       script: run_test.sh
+      requires:
+        - patchelf  # [linux]
       files:
         - tests/helloworld.sh
-        - tests/test_ldd.py
       {% else %}
       commands:
         - echo "It works!"
