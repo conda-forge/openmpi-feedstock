@@ -29,7 +29,14 @@ if [[ $PKG_NAME == "openmpi" ]]; then
       exit 1
     fi
     
-    python3 test_ldd.py
+    # make sure libmpi doesn't link cuda
+    # this doesn't actually check if cuda will be loaded,
+    # only a direct link in libmpi. 
+    # But that's most likely if this gets mixed up again.
+    if [[ $(ldd $CONDA_PREFIX/lib/libmpi.so | grep -cE '/libcuda.*\.so') -gt 0 ]]; then
+      echo "improper dependency on CUDA shared libraries"
+      ldd $CONDA_PREFIX/lib/libmpi.so
+    fi
   fi
 
   command -v ompi_info
