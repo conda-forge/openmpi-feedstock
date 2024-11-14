@@ -5,9 +5,10 @@ from pathlib import Path
 import psutil
 
 # load every `libmpi*` shared library
+mpi_libs = []
 for libmpi in (Path(sys.prefix) / "lib").glob("libmpi*.so"):
     print(f"Loading {libmpi}")
-    ctypes.CDLL(libmpi)
+    mpi_libs.append(ctypes.CDLL(libmpi))
 
 # check all loaded libraries
 print("Listing all libraries loaded")
