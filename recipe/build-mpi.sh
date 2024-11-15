@@ -46,7 +46,7 @@ fi
 build_with_cuda=""
 if [[ -n "$CUDA_HOME" ]]; then
     echo "Build with CUDA support"
-    build_with_cuda="--with-cuda=$CUDA_HOME --with-cuda-libdir=$CUDA_HOME/lib64/stubs"
+    build_with_cuda="--with-cuda=$CUDA_HOME --with-cuda-libdir=$CUDA_HOME/lib64/stubs --with-io-romio-flags=ac_cv_lib_cudart_cudaStreamSynchronize=no"
 fi
 
 if [[ $CONDA_BUILD_CROSS_COMPILATION == "1" ]]; then
@@ -88,7 +88,7 @@ fi
             $build_with_cuda \
     || (cat config.log; exit 1)
 
-make -j"${CPU_COUNT:-1}"
+make -j"${CPU_COUNT:-1}" V=1
 make install
 
 POST_LINK=$PREFIX/bin/.openmpi-post-link.sh
