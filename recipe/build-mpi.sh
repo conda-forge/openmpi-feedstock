@@ -77,6 +77,7 @@ fi
             --with-mpi-moduledir='${includedir}' \
             --with-wrapper-ldflags="${wrapper_ldflags}" \
             --with-sge \
+            --with-libfabric=$PREFIX \
             --with-hwloc=$PREFIX \
             --with-libevent=$PREFIX \
             --with-zlib=$PREFIX \
@@ -86,7 +87,7 @@ fi
             $build_with_cuda \
     || (cat config.log; exit 1)
 
-make -j"${CPU_COUNT:-1}" V=1
+make -j"${CPU_COUNT:-1}"
 make install
 
 POST_LINK=$PREFIX/bin/.openmpi-post-link.sh
