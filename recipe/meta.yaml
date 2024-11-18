@@ -75,6 +75,9 @@ outputs:
         - patchelf  # [linux]
       files:
         - tests/helloworld.sh
+      commands:
+        - test ! -d $PREFIX/share/doc/openmpi
+        - test ! -f $PREFIX/share/man/man3/MPI_Init.3
       {% else %}
       commands:
         - echo "It works!"

@@ -74,7 +74,8 @@ fi
             --disable-dependency-tracking \
             --disable-wrapper-runpath \
             --enable-mpi-fortran \
-            --with-docdir=$PWD/_noinst/doc \
+            --docdir=$PWD/_noinst/doc \
+            --mandir=$PWD/_noinst/man \
             --with-mpi-moduledir='${includedir}' \
             --with-wrapper-ldflags="${wrapper_ldflags}" \
             --with-sge \
