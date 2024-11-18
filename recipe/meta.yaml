@@ -1,7 +1,7 @@
 {% set version = "5.0.6" %}
 {% set major = version.rpartition('.')[0] %}
 {% set cuda_major = (cuda_compiler_version|default("11.8")).rpartition('.')[0] %}
-{% set build = 0 %}
+{% set build = 1 %}
 
 # give conda package a higher build number
 {% if mpi_type == 'conda' %}
@@ -39,6 +39,9 @@ outputs:
       {% endif %}
       ignore_run_exports_from:
         - {{ compiler('cuda') }}   # [cuda_compiler != "None"]
+        # libprrte-devel is only used for version check during configure;
+        # libprrte is not linked
+        - libprrte-devel
     requirements:
       build:
         - {{ compiler('c') }}
@@ -49,20 +52,21 @@ outputs:
         - pkg-config
         - make
       host:
-        #- openpmix
-        #- prrte
         - libevent
         - libfabric
         - libhwloc
         - libnl  # [linux]
+        - libpmix-devel
+        - libprrte-devel
+        - prrte
         - zlib
         - ucc  # [linux and not ppc64le]
         - ucx  # [linux and not ppc64le]
         - cuda-version {{ cuda_compiler_version }}  # [cuda_compiler != "None"]
       run:
         - mpi 1.0 openmpi
-        #- openpmix
-        #- prrte
+        # only pin major version of prrte, it isn't linked
+        - {{ pin_compatible('prrte', max_pin='x', min_pin='x') }}
       run_constrained:
         # Open MPI only uses CUDA Driver APIs, set the minimal driver version
         - __cuda  >= {{ cuda_major ~ ".0" }}  # [cuda_compiler != "None"]
