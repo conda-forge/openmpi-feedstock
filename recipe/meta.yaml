@@ -17,9 +17,6 @@ source:
   fn: openmpi-{{ version }}.tar.bz2
   url: https://www.open-mpi.org/software/ompi/v{{ major }}/downloads/openmpi-{{ version }}.tar.bz2
   sha256: bd4183fcbc43477c254799b429df1a6e576c042e74a2d2f8b37d537b2ff98157
-  patches:
-    - ldflags-mac.patch  # [osx]
-    - prrte-mpiexec-timeout.patch
 
 build:
   number: {{ build }}
@@ -49,12 +46,8 @@ outputs:
         - {{ compiler('cuda') }}     # [cuda_compiler != "None"]
         - {{ compiler('fortran') }}
         - {{ stdlib('c') }}
-        # FIXME: autotools, perl required for ldflags-mac.patch
-        - perl  # [osx]
-        - autoconf  # [osx]
-        - automake  # [osx]
-        - libtool  # [unix]
-        - make  # [unix]
+        - pkg-config
+        - make
       host:
         #- openpmix
         #- prrte

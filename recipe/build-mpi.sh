@@ -12,8 +12,6 @@ unset FFLAGS F77 F90 F95
 # tweak compiler flags
 export LIBRARY_PATH="$PREFIX/lib"
 if [[ "$target_platform" == osx-* ]]; then
-    # FIXME: remove autogen when autotools patch no longer required
-    perl autogen.pl --force
     if [[ -n "$CONDA_BUILD_SYSROOT" ]]; then
         export CFLAGS="$CFLAGS -isysroot $CONDA_BUILD_SYSROOT"
         export CXXFLAGS="$CXXFLAGS -isysroot $CONDA_BUILD_SYSROOT"
