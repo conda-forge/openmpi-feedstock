@@ -12,8 +12,6 @@ unset FFLAGS F77 F90 F95
 # tweak compiler flags
 export LIBRARY_PATH="$PREFIX/lib"
 if [[ "$target_platform" == osx-* ]]; then
-    # FIXME: remove autogen when autotools patch no longer required
-    perl autogen.pl --force
     if [[ -n "$CONDA_BUILD_SYSROOT" ]]; then
         export CFLAGS="$CFLAGS -isysroot $CONDA_BUILD_SYSROOT"
         export CXXFLAGS="$CXXFLAGS -isysroot $CONDA_BUILD_SYSROOT"
@@ -76,9 +74,12 @@ fi
             --disable-dependency-tracking \
             --disable-wrapper-runpath \
             --enable-mpi-fortran \
+            --docdir=$PWD/_noinst/doc \
+            --mandir=$PWD/_noinst/man \
             --with-mpi-moduledir='${includedir}' \
             --with-wrapper-ldflags="${wrapper_ldflags}" \
             --with-sge \
+            --with-libfabric=$PREFIX \
             --with-hwloc=$PREFIX \
             --with-libevent=$PREFIX \
             --with-zlib=$PREFIX \
@@ -88,7 +89,7 @@ fi
             $build_with_cuda \
     || (cat config.log; exit 1)
 
-make -j"${CPU_COUNT:-1}" V=1
+make -j"${CPU_COUNT:-1}"
 make install
 
 POST_LINK=$PREFIX/bin/.openmpi-post-link.sh
