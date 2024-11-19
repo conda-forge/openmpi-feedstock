@@ -42,9 +42,6 @@ if [[ $PKG_NAME == "openmpi" ]]; then
   command -v ompi_info
   ompi_info
 
-  command -v prte_info
-  prte_info
-
   command -v mpiexec
   $MPIEXEC --help
   $MPIEXEC -n 4 ./helloworld.sh

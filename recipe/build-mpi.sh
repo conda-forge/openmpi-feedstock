@@ -78,10 +78,11 @@ fi
             --mandir=$PWD/_noinst/man \
             --with-mpi-moduledir='${includedir}' \
             --with-wrapper-ldflags="${wrapper_ldflags}" \
-            --with-sge \
-            --with-libfabric=$PREFIX \
             --with-hwloc=$PREFIX \
             --with-libevent=$PREFIX \
+            --with-libfabric=$PREFIX \
+            --with-pmix=$PREFIX \
+            --with-prrte=$PREFIX \
             --with-zlib=$PREFIX \
             --enable-ipv6 \
             $build_with_ucx \
