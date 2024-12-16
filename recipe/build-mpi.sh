@@ -82,7 +82,6 @@ fi
             --with-libevent=$PREFIX \
             --with-libfabric=$PREFIX \
             --with-pmix=$PREFIX \
-            --with-prrte=$PREFIX \
             --with-zlib=$PREFIX \
             --enable-ipv6 \
             $build_with_ucx \
@@ -92,6 +91,11 @@ fi
 
 make -j"${CPU_COUNT:-1}"
 make install
+
+# do not install unused bundled-prrte dev and doc files
+rm -rf $PREFIX/include/prte
+rm -rf $PREFIX/include/prte*.h
+rm -rf $PREFIX/share/prte/rst
 
 POST_LINK=$PREFIX/bin/.openmpi-post-link.sh
 if [ -n "$build_with_cuda" ]; then

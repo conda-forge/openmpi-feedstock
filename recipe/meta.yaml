@@ -39,9 +39,6 @@ outputs:
       {% endif %}
       ignore_run_exports_from:
         - {{ compiler('cuda') }}   # [cuda_compiler != "None"]
-        # libprrte-devel is only used for version check during configure;
-        # libprrte is not linked
-        - libprrte-devel
     requirements:
       build:
         - {{ compiler('c') }}
@@ -55,23 +52,22 @@ outputs:
         - libevent
         - libfabric
         - libhwloc
-        - libnl  # [linux]
         - libpmix-devel
-        - libprrte-devel
-        - prrte
         - zlib
         - ucc  # [linux and not ppc64le]
         - ucx  # [linux and not ppc64le]
         - cuda-version {{ cuda_compiler_version }}  # [cuda_compiler != "None"]
       run:
         - mpi 1.0 openmpi
-        # only pin major version of prrte, it isn't linked
-        - {{ pin_compatible('prrte', max_pin='x', min_pin='x') }}
       run_constrained:
         # Open MPI only uses CUDA Driver APIs, set the minimal driver version
         - __cuda  >= {{ cuda_major ~ ".0" }}  # [cuda_compiler != "None"]
         # Ensure a consistent CUDA environment
         - cuda-version  >= {{ cuda_major ~ ".0" }}  # [cuda_compiler != "None"]
+        # conflict with prrte
+        # openmpi (starting with 6)
+        # bundles its own fork of prrte
+        - libprrte ==0.0.0
     test:
       {% if mpi_type == 'conda' %}
       script: run_test.sh
