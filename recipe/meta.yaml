@@ -50,7 +50,7 @@ outputs:
         - make
       host:
         - libevent
-        - libfabric
+        - libfabric-devel
         - libhwloc
         - libpmix-devel
         - zlib
