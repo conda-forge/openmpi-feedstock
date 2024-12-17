@@ -20,8 +20,7 @@ source:
 
 build:
   number: {{ build }}
-  skip: true  # [win]
-  skip: true  # [linux and cuda_compiler_version != "11.8"]
+  skip: true  # [win or (linux and cuda_compiler_version != "11.8")]
 
 outputs:
   - name: openmpi
@@ -75,11 +74,12 @@ outputs:
         - patchelf  # [linux]
       files:
         - tests/helloworld.sh
+      {% endif %}
       commands:
+      {% if mpi_type == 'conda' %}
         - test ! -d $PREFIX/share/doc/openmpi
         - test ! -f $PREFIX/share/man/man3/MPI_Init.3
       {% else %}
-      commands:
         - echo "It works!"
       {% endif %}
 
