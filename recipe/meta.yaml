@@ -49,7 +49,7 @@ outputs:
         - make
       host:
         - libevent
-        - libfabric-devel
+        - libfabric-devel {{ libfabric }}.*
         - libhwloc
         - libpmix-devel
         - zlib

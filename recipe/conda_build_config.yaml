@@ -1,3 +1,5 @@
 mpi_type:
   - external  # [linux]
   - conda
+libfabric:
+  - "1.19"
