@@ -28,14 +28,14 @@ fortran_compiler_version:
 - '13'
 libevent:
 - 2.1.12
+libfabric:
+- '1.19'
 libhwloc:
 - 2.11.2
 macos_machine:
 - arm64-apple-darwin20.0.0
 mpi_type:
 - conda
-perl:
-- 5.32.1
 target_platform:
 - osx-arm64
 zip_keys:
