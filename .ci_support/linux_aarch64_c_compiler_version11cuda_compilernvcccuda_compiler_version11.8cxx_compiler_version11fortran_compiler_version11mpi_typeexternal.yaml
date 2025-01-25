@@ -34,12 +34,14 @@ libhwloc:
 - 2.11.2
 mpi_type:
 - external
+openmpi:
+- '4'
 target_platform:
 - linux-aarch64
 ucc:
 - '1'
 ucx:
-- '1.17'
+- '1.18'
 zip_keys:
 - - c_compiler_version
   - cxx_compiler_version
