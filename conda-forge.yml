@@ -1,5 +1,10 @@
+azure:
+  free_disk_space: true
+  settings_linux:
+    swapfile_size: 10GiB
 build_platform:
   linux_aarch64: linux_64
+  linux_ppc64le: linux_64
   osx_arm64: osx_64
 conda_build:
   pkg_format: '2'
@@ -7,7 +12,12 @@ conda_forge_output_validation: true
 github:
   branch_name: main
   tooling_branch_name: main
+os_version:
+  linux_64: cos7
+  linux_aarch64: cos7
+  linux_ppc64le: cos7
 provider:
   linux_aarch64: default
-  linux_ppc64le: azure
+  linux_ppc64le: default
+  osx_arm64: default
 test: native_and_emulated

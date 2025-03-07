@@ -1,6 +1,7 @@
-{% set version = "4.1.6" %}
+{% set version = "4.1.7" %}
 {% set major = version.rpartition('.')[0] %}
-{% set build = 1 %}
+{% set cuda_major = (cuda_compiler_version|default("11.8")).rpartition('.')[0] %}
+{% set build = 0 %}
 
 # give conda package a higher build number
 {% if mpi_type == 'conda' %}
@@ -15,57 +16,80 @@ package:
 source:
   fn: openmpi-{{ version }}.tar.bz2
   url: https://www.open-mpi.org/software/ompi/v{{ major }}/downloads/openmpi-{{ version }}.tar.bz2
-  sha256: f740994485516deb63b5311af122c265179f5328a0d857a567b85db00b11e415
+  sha256: 54a33cb7ad81ff0976f15a6cc8003c3922f0f3d8ceed14e1813ef3603f22cd34
 
 build:
   number: {{ build }}
-  skip: true  # [win]
+  skip: true  # [win or (linux and cuda_compiler_version != "11.8")]
 
 outputs:
-  {% if mpi_type == 'conda' %}
   - name: openmpi
+    {% if mpi_type == 'conda' %}
     script: build-mpi.sh
+    {% endif %}
     build:
+      {% if mpi_type == 'conda' %}
       run_exports:
         - {{ pin_subpackage('openmpi', min_pin='x.x.x', max_pin='x') }}
-      ignore_run_exports:
-        - ucx  # [enable_cuda]
-      script_env:
-        - CUDA_HOME     # [enable_cuda]
+      {% else %}
+      string: {{ mpi_type }}_h{{ PKG_HASH }}_{{ build }}
+      track_features:
+        - openmpi_{{ mpi_type }}
+      {% endif %}
+      ignore_run_exports_from:
+        - {{ compiler('cuda') }}   # [cuda_compiler != "None"]
     requirements:
       build:
         - {{ compiler('c') }}
         - {{ compiler('cxx') }}
+        - {{ compiler('cuda') }}     # [cuda_compiler != "None"]
         - {{ compiler('fortran') }}
-        - autoconf  # [unix]
-        - automake  # [unix]
-        - libtool   # [unix]
-        - make  # [unix]
-        - perl 5.26.2
+        - {{ stdlib('c') }}
+        - pkg-config
+        - make
       host:
+        - libevent
+        - libfabric-devel {{ libfabric }}.*
+        - libhwloc
         - zlib
-        - ucx                 # [enable_cuda]
-        - ucx-proc =*=gpu     # [enable_cuda]
+        - ucc  # [linux and not ppc64le]
+        - ucx  # [linux and not ppc64le]
+        - cuda-version {{ cuda_compiler_version }}  # [cuda_compiler != "None"]
       run:
-        - zlib
         - mpi 1.0 openmpi
       run_constrained:
-        - cudatoolkit  >= {{ cudatoolkit }}         # [enable_cuda]
-        - {{ pin_compatible("ucx", max_pin="x") }}  # [enable_cuda]
+        # Open MPI only uses CUDA Driver APIs, set the minimal driver version
+        - __cuda  >= {{ cuda_major ~ ".0" }}  # [cuda_compiler != "None"]
+        # Ensure a consistent CUDA environment
+        - cuda-version  >= {{ cuda_major ~ ".0" }}  # [cuda_compiler != "None"]
+        # conflict with prrte
+        # openmpi (starting with 6)
+        # bundles its own fork of prrte
+        - libprrte ==0.0.0
     test:
+      {% if mpi_type == 'conda' %}
       script: run_test.sh
+      requires:
+        - patchelf  # [linux]
       files:
-        - mpiexec.sh
         - tests/helloworld.sh
+      {% endif %}
+      commands:
+      {% if mpi_type == 'conda' %}
+        - test ! -d $PREFIX/share/doc/openmpi
+        - test ! -f $PREFIX/share/man/man3/MPI_Init.3
+      {% else %}
+        - echo "It works!"
+      {% endif %}
 
+  {% if mpi_type == 'conda' %}
   - name: openmpi-mpicc
     build:
       script:
-        - echo 'ok'  # [not osx]
-        # make CONDA_BUILD_SYSROOT a 'used variable'
-        # so that conda-build knows to pass it to the test env
-        - echo "{{ CONDA_BUILD_SYSROOT }}"  # [osx]
+        - echo 'ok'
     requirements:
+      build:
+        - {{ stdlib('c') }}
       run:
         - {{ pin_subpackage('openmpi', exact=True) }}
         # host C compilers work fine (better) on mac
@@ -73,17 +97,15 @@ outputs:
     test:
       script: run_test.sh
       files:
-        - mpiexec.sh
         - tests/helloworld.c
 
   - name: openmpi-mpicxx
     build:
       script:
-        - echo 'ok'  # [not osx]
-        # make CONDA_BUILD_SYSROOT a 'used variable'
-        # so that conda-build knows to pass it to the test env
-        - echo "{{ CONDA_BUILD_SYSROOT }}"  # [osx]
+        - echo 'ok'
     requirements:
+      build:
+        - {{ stdlib('c') }}
       run:
         - {{ pin_subpackage('openmpi', exact=True) }}
         # host C compilers work fine (better) on mac
@@ -91,39 +113,23 @@ outputs:
     test:
       script: run_test.sh
       files:
-        - mpiexec.sh
         - tests/helloworld.cxx
 
   - name: openmpi-mpifort
     build:
       script:
-        - echo 'ok'  # [not osx]
-        # make CONDA_BUILD_SYSROOT a 'used variable'
-        # so that conda-build knows to pass it to the test env
-        - echo "{{ CONDA_BUILD_SYSROOT }}"  # [osx]
+        - echo 'ok'
     requirements:
+      build:
+        - {{ stdlib('c') }}
       run:
         - {{ pin_subpackage('openmpi', exact=True) }}
         - {{ compiler('fortran') }}
     test:
       script: run_test.sh
       files:
-        - mpiexec.sh
         - tests/helloworld.f
         - tests/helloworld.f90
-  {% else %}
-  - name: openmpi
-    build:
-      string: {{ mpi_type }}_{{ build }}
-      track_features:
-        - openmpi_{{ mpi_type }}
-    requirements:
-      host: []
-      run:
-        - mpi 1.0 openmpi
-    test:
-      commands:
-        - echo "It works!"
   {% endif %}
 
 about:
@@ -149,3 +155,4 @@ extra:
     - msarahan
     - ocefpaf
     - beckermr
+    - j34ni
