@@ -45,5 +45,5 @@ if [ "${CONDA_BUILD:-}" = "1" ]; then
   export OMPI_MCA_pml=ob1
   export OMPI_MCA_mpi_yield_when_idle=true
   export OMPI_MCA_btl_base_warn_component_unused=false
-  export PRTE_MCA_rmaps_default_mapping_policy=:oversubscribe
+  export OMPI_MCA_rmaps_base_oversubscribe=true
 fi

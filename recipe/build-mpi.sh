@@ -81,7 +81,6 @@ fi
             --with-hwloc=$PREFIX \
             --with-libevent=$PREFIX \
             --with-libfabric=$PREFIX \
-            --with-pmix=$PREFIX \
             --with-zlib=$PREFIX \
             --enable-ipv6 \
             $build_with_ucx \
