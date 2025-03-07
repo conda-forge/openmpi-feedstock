@@ -1,14 +1,5 @@
 mpi_type:
   - external  # [linux]
   - conda
-docker_image:  # [linux]
-  - quay.io/condaforge/linux-anvil-cos7-cuda:10.2      # [linux64]
-  - quay.io/condaforge/linux-anvil-ppc64le-cuda:11.0   # [ppc64le]
-  - quay.io/condaforge/linux-anvil-aarch64-cuda:11.0   # [aarch64]
-cudatoolkit:  # [linux]
-  - 10.2      # [linux64]
-  - 11.0      # [ppc64le]
-  - 11.0      # [aarch64]
-enable_cuda:
-  - True      # [linux]
-  - False     # [not linux]
+libfabric:
+  - "1.19"
