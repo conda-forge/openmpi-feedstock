@@ -94,7 +94,7 @@ outputs:
       run:
         - {{ pin_subpackage('openmpi', exact=True) }}
         # host C compilers work fine (better) on mac
-        - {{ compiler('c') }}
+        - {{ c_compiler }} >={{ c_compiler_version }}
     test:
       script: run_test.sh
       files:
@@ -110,7 +110,7 @@ outputs:
       run:
         - {{ pin_subpackage('openmpi', exact=True) }}
         # host C compilers work fine (better) on mac
-        - {{ compiler('cxx') }}
+        - {{ cxx_compiler }} >={{ cxx_compiler_version }}
     test:
       script: run_test.sh
       files:
@@ -125,7 +125,7 @@ outputs:
         - {{ stdlib('c') }}
       run:
         - {{ pin_subpackage('openmpi', exact=True) }}
-        - {{ compiler('fortran') }}
+        - {{ fortran_compiler }} >={{ fortran_compiler_version }}
     test:
       script: run_test.sh
       files:
