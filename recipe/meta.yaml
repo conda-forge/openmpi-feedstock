@@ -1,7 +1,7 @@
 {% set version = "5.0.7" %}
 {% set major = version.rpartition('.')[0] %}
 {% set cuda_major = (cuda_compiler_version|default("11.8")).rpartition('.')[0] %}
-{% set build = 0 %}
+{% set build = 1 %}
 
 # give conda package a higher build number
 {% if mpi_type == 'conda' %}
@@ -94,7 +94,7 @@ outputs:
       run:
         - {{ pin_subpackage('openmpi', exact=True) }}
         # host C compilers work fine (better) on mac
-        - {{ compiler('c') }}
+        - {{ compiler('c') | replace(' ', '>=', 1) }}
     test:
       script: run_test.sh
       files:
@@ -110,7 +110,7 @@ outputs:
       run:
         - {{ pin_subpackage('openmpi', exact=True) }}
         # host C compilers work fine (better) on mac
-        - {{ compiler('cxx') }}
+        - {{ compiler('cxx') | replace(' ', '>=', 1) }}
     test:
       script: run_test.sh
       files:
@@ -125,7 +125,7 @@ outputs:
         - {{ stdlib('c') }}
       run:
         - {{ pin_subpackage('openmpi', exact=True) }}
-        - {{ compiler('fortran') }}
+        - {{ compiler('fortran') | replace(' ', '>=', 1) }}
     test:
       script: run_test.sh
       files:
