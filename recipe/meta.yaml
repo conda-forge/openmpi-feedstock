@@ -1,7 +1,7 @@
 {% set version = "5.0.7" %}
 {% set major = version.rpartition('.')[0] %}
 {% set cuda_major = (cuda_compiler_version|default("11.8")).rpartition('.')[0] %}
-{% set build = 1 %}
+{% set build = 2 %}
 
 # give conda package a higher build number
 {% if mpi_type == 'conda' %}
@@ -37,12 +37,12 @@ outputs:
         - openmpi_{{ mpi_type }}
       {% endif %}
       ignore_run_exports_from:
-        - {{ compiler('cuda') }}   # [cuda_compiler != "None"]
+        - {{ compiler('cuda') }}   # [cuda_compiler_version != "None"]
     requirements:
       build:
         - {{ compiler('c') }}
         - {{ compiler('cxx') }}
-        - {{ compiler('cuda') }}     # [cuda_compiler != "None"]
+        - {{ compiler('cuda') }}     # [cuda_compiler_version != "None"]
         - {{ compiler('fortran') }}
         - {{ stdlib('c') }}
         - pkg-config
@@ -55,14 +55,14 @@ outputs:
         - zlib
         - ucc  # [linux and not ppc64le]
         - ucx  # [linux and not ppc64le]
-        - cuda-version {{ cuda_compiler_version }}  # [cuda_compiler != "None"]
+        - cuda-version {{ cuda_compiler_version }}  # [cuda_compiler_version != "None"]
       run:
         - mpi 1.0 openmpi
       run_constrained:
         # Open MPI only uses CUDA Driver APIs, set the minimal driver version
-        - __cuda  >= {{ cuda_major ~ ".0" }}  # [cuda_compiler != "None"]
+        - __cuda  >= {{ cuda_major ~ ".0" }}  # [cuda_compiler_version != "None"]
         # Ensure a consistent CUDA environment
-        - cuda-version  >= {{ cuda_major ~ ".0" }}  # [cuda_compiler != "None"]
+        - cuda-version  >= {{ cuda_major ~ ".0" }}  # [cuda_compiler_version != "None"]
         # conflict with prrte
         # openmpi (starting with 6)
         # bundles its own fork of prrte

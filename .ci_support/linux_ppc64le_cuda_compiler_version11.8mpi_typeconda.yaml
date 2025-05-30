@@ -32,6 +32,8 @@ libfabric:
 - '1.19'
 libhwloc:
 - 2.11.2
+libpmix_devel:
+- '5'
 mpi_type:
 - conda
 openmpi:

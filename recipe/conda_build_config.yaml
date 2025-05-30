@@ -3,3 +3,5 @@ mpi_type:
   - conda
 libfabric:
   - "1.19"
+libpmix_devel:
+  - "5"
