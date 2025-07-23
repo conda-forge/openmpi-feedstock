@@ -1,8 +1,8 @@
 azure:
-  store_build_artifacts: false
   free_disk_space: true
   settings_linux:
     swapfile_size: 10GiB
+  store_build_artifacts: false
 build_platform:
   linux_aarch64: linux_64
   linux_ppc64le: linux_64
