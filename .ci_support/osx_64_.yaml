@@ -5,7 +5,7 @@ MACOSX_SDK_VERSION:
 c_compiler:
 - clang
 c_compiler_version:
-- '18'
+- '19'
 c_stdlib:
 - macosx_deployment_target
 c_stdlib_version:
@@ -19,11 +19,11 @@ cuda_compiler_version:
 cxx_compiler:
 - clangxx
 cxx_compiler_version:
-- '18'
+- '19'
 fortran_compiler:
 - gfortran
 fortran_compiler_version:
-- '13'
+- '14'
 libevent:
 - 2.1.12
 libfabric:
