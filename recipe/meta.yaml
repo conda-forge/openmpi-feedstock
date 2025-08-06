@@ -1,7 +1,8 @@
 {% set version = "5.0.8" %}
+{% set cuda_compiler_version = "None" %}
 {% set major = version.rpartition('.')[0] %}
 {% set cuda_major = (cuda_compiler_version|default("11.8")).rpartition('.')[0] %}
-{% set build = 1 %}
+{% set build = 2 %}
 
 # give conda package a higher build number
 {% if mpi_type == 'conda' %}
@@ -20,6 +21,8 @@ source:
 
 build:
   number: {{ build }}
+  run_exports:
+    - {{ pin_subpackage('openmpi', max_pin="x.x") }}
   skip: true  # [win or (linux and cuda_compiler_version != cuda_compiler_version_min)]
 
 outputs:
@@ -42,9 +45,10 @@ outputs:
       build:
         - {{ compiler('c') }}
         - {{ compiler('cxx') }}
-        - {{ compiler('cuda') }}     # [cuda_compiler_version != "None"]
+          #        - {{ compiler('cuda') }}     # [cuda_compiler_version != "None"]
         - {{ compiler('fortran') }}
-        - {{ stdlib('c') }}
+          #- {{ stdlib('c') }}
+        - libgcc-ng
         - pkg-config
         - make
       host:
@@ -55,14 +59,14 @@ outputs:
         - zlib
         - ucc  # [linux and not ppc64le]
         - ucx  # [linux and not ppc64le]
-        - cuda-version {{ cuda_compiler_version }}  # [cuda_compiler_version != "None"]
+          #- cuda-version {{ cuda_compiler_version }}  # [cuda_compiler_version != "None"]
       run:
         - mpi 1.0 openmpi
       run_constrained:
         # Open MPI only uses CUDA Driver APIs, set the minimal driver version
-        - __cuda  >= {{ cuda_major ~ ".0" }}  # [cuda_compiler_version != "None"]
+        #- __cuda  >= {{ cuda_major ~ ".0" }}  # [cuda_compiler_version != "None"]
         # Ensure a consistent CUDA environment
-        - cuda-version  >= {{ cuda_major ~ ".0" }}  # [cuda_compiler_version != "None"]
+        #- cuda-version  >= {{ cuda_major ~ ".0" }}  # [cuda_compiler_version != "None"]
         # conflict with prrte
         # openmpi (starting with 6)
         # bundles its own fork of prrte
@@ -90,7 +94,8 @@ outputs:
         - echo 'ok'
     requirements:
       build:
-        - {{ stdlib('c') }}
+        #- {{ stdlib('c') }}
+        - libgcc-ng
       run:
         - {{ pin_subpackage('openmpi', exact=True) }}
         # host C compilers work fine (better) on mac
@@ -106,7 +111,8 @@ outputs:
         - echo 'ok'
     requirements:
       build:
-        - {{ stdlib('c') }}
+        #- {{ stdlib('c') }}
+        - libgcc-ng
       run:
         - {{ pin_subpackage('openmpi', exact=True) }}
         # host C compilers work fine (better) on mac
@@ -122,7 +128,8 @@ outputs:
         - echo 'ok'
     requirements:
       build:
-        - {{ stdlib('c') }}
+        #- {{ stdlib('c') }}
+        - libgcc-ng
       run:
         - {{ pin_subpackage('openmpi', exact=True) }}
         - {{ compiler('fortran') | replace(' ', '>=', 1) }}
@@ -157,3 +164,5 @@ extra:
     - ocefpaf
     - beckermr
     - j34ni
+  additional-platforms:
+    - linux-aarch64

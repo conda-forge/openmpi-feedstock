@@ -1,7 +1,7 @@
 #!/bin/bash
 set -ex
 
-MPIEXEC="mpiexec"
+MPIEXEC="mpiexec --allow-run-as-root"
 
 pushd "tests"
 
