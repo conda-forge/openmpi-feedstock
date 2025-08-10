@@ -29,7 +29,7 @@ libevent:
 libfabric:
 - '1.19'
 libhwloc:
-- 2.11.2
+- 2.12.1
 libpmix_devel:
 - '5'
 macos_machine:
