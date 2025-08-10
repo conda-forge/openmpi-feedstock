@@ -21,6 +21,9 @@ source:
 build:
   number: {{ build }}
   skip: true  # [win or (linux and cuda_compiler_version != cuda_compiler_version_min)]
+  force_use_keys:
+    # var only being used in skip doesn't appear to end up in used_vars
+    - cuda_compiler_version_min  # [linux]
 
 outputs:
   - name: openmpi
