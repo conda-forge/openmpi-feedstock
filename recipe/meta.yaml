@@ -54,6 +54,7 @@ outputs:
         - libevent
         - libfabric-devel {{ libfabric }}.*
         - libhwloc
+        - libnl  # [linux]
         - libpmix-devel
         - zlib
         - ucc  # [linux and not ppc64le]
