@@ -41,10 +41,10 @@ fi
 
 
 # CUDA support
-build_with_cuda=""
-if [[ -n "$CUDA_HOME" ]]; then
+cuda_version="${CUDA_COMPILER_VERSION:-}"
+if [[ ! -z "$cuda_version" && "$cuda_version" != "None" ]]; then
     echo "Build with CUDA support"
-    build_with_cuda="--with-cuda=$CUDA_HOME --with-cuda-libdir=$CUDA_HOME/lib64/stubs --with-io-romio-flags=ac_cv_lib_cudart_cudaStreamSynchronize=no"
+    build_with_cuda="--with-cuda=$PREFIX --with-cuda-libdir=$PREFIX/lib/stubs --with-io-romio-flags=ac_cv_lib_cudart_cudaStreamSynchronize=no"
 fi
 
 if [[ $CONDA_BUILD_CROSS_COMPILATION == "1" ]]; then
