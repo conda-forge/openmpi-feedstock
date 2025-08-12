@@ -7,6 +7,9 @@ pushd "tests"
 
 if [[ $PKG_NAME == "openmpi" ]]; then
 
+  command -v ompi_info
+  ompi_info
+
   if [[ "$target_platform" == linux-64 || "$target_platform" == linux-aarch64 ]]; then
     if [[ -z "$(ompi_info | grep ucc)" ]]; then
       echo "OpenMPI configured without UCC support!"
@@ -24,10 +27,14 @@ if [[ $PKG_NAME == "openmpi" ]]; then
   fi
 
   if [[ "$target_platform" == linux-* ]]; then
-    if [[ -z "$(ompi_info | grep cuda)" ]]; then
+    if [[ -z "$(ompi_info | grep 'with-cuda')" ]]; then
       echo "OpenMPI configured without CUDA support!"
       exit 1
     fi
+    # check for at least one cuda DSO
+    # because ompi_info can report cuda being enabled when it isn't
+    find "${PREFIX}/lib/openmpi" -name "*cuda*.so"
+    test -f "${PREFIX}/lib/openmpi/mca_accelerator_cuda.so"
     
     # make sure libmpi doesn't link cuda
     # this doesn't actually check if cuda will be loaded,
@@ -38,9 +45,6 @@ if [[ $PKG_NAME == "openmpi" ]]; then
       patchelf --print-needed $CONDA_PREFIX/lib/libmpi.so
     fi
   fi
-
-  command -v ompi_info
-  ompi_info
 
   command -v mpiexec
   $MPIEXEC --help
