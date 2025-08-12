@@ -1,7 +1,7 @@
 {% set version = "5.0.8" %}
 {% set major = version.rpartition('.')[0] %}
 {% set cuda_major = (cuda_compiler_version|default("11.8")).rpartition('.')[0] %}
-{% set build = 3 %}
+{% set build = 4 %}
 
 # give conda package a higher build number
 {% if mpi_type == 'conda' %}
@@ -54,6 +54,7 @@ outputs:
         - libevent
         - libfabric-devel {{ libfabric }}.*
         - libhwloc
+        - libnl  # [linux]
         - libpmix-devel
         - zlib
         - ucc  # [linux and not ppc64le]

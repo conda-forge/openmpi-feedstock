@@ -41,10 +41,24 @@ fi
 
 
 # CUDA support
-build_with_cuda=""
-if [[ -n "$CUDA_HOME" ]]; then
+cuda_version="${cuda_compiler_version:-}"
+if [[ ! -z "$cuda_version" && "$cuda_version" != "None" ]]; then
     echo "Build with CUDA support"
-    build_with_cuda="--with-cuda=$CUDA_HOME --with-cuda-libdir=$CUDA_HOME/lib64/stubs --with-io-romio-flags=ac_cv_lib_cudart_cudaStreamSynchronize=no"
+    # locate cuda.h target
+    # nvcc activation already deals with this in $CFLAGS, etc.
+    # but openmpi needs to find cuda.h itself for some reason
+    if [[ "${target_platform}" == "linux-64" ]]; then
+      cuda_target=x86_64-linux
+    elif [[ "${target_platform}" == "linux-aarch64" ]]; then
+      cuda_target=sbsa-linux
+    elif [[ "${target_platform}" == "linux-ppc64le" ]]; then
+      cuda_target=ppc64le-linux
+    else
+      echo "unexpected cuda target_platform=${target_platform}"
+      exit 1
+    fi
+    cuda_dir="$BUILD_PREFIX/targets/$cuda_target"
+    build_with_cuda="--with-cuda=$cuda_dir --with-io-romio-flags=ac_cv_lib_cudart_cudaStreamSynchronize=no"
 fi
 
 if [[ $CONDA_BUILD_CROSS_COMPILATION == "1" ]]; then
