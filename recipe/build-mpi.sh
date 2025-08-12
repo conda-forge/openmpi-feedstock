@@ -44,7 +44,13 @@ fi
 cuda_version="${cuda_compiler_version:-}"
 if [[ ! -z "$cuda_version" && "$cuda_version" != "None" ]]; then
     echo "Build with CUDA support"
-    build_with_cuda="--with-cuda=$PREFIX --with-cuda-libdir=$PREFIX/lib/stubs --with-io-romio-flags=ac_cv_lib_cudart_cudaStreamSynchronize=no"
+    if [[ ! -n "${CUDA_CFLAGS:-}" ]]; then
+      # conda-build doesn't seem to run the cuda activate?
+      # maybe because it starts with ~
+      echo "cuda-nvcc not activated? activating again"
+      . "${BUILD_PREFIX}/etc/conda/activate.d/~cuda*.sh"
+    fi
+    build_with_cuda="--with-cuda=$PREFIX --with-io-romio-flags=ac_cv_lib_cudart_cudaStreamSynchronize=no"
 fi
 
 if [[ $CONDA_BUILD_CROSS_COMPILATION == "1" ]]; then
