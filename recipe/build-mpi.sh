@@ -41,7 +41,7 @@ fi
 
 
 # CUDA support
-cuda_version="${CUDA_COMPILER_VERSION:-}"
+cuda_version="${cuda_compiler_version:-}"
 if [[ ! -z "$cuda_version" && "$cuda_version" != "None" ]]; then
     echo "Build with CUDA support"
     build_with_cuda="--with-cuda=$PREFIX --with-cuda-libdir=$PREFIX/lib/stubs --with-io-romio-flags=ac_cv_lib_cudart_cudaStreamSynchronize=no"
