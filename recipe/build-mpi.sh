@@ -1,6 +1,10 @@
 #!/bin/bash
 set -ex
 
+if [[ "$mpi_type" == "external" ]]; then
+  exit 0
+fi
+
 # avoid absolute-paths in compilers
 export CC=$(basename "$CC")
 export CXX=$(basename "$CXX")

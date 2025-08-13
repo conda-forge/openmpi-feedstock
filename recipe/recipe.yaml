@@ -31,8 +31,7 @@ outputs:
   - package:
       name: openmpi
     build:
-      script: 
-        file: ${{ 'build-mpi' if mpi_type == 'conda' else 'null' }}
+      script: build-mpi
       variant:
         # deprioritize external
         down_prioritize_variant: ${{ 1 if mpi_type == 'external' else 0 }}
@@ -78,6 +77,11 @@ outputs:
         # openmpi (starting with 6)
         # bundles its own fork of prrte
         - libprrte ==0.0.0
+      ignore_run_exports:
+        from_package:
+          - if: with_cuda
+            then:
+              - ${{ compiler("cuda") | split | first }}
     tests:
       - package_contents:
           files:
