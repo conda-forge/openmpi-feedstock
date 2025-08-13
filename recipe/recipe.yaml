@@ -26,11 +26,6 @@ source:
 build:
   number: ${{ build }}
   skip: win or (linux and cuda_compiler_version != cuda_compiler_version_min)
-  variant:
-    use_keys: 
-      - if: linux
-        then:
-          - cuda_compiler_version_min
 
 outputs:
   - package:
@@ -104,10 +99,10 @@ outputs:
           recipe:
             - run_test.sh
             - tests/helloworld.sh
+
   - package:
       name: openmpi-mpicc
     build:
-      skip: mpi_type != 'conda'
       script:
         - echo 'ok'
     requirements:
@@ -126,7 +121,6 @@ outputs:
   - package:
       name: openmpi-mpicxx
     build:
-      skip: mpi_type != 'conda'
       script:
         - echo 'ok'
     requirements:
@@ -146,7 +140,6 @@ outputs:
   - package:
       name: openmpi-mpifort
     build:
-      skip: mpi_type != 'conda'
       script:
         - echo 'ok'
     requirements:
