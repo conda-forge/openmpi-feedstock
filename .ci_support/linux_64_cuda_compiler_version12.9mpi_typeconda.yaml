@@ -38,8 +38,6 @@ libpmix_devel:
 - '5'
 mpi_type:
 - conda
-openmpi:
-- '4'
 target_platform:
 - linux-64
 ucc:
