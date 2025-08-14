@@ -86,10 +86,10 @@ outputs:
       - if: mpi_type == 'conda'
         then:
           - package_contents:
-            files:
-              not_exists:
-                - share/doc/openmpi
-                - share/man/man3/MPI_Init.3
+              files:
+                not_exists:
+                  - share/doc/openmpi
+                  - share/man/man3/MPI_Init.3
           - script:
               file: run_test
             requirements:
