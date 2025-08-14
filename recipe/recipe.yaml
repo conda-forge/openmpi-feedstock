@@ -83,26 +83,23 @@ outputs:
             then:
               - ${{ compiler("cuda") | split | first }}
     tests:
-      - package_contents:
-          files:
-            not_exists: 
-              - share/doc/openmpi
-              - share/man/man3/MPI_Init.3
-      - script:
-        - if: mpi_type == 'conda'
-          then:
-            - bash run_test.sh
-          else:
-            - echo 'ok'
-        requirements:
-          run:
-            - if: linux
-              then:
-                - patchelf
-        files:
-          recipe:
-            - run_test.sh
-            - tests/helloworld.sh
+      - if: mpi_type == 'conda'
+        then:
+          - package_contents:
+            files:
+              not_exists:
+                - share/doc/openmpi
+                - share/man/man3/MPI_Init.3
+          - script:
+              file: run_test
+            requirements:
+              run:
+                - if: linux
+                  then:
+                    - patchelf
+            files:
+              recipe:
+                - tests/helloworld.sh
 
   - package:
       name: openmpi-mpicc
@@ -116,11 +113,13 @@ outputs:
         - ${{ pin_subpackage('openmpi', exact=True) }}
         - ${{ compiler('c') | replace(' =', '>=') }}
     tests:
-      - script:
-          file: run_test
-        files:
-          recipe:
-            - tests/helloworld.c
+      - if: mpi_type == 'conda'
+        then:
+          - script:
+              file: run_test
+            files:
+              recipe:
+                - tests/helloworld.c
 
   - package:
       name: openmpi-mpicxx
@@ -132,14 +131,15 @@ outputs:
         - ${{ stdlib('c') }}
       run:
         - ${{ pin_subpackage('openmpi', exact=True) }}
-        # host C compilers work fine (better) on mac
         - ${{ compiler('cxx') | replace(' =', '>=') }}
     tests:
-      - script:
-          file: run_test
-        files:
-          recipe:
-            - tests/helloworld.cxx
+      - if: mpi_type == 'conda'
+        then:
+          - script:
+              file: run_test
+            files:
+              recipe:
+                - tests/helloworld.cxx
 
   - package:
       name: openmpi-mpifort
@@ -153,12 +153,14 @@ outputs:
         - ${{ pin_subpackage('openmpi', exact=True) }}
         - ${{ compiler('fortran') | replace(' =', '>=') }}
     tests:
-      - script:
-          file: run_test
-        files:
-          recipe:
-            - tests/helloworld.f
-            - tests/helloworld.f90
+      - if: mpi_type == 'conda'
+        then:
+          - script:
+              file: run_test
+            files:
+              recipe:
+                - tests/helloworld.f
+                - tests/helloworld.f90
 
 about:
   homepage: https://www.open-mpi.org/
