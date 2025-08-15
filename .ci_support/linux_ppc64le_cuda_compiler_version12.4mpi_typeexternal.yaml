@@ -38,8 +38,6 @@ libpmix_devel:
 - '5'
 mpi_type:
 - external
-openmpi:
-- '4'
 target_platform:
 - linux-ppc64le
 zip_keys:

@@ -1,4 +1,6 @@
-if [ "${CONDA_BUILD:-}" = "1" ]; then
+# rattler-build sets PKG_NAME, not CONDA_BUILD in test env
+# ref: https://github.com/prefix-dev/rattler-build/issues/1317
+if [[ "${CONDA_BUILD:-}" = "1" || -n "${PKG_NAME:-}" ]]; then
   echo "setting openmpi environment variables for conda-build"
   if [[ "${CONDA_BUILD_CROSS_COMPILATION:-}" = "1" ]]; then
     # set compilation variables during cross compilation
