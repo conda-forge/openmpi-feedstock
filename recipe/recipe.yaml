@@ -2,7 +2,7 @@ schema_version: 1
 
 context:
   version: 5.0.8
-  build: 105
+  build: 106
   mpi_type: ${{ mpi_type | default('conda') }}
   major_minor: ${{ (version | split('.'))[:2] | join('.') }}
   cuda_compiler_version: ${{ cuda_compiler_version | default('None') }}
@@ -38,6 +38,8 @@ outputs:
       string: ${{ string_prefix }}h${{ hash }}_${{ build }}
       
     requirements:
+      run_exports:
+        - ${{ pin_subpackage('openmpi', lower_bound='x.x.x', upper_bound='x') }}
       build:
         - ${{ compiler('c') }}
         - ${{ compiler('cxx') }}
