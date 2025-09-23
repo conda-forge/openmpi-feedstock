@@ -1,45 +1,47 @@
 # rattler-build sets PKG_NAME, not CONDA_BUILD in test env
 # ref: https://github.com/prefix-dev/rattler-build/issues/1317
-# note: this first `if` must remain POSIX-compatible (no bash [[]])
-# (inner content can be bash, since conda-build env shells are bash by definition)
-if [ "${CONDA_BUILD:-}" = "1" ] || [ "${PKG_NAME:-}" != "" ]; then
+# since this is an activate script, it should run on all shells,
+# though only the first `if` really needs to since conda builds are necessarily bash
+if [ "${CONDA_BUILD:-}" = "1" ] || [ -n "${PKG_NAME:-}" ]; then
   echo "setting openmpi environment variables for conda-build"
-  if [[ "${CONDA_BUILD_CROSS_COMPILATION:-}" = "1" ]]; then
+  if [ "${CONDA_BUILD_CROSS_COMPILATION:-}" = "1" ]; then
     # set compilation variables during cross compilation
-    if [[ -z "${OMPI_CC:-}" && ! -z "${CC:-}" ]]; then
+    if [ -z "${OMPI_CC:-}" ] && [ -n "${CC:-}" ]; then
       echo "OMPI_CC=${CC}"
       export "OMPI_CC=${CC}"
     fi
 
-    if [[ -z "${OMPI_CXX:-}" && ! -z "${CXX:-}" ]]; then
+    if [ -z "${OMPI_CXX:-}" ] && [ -n "${CXX:-}" ]; then
       echo "OMPI_CXX=${CXX}"
       export "OMPI_CXX=${CXX}"
     fi
 
-    if [[ -z "${OMPI_FC:-}" && ! -z "${FC:-}" ]]; then
+    if [ -z "${OMPI_FC:-}" ] && [ -n "${FC:-}" ]; then
       echo "OMPI_FC=${FC}"
       export "OMPI_FC=${FC}"
     fi
 
     # require pkg-config?
-    if [[ -z "${OMPI_CFLAGS:-}" ]]; then
+    if [ -z "${OMPI_CFLAGS:-}" ]; then
       # pkg-config --cflags ompi
       export OMPI_CFLAGS="-I$PREFIX/include"
     fi
-    if [[ -z "${OMPI_CXXFLAGS:-}" ]]; then
+    if [ -z "${OMPI_CXXFLAGS:-}" ]; then
       # pkg-config --cflags ompi-cxx
       export OMPI_CXXFLAGS="-I$PREFIX/include"
     fi
-    if [[ -z "${OMPI_FCFLAGS:-}" ]]; then
+    if [ -z "${OMPI_FCFLAGS:-}" ]; then
       # pkg-config --cflags ompi-fort
       export OMPI_FCFLAGS="-I$PREFIX/include"
     fi
-    if [[ -z "${OMPI_LDFLAGS:-}" ]]; then
+    if [ -z "${OMPI_LDFLAGS:-}" ]; then
       # pkg-config --libs-only-L --libs-only-other ompi
       export OMPI_LDFLAGS="-L$PREFIX/lib -Wl,-rpath,$PREFIX/lib"
-      if [[ "${target_platform:-}" == linux-* ]]; then
-        export OMPI_LDFLAGS="${OMPI_LDFLAGS} -Wl,--allow-shlib-undefined"
-      fi
+      case "${target_platform:-}" in
+        linux-*)
+          export OMPI_LDFLAGS="${OMPI_LDFLAGS} -Wl,--allow-shlib-undefined"
+          ;;
+      esac
     fi
     export OPAL_PREFIX="$PREFIX"
   fi
