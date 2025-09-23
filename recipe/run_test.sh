@@ -1,6 +1,13 @@
 #!/bin/bash
 set -ex
 
+# validate sh-safety of activate script (no bash-isms)
+(
+  CONDA_BUILD=""
+  PKG_NAME=""
+  /bin/sh -e "$PREFIX/etc/conda/activate.d/openmpi_activate.sh"
+)
+
 MPIEXEC="mpiexec"
 
 pushd "tests"
