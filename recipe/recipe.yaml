@@ -2,7 +2,7 @@ schema_version: 1
 
 context:
   version: 5.0.8
-  build: 108
+  init_build: 109
   mpi_type: ${{ mpi_type | default('conda') }}
   major_minor: ${{ (version | split('.'))[:2] | join('.') }}
   cuda_compiler_version: ${{ cuda_compiler_version | default('None') }}
@@ -14,6 +14,7 @@ context:
       else "0"
     }}
   string_prefix: ${{ 'external_' if mpi_type == 'external' else '' }}
+  build: ${{ (init_build | int) - 100 if mpi_type == 'external' else init_build }}
 
 recipe:
   name: openmpi
@@ -34,58 +35,72 @@ outputs:
       script: build-mpi
       variant:
         # deprioritize external
-        down_prioritize_variant: ${{ 1 if mpi_type == 'external' else 0 }}
+        down_prioritize_variant: ${{ 4 if mpi_type == 'external' else 0 }}
       string: ${{ string_prefix }}h${{ hash }}_${{ build }}
       
     requirements:
       run_exports:
-        - ${{ pin_subpackage('openmpi', lower_bound='x.x.x', upper_bound='x') }}
+        - if: mpi_type != 'external'
+          then: ${{ pin_subpackage('openmpi', lower_bound='x.x.x', upper_bound='x') }}
       build:
-        - ${{ compiler('c') }}
-        - ${{ compiler('cxx') }}
-        - if: with_cuda
+        - if: mpi_type != 'external'
           then:
-            - ${{ compiler('cuda') }}
-        - ${{ compiler('fortran') }}
-        - ${{ stdlib('c') }}
-        - pkg-config
-        - make
-        - shellcheck
+            - ${{ compiler('c') }}
+            - ${{ compiler('cxx') }}
+            - if: with_cuda
+              then:
+                - ${{ compiler('cuda') }}
+            - ${{ compiler('fortran') }}
+            - ${{ stdlib('c') }}
+            - pkg-config
+            - make
+            - shellcheck
       host:
-        - libevent
-        - libfabric-devel ${{ libfabric }}.*
-        - libhwloc
-        - libpmix-devel
-        - zlib
-        - if: linux
+        - if: mpi_type != 'external'
           then:
-            - libnl
-        - if: linux and not ppc64le
-          then:
-            - ucc
-            - ucx
-        - if: with_cuda
-          then:
-            - cuda-version ${{ cuda_compiler_version }}.*
+            - libevent
+            - libfabric-devel ${{ libfabric }}.*
+            - libhwloc
+            - libpmix-devel
+            - zlib
+            - if: linux
+              then:
+                - libnl
+            - if: linux and not ppc64le
+              then:
+                - ucc
+                - ucx
+            - if: with_cuda
+              then:
+                - cuda-version ${{ cuda_compiler_version }}.*
       run:
         - mpi 1.0.* openmpi
       run_constraints:
-        # Open MPI only uses CUDA Driver APIs, set the minimal driver version
-        - if: with_cuda
-          then:
-            - __cuda  >= ${{ cuda_major ~ ".0" }}
-            # Ensure a consistent CUDA environment
-            - cuda-version  >= ${{ cuda_major ~ ".0" }}
-        # conflict with prrte
-        # openmpi (starting with 6)
-        # bundles its own fork of prrte
-        - libprrte ==0.0.0
+        - if: mpi_type != 'external'
+          then:  
+            # Open MPI only uses CUDA Driver APIs, set the minimal driver version
+            - if: with_cuda
+              then:
+                - __cuda  >= ${{ cuda_major ~ ".0" }}
+                # Ensure a consistent CUDA environment
+                - cuda-version  >= ${{ cuda_major ~ ".0" }}
+            # conflict with prrte
+            # openmpi (starting with 6)
+            # bundles its own fork of prrte
+            - libprrte ==0.0.0
       ignore_run_exports:
         from_package:
           - if: with_cuda
             then:
               - ${{ compiler("cuda") | split | first }}
     tests:
+      - if: mpi_type == 'external'
+        then:
+          - script:
+              - conda list --fields fn,track_features | grep "openmpi-p-3"
+            requirements:
+              run:
+                - conda
       - if: mpi_type == 'conda'
         then:
           - package_contents:
@@ -103,10 +118,11 @@ outputs:
             files:
               recipe:
                 - tests/helloworld.sh
-
+  
   - package:
       name: openmpi-mpicc
     build:
+      skip: mpi_type == 'external'
       script:
         - echo 'ok'
     requirements:
@@ -127,6 +143,7 @@ outputs:
   - package:
       name: openmpi-mpicxx
     build:
+      skip: mpi_type == 'external'
       script:
         - echo 'ok'
     requirements:
@@ -147,6 +164,7 @@ outputs:
   - package:
       name: openmpi-mpifort
     build:
+      skip: mpi_type == 'external'
       script:
         - echo 'ok'
     requirements:
