@@ -111,68 +111,69 @@ outputs:
               recipe:
                 - tests/helloworld.sh
   
-  - if: mpi_type == 'conda'
-    then:
-      - package:
-          name: openmpi-mpicc
-        build:
-          script:
-            - echo 'ok'
-        requirements:
-          build:
-            - ${{ stdlib('c') }}
-          run:
-            - ${{ pin_subpackage('openmpi', exact=True) }}
-            - ${{ compiler('c') | replace(' =', '>=') }}
-        tests:
-          - if: mpi_type == 'conda'
-            then:
-              - script:
-                  file: run_test
-                files:
-                  recipe:
-                    - tests/helloworld.c
-    
-      - package:
-          name: openmpi-mpicxx
-        build:
-          script:
-            - echo 'ok'
-        requirements:
-          build:
-            - ${{ stdlib('c') }}
-          run:
-            - ${{ pin_subpackage('openmpi', exact=True) }}
-            - ${{ compiler('cxx') | replace(' =', '>=') }}
-        tests:
-          - if: mpi_type == 'conda'
-            then:
-              - script:
-                  file: run_test
-                files:
-                  recipe:
-                    - tests/helloworld.cxx
-    
-      - package:
-          name: openmpi-mpifort
-        build:
-          script:
-            - echo 'ok'
-        requirements:
-          build:
-            - ${{ stdlib('c') }}
-          run:
-            - ${{ pin_subpackage('openmpi', exact=True) }}
-            - ${{ compiler('fortran') | replace(' =', '>=') }}
-        tests:
-          - if: mpi_type == 'conda'
-            then:
-              - script:
-                  file: run_test
-                files:
-                  recipe:
-                    - tests/helloworld.f
-                    - tests/helloworld.f90
+  - package:
+      name: openmpi-mpicc
+    build:
+      skip: mpi_type == 'external'
+      script:
+        - echo 'ok'
+    requirements:
+      build:
+        - ${{ stdlib('c') }}
+      run:
+        - ${{ pin_subpackage('openmpi', exact=True) }}
+        - ${{ compiler('c') | replace(' =', '>=') }}
+    tests:
+      - if: mpi_type == 'conda'
+        then:
+          - script:
+              file: run_test
+            files:
+              recipe:
+                - tests/helloworld.c
+
+  - package:
+      name: openmpi-mpicxx
+    build:
+      skip: mpi_type == 'external'
+      script:
+        - echo 'ok'
+    requirements:
+      build:
+        - ${{ stdlib('c') }}
+      run:
+        - ${{ pin_subpackage('openmpi', exact=True) }}
+        - ${{ compiler('cxx') | replace(' =', '>=') }}
+    tests:
+      - if: mpi_type == 'conda'
+        then:
+          - script:
+              file: run_test
+            files:
+              recipe:
+                - tests/helloworld.cxx
+
+  - package:
+      name: openmpi-mpifort
+    build:
+      skip: mpi_type == 'external'
+      script:
+        - echo 'ok'
+    requirements:
+      build:
+        - ${{ stdlib('c') }}
+      run:
+        - ${{ pin_subpackage('openmpi', exact=True) }}
+        - ${{ compiler('fortran') | replace(' =', '>=') }}
+    tests:
+      - if: mpi_type == 'conda'
+        then:
+          - script:
+              file: run_test
+            files:
+              recipe:
+                - tests/helloworld.f
+                - tests/helloworld.f90
 
 about:
   homepage: https://www.open-mpi.org/
