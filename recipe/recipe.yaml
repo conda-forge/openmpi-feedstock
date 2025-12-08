@@ -24,7 +24,7 @@ source:
   sha256: 53131e1a57e7270f645707f8b0b65ba56048f5b5ac3f68faabed3eb0d710e449
   
 build:
-  number: ${{ int(build) - 100 if mpi_type == 'external' else build }}
+  number: ${{ (build | int) - 100 if mpi_type == 'external' else build }}
   skip: win or (linux and cuda_compiler_version != cuda_compiler_version_min)
 
 outputs:
