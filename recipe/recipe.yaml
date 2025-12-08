@@ -93,6 +93,13 @@ outputs:
             then:
               - ${{ compiler("cuda") | split | first }}
     tests:
+      - if: mpi_type == 'external'
+        then:
+          - script:
+              - conda list --fields fn,track_features
+            requirements:
+              run:
+                - conda
       - if: mpi_type == 'conda'
         then:
           - package_contents:
