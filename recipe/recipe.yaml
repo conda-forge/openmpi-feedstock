@@ -75,16 +75,18 @@ outputs:
       run:
         - mpi 1.0.* openmpi
       run_constraints:
-        # Open MPI only uses CUDA Driver APIs, set the minimal driver version
-        - if: with_cuda and mpi != 'external'
-          then:
-            - __cuda  >= ${{ cuda_major ~ ".0" }}
-            # Ensure a consistent CUDA environment
-            - cuda-version  >= ${{ cuda_major ~ ".0" }}
-        # conflict with prrte
-        # openmpi (starting with 6)
-        # bundles its own fork of prrte
-        - libprrte ==0.0.0
+        - if: mpi_type != 'external'
+          then:  
+            # Open MPI only uses CUDA Driver APIs, set the minimal driver version
+            - if: with_cuda
+              then:
+                - __cuda  >= ${{ cuda_major ~ ".0" }}
+                # Ensure a consistent CUDA environment
+                - cuda-version  >= ${{ cuda_major ~ ".0" }}
+            # conflict with prrte
+            # openmpi (starting with 6)
+            # bundles its own fork of prrte
+            - libprrte ==0.0.0
       ignore_run_exports:
         from_package:
           - if: with_cuda
