@@ -1,8 +1,8 @@
 schema_version: 1
 
 context:
-  version: 5.0.8
-  build: 110
+  version: 4.1.6
+  build: 2
   mpi_type: ${{ mpi_type | default('conda') }}
   major_minor: ${{ (version | split('.'))[:2] | join('.') }}
   cuda_compiler_version: ${{ cuda_compiler_version | default('None') }}
@@ -19,15 +19,15 @@ recipe:
   name: openmpi
   version: ${{ version }}
 
-source:
-  url: https://www.open-mpi.org/software/ompi/v${{ major_minor }}/downloads/openmpi-${{ version }}.tar.bz2
-  sha256: 53131e1a57e7270f645707f8b0b65ba56048f5b5ac3f68faabed3eb0d710e449
-  
+# source:
+  # url: https://www.open-mpi.org/software/ompi/v${{ major_minor }}/downloads/openmpi-${{ version }}.tar.bz2
+  # sha256: 53131e1a57e7270f645707f8b0b65ba56048f5b5ac3f68faabed3eb0d710e449
+  #
 build:
   number: ${{ build }}
   # this needs to be duplicated into output skips
   # until https://github.com/prefix-dev/rattler-build/issues/1918 is fixed
-  skip: win or (linux and cuda_compiler_version != cuda_compiler_version_min)
+  skip: mpi_type != 'external' or cuda_compiler_version != 'None'
 
 outputs:
   - package:
@@ -117,7 +117,7 @@ outputs:
   - package:
       name: openmpi-mpicc
     build:
-      skip: mpi_type == 'external' or win or (linux and cuda_compiler_version != cuda_compiler_version_min)
+      skip: true
       script:
         - echo 'ok'
     requirements:
@@ -138,7 +138,7 @@ outputs:
   - package:
       name: openmpi-mpicxx
     build:
-      skip: mpi_type == 'external' or win or (linux and cuda_compiler_version != cuda_compiler_version_min)
+      skip: true
       script:
         - echo 'ok'
     requirements:
@@ -159,7 +159,7 @@ outputs:
   - package:
       name: openmpi-mpifort
     build:
-      skip: mpi_type == 'external' or win or (linux and cuda_compiler_version != cuda_compiler_version_min)
+      skip: true
       script:
         - echo 'ok'
     requirements:
