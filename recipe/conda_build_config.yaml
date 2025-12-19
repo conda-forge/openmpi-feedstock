@@ -4,4 +4,4 @@ mpi_type:
 libfabric:
   - "1.19"
 libpmix_devel:
-  - "5"
+  - "6"
