@@ -26,6 +26,8 @@ source:
   
 build:
   number: ${{ build }}
+  # this needs to be duplicated into output skips
+  # until https://github.com/prefix-dev/rattler-build/issues/1918 is fixed
   skip: win or (linux and cuda_compiler_version != cuda_compiler_version_min)
 
 outputs:
@@ -122,7 +124,7 @@ outputs:
   - package:
       name: openmpi-mpicc
     build:
-      skip: mpi_type == 'external'
+      skip: mpi_type == 'external' or win or (linux and cuda_compiler_version != cuda_compiler_version_min)
       script:
         - echo 'ok'
     requirements:
@@ -143,7 +145,7 @@ outputs:
   - package:
       name: openmpi-mpicxx
     build:
-      skip: mpi_type == 'external'
+      skip: mpi_type == 'external' or win or (linux and cuda_compiler_version != cuda_compiler_version_min)
       script:
         - echo 'ok'
     requirements:
@@ -164,7 +166,7 @@ outputs:
   - package:
       name: openmpi-mpifort
     build:
-      skip: mpi_type == 'external'
+      skip: mpi_type == 'external' or win or (linux and cuda_compiler_version != cuda_compiler_version_min)
       script:
         - echo 'ok'
     requirements:
