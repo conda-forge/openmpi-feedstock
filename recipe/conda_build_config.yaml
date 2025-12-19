@@ -1,3 +1,7 @@
+channel_targets:
+- conda-forge mpi-external # [linux]
+- conda-forge
+
 mpi_type:
   - external  # [linux]
   - conda
@@ -5,3 +9,8 @@ libfabric:
   - "1.19"
 libpmix_devel:
   - "5"
+
+zip_keys:
+  -
+    - mpi_type
+    - channel_targets
