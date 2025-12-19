@@ -2,7 +2,7 @@ schema_version: 1
 
 context:
   version: 5.0.8
-  init_build: 109
+  build: 110
   mpi_type: ${{ mpi_type | default('conda') }}
   major_minor: ${{ (version | split('.'))[:2] | join('.') }}
   cuda_compiler_version: ${{ cuda_compiler_version | default('None') }}
@@ -14,7 +14,6 @@ context:
       else "0"
     }}
   string_prefix: ${{ 'external_' if mpi_type == 'external' else '' }}
-  build: ${{ (init_build | int) - 100 if mpi_type == 'external' else init_build }}
 
 recipe:
   name: openmpi
@@ -26,6 +25,8 @@ source:
   
 build:
   number: ${{ build }}
+  # this needs to be duplicated into output skips
+  # until https://github.com/prefix-dev/rattler-build/issues/1918 is fixed
   skip: win or (linux and cuda_compiler_version != cuda_compiler_version_min)
 
 outputs:
@@ -33,9 +34,6 @@ outputs:
       name: openmpi
     build:
       script: build-mpi
-      variant:
-        # deprioritize external
-        down_prioritize_variant: ${{ 4 if mpi_type == 'external' else 0 }}
       string: ${{ string_prefix }}h${{ hash }}_${{ build }}
       
     requirements:
@@ -97,10 +95,7 @@ outputs:
       - if: mpi_type == 'external'
         then:
           - script:
-              - conda list --fields fn,track_features | grep "openmpi-p-3"
-            requirements:
-              run:
-                - conda
+              - echo 'ok'
       - if: mpi_type == 'conda'
         then:
           - package_contents:
@@ -122,7 +117,7 @@ outputs:
   - package:
       name: openmpi-mpicc
     build:
-      skip: mpi_type == 'external'
+      skip: mpi_type == 'external' or win or (linux and cuda_compiler_version != cuda_compiler_version_min)
       script:
         - echo 'ok'
     requirements:
@@ -143,7 +138,7 @@ outputs:
   - package:
       name: openmpi-mpicxx
     build:
-      skip: mpi_type == 'external'
+      skip: mpi_type == 'external' or win or (linux and cuda_compiler_version != cuda_compiler_version_min)
       script:
         - echo 'ok'
     requirements:
@@ -164,7 +159,7 @@ outputs:
   - package:
       name: openmpi-mpifort
     build:
-      skip: mpi_type == 'external'
+      skip: mpi_type == 'external' or win or (linux and cuda_compiler_version != cuda_compiler_version_min)
       script:
         - echo 'ok'
     requirements:
