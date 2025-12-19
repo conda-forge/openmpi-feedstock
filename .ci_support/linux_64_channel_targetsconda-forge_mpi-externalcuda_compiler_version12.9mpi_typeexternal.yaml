@@ -33,7 +33,7 @@ libfabric:
 libhwloc:
 - 2.12.1
 libpmix_devel:
-- '5'
+- '6'
 mpi_type:
 - external
 target_platform:

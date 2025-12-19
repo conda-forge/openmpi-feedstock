@@ -35,7 +35,7 @@ libfabric:
 libhwloc:
 - 2.12.1
 libpmix_devel:
-- '5'
+- '6'
 macos_machine:
 - arm64-apple-darwin20.0.0
 mpi_type:
