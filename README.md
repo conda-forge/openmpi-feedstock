@@ -35,38 +35,17 @@ Current build status
         <table>
           <thead><tr><th>Variant</th><th>Status</th></tr></thead>
           <tbody><tr>
-              <td>linux_64_channel_targetsconda-forge_maincuda_compiler_version12.9mpi_typeconda</td>
+              <td>linux_64_channel_targetsconda-forge_mpi-externalcuda_compiler_versionNonempi_typeexternal</td>
               <td>
                 <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=720&branchName=main">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/openmpi-feedstock?branchName=main&jobName=linux&configuration=linux%20linux_64_channel_targetsconda-forge_maincuda_compiler_version12.9mpi_typeconda" alt="variant">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/openmpi-feedstock?branchName=main&jobName=linux&configuration=linux%20linux_64_channel_targetsconda-forge_mpi-externalcuda_compiler_versionNonempi_typeexternal" alt="variant">
                 </a>
               </td>
             </tr><tr>
-              <td>linux_64_channel_targetsconda-forge_mpi-externalcuda_compiler_version12.9mpi_typeexternal</td>
+              <td>linux_aarch64_channel_targetsconda-forge_mpi-externalcuda_compiler_versionNonempi_typeexternal</td>
               <td>
                 <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=720&branchName=main">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/openmpi-feedstock?branchName=main&jobName=linux&configuration=linux%20linux_64_channel_targetsconda-forge_mpi-externalcuda_compiler_version12.9mpi_typeexternal" alt="variant">
-                </a>
-              </td>
-            </tr><tr>
-              <td>linux_aarch64_channel_targetsconda-forge_maincuda_compiler_version12.9mpi_typeconda</td>
-              <td>
-                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=720&branchName=main">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/openmpi-feedstock?branchName=main&jobName=linux&configuration=linux%20linux_aarch64_channel_targetsconda-forge_maincuda_compiler_version12.9mpi_typeconda" alt="variant">
-                </a>
-              </td>
-            </tr><tr>
-              <td>linux_aarch64_channel_targetsconda-forge_mpi-externalcuda_compiler_version12.9mpi_typeexternal</td>
-              <td>
-                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=720&branchName=main">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/openmpi-feedstock?branchName=main&jobName=linux&configuration=linux%20linux_aarch64_channel_targetsconda-forge_mpi-externalcuda_compiler_version12.9mpi_typeexternal" alt="variant">
-                </a>
-              </td>
-            </tr><tr>
-              <td>linux_ppc64le_channel_targetsconda-forge_mainmpi_typeconda</td>
-              <td>
-                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=720&branchName=main">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/openmpi-feedstock?branchName=main&jobName=linux&configuration=linux%20linux_ppc64le_channel_targetsconda-forge_mainmpi_typeconda" alt="variant">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/openmpi-feedstock?branchName=main&jobName=linux&configuration=linux%20linux_aarch64_channel_targetsconda-forge_mpi-externalcuda_compiler_versionNonempi_typeexternal" alt="variant">
                 </a>
               </td>
             </tr><tr>
@@ -74,20 +53,6 @@ Current build status
               <td>
                 <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=720&branchName=main">
                   <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/openmpi-feedstock?branchName=main&jobName=linux&configuration=linux%20linux_ppc64le_channel_targetsconda-forge_mpi-externalmpi_typeexternal" alt="variant">
-                </a>
-              </td>
-            </tr><tr>
-              <td>osx_64</td>
-              <td>
-                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=720&branchName=main">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/openmpi-feedstock?branchName=main&jobName=osx&configuration=osx%20osx_64_" alt="variant">
-                </a>
-              </td>
-            </tr><tr>
-              <td>osx_arm64</td>
-              <td>
-                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=720&branchName=main">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/openmpi-feedstock?branchName=main&jobName=osx&configuration=osx%20osx_arm64_" alt="variant">
                 </a>
               </td>
             </tr>
@@ -104,55 +69,52 @@ Current release info
 | Name | Downloads | Version | Platforms |
 | --- | --- | --- | --- |
 | [![Conda Recipe](https://img.shields.io/badge/recipe-openmpi-green.svg)](https://anaconda.org/conda-forge/openmpi) | [![Conda Downloads](https://img.shields.io/conda/dn/conda-forge/openmpi.svg)](https://anaconda.org/conda-forge/openmpi) | [![Conda Version](https://img.shields.io/conda/vn/conda-forge/openmpi.svg)](https://anaconda.org/conda-forge/openmpi) | [![Conda Platforms](https://img.shields.io/conda/pn/conda-forge/openmpi.svg)](https://anaconda.org/conda-forge/openmpi) |
-| [![Conda Recipe](https://img.shields.io/badge/recipe-openmpi--mpicc-green.svg)](https://anaconda.org/conda-forge/openmpi-mpicc) | [![Conda Downloads](https://img.shields.io/conda/dn/conda-forge/openmpi-mpicc.svg)](https://anaconda.org/conda-forge/openmpi-mpicc) | [![Conda Version](https://img.shields.io/conda/vn/conda-forge/openmpi-mpicc.svg)](https://anaconda.org/conda-forge/openmpi-mpicc) | [![Conda Platforms](https://img.shields.io/conda/pn/conda-forge/openmpi-mpicc.svg)](https://anaconda.org/conda-forge/openmpi-mpicc) |
-| [![Conda Recipe](https://img.shields.io/badge/recipe-openmpi--mpicxx-green.svg)](https://anaconda.org/conda-forge/openmpi-mpicxx) | [![Conda Downloads](https://img.shields.io/conda/dn/conda-forge/openmpi-mpicxx.svg)](https://anaconda.org/conda-forge/openmpi-mpicxx) | [![Conda Version](https://img.shields.io/conda/vn/conda-forge/openmpi-mpicxx.svg)](https://anaconda.org/conda-forge/openmpi-mpicxx) | [![Conda Platforms](https://img.shields.io/conda/pn/conda-forge/openmpi-mpicxx.svg)](https://anaconda.org/conda-forge/openmpi-mpicxx) |
-| [![Conda Recipe](https://img.shields.io/badge/recipe-openmpi--mpifort-green.svg)](https://anaconda.org/conda-forge/openmpi-mpifort) | [![Conda Downloads](https://img.shields.io/conda/dn/conda-forge/openmpi-mpifort.svg)](https://anaconda.org/conda-forge/openmpi-mpifort) | [![Conda Version](https://img.shields.io/conda/vn/conda-forge/openmpi-mpifort.svg)](https://anaconda.org/conda-forge/openmpi-mpifort) | [![Conda Platforms](https://img.shields.io/conda/pn/conda-forge/openmpi-mpifort.svg)](https://anaconda.org/conda-forge/openmpi-mpifort) |
 
 Installing openmpi
 ==================
 
-Installing `openmpi` from the `conda-forge` channel can be achieved by adding `conda-forge` to your channels with:
+Installing `openmpi` from the `conda-forge/label/mpi-external` channel can be achieved by adding `conda-forge/label/mpi-external` to your channels with:
 
 ```
-conda config --add channels conda-forge
+conda config --add channels conda-forge/label/mpi-external
 conda config --set channel_priority strict
 ```
 
-Once the `conda-forge` channel has been enabled, `openmpi, openmpi-mpicc, openmpi-mpicxx, openmpi-mpifort` can be installed with `conda`:
+Once the `conda-forge/label/mpi-external` channel has been enabled, `openmpi` can be installed with `conda`:
 
 ```
-conda install openmpi openmpi-mpicc openmpi-mpicxx openmpi-mpifort
+conda install openmpi
 ```
 
 or with `mamba`:
 
 ```
-mamba install openmpi openmpi-mpicc openmpi-mpicxx openmpi-mpifort
+mamba install openmpi
 ```
 
 It is possible to list all of the versions of `openmpi` available on your platform with `conda`:
 
 ```
-conda search openmpi --channel conda-forge
+conda search openmpi --channel conda-forge/label/mpi-external
 ```
 
 or with `mamba`:
 
 ```
-mamba search openmpi --channel conda-forge
+mamba search openmpi --channel conda-forge/label/mpi-external
 ```
 
 Alternatively, `mamba repoquery` may provide more information:
 
 ```
 # Search all versions available on your platform:
-mamba repoquery search openmpi --channel conda-forge
+mamba repoquery search openmpi --channel conda-forge/label/mpi-external
 
 # List packages depending on `openmpi`:
-mamba repoquery whoneeds openmpi --channel conda-forge
+mamba repoquery whoneeds openmpi --channel conda-forge/label/mpi-external
 
 # List dependencies of `openmpi`:
-mamba repoquery depends openmpi --channel conda-forge
+mamba repoquery depends openmpi --channel conda-forge/label/mpi-external
 ```
 
 

@@ -13,9 +13,7 @@ channel_targets:
 cuda_compiler:
 - cuda-nvcc
 cuda_compiler_version:
-- '12.9'
-cuda_compiler_version_min:
-- '12.9'
+- None
 cxx_compiler:
 - gxx
 cxx_compiler_version:
@@ -26,22 +24,12 @@ fortran_compiler:
 - gfortran
 fortran_compiler_version:
 - '14'
-libevent:
-- 2.1.12
 libfabric:
 - '1.19'
-libhwloc:
-- 2.12.1
-libpmix_devel:
-- '5'
 mpi_type:
 - external
 target_platform:
 - linux-64
-ucc:
-- '1'
-ucx:
-- '1.19'
 zip_keys:
 - - c_compiler_version
   - cxx_compiler_version
@@ -50,5 +38,3 @@ zip_keys:
   - cuda_compiler_version
 - - mpi_type
   - channel_targets
-zlib:
-- '1'

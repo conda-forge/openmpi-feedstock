@@ -14,8 +14,6 @@ cuda_compiler:
 - cuda-nvcc
 cuda_compiler_version:
 - None
-cuda_compiler_version_min:
-- None
 cxx_compiler:
 - gxx
 cxx_compiler_version:
@@ -26,14 +24,8 @@ fortran_compiler:
 - gfortran
 fortran_compiler_version:
 - '14'
-libevent:
-- 2.1.12
 libfabric:
 - '1.19'
-libhwloc:
-- 2.12.1
-libpmix_devel:
-- '5'
 mpi_type:
 - external
 target_platform:
@@ -46,5 +38,3 @@ zip_keys:
   - cuda_compiler_version
 - - mpi_type
   - channel_targets
-zlib:
-- '1'
