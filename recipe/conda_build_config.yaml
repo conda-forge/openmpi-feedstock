@@ -1,6 +1,6 @@
 channel_targets:
 - conda-forge mpi-external # [linux]
-- conda-forge
+- conda-forge main
 
 mpi_type:
   - external  # [linux]
