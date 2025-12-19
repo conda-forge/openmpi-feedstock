@@ -8,28 +8,28 @@ jobs:
     vmImage: ubuntu-latest
   strategy:
     matrix:
-      linux_64_cuda_compiler_version12.9mpi_typeconda:
-        CONFIG: linux_64_cuda_compiler_version12.9mpi_typeconda
+      linux_64_channel_targetsconda-forge_mpi-externalcuda_compiler_version12.9mpi_typeexternal:
+        CONFIG: linux_64_channel_targetsconda-forge_mpi-externalcuda_compiler_version12.9mpi_typeexternal
         UPLOAD_PACKAGES: 'True'
         DOCKER_IMAGE: quay.io/condaforge/linux-anvil-x86_64:alma9
-      linux_64_cuda_compiler_version12.9mpi_typeexternal:
-        CONFIG: linux_64_cuda_compiler_version12.9mpi_typeexternal
+      linux_64_channel_targetsconda-forgecuda_compiler_version12.9mpi_typeconda:
+        CONFIG: linux_64_channel_targetsconda-forgecuda_compiler_version12.9mpi_typeconda
         UPLOAD_PACKAGES: 'True'
         DOCKER_IMAGE: quay.io/condaforge/linux-anvil-x86_64:alma9
-      linux_aarch64_cuda_compiler_version12.9mpi_typeconda:
-        CONFIG: linux_aarch64_cuda_compiler_version12.9mpi_typeconda
+      linux_aarch64_channel_targetsconda-forge_mpi-externalcuda_compiler_version12.9mpi_typeexternal:
+        CONFIG: linux_aarch64_channel_targetsconda-forge_mpi-externalcuda_compiler_version12.9mpi_typeexternal
         UPLOAD_PACKAGES: 'True'
         DOCKER_IMAGE: quay.io/condaforge/linux-anvil-x86_64:alma9
-      linux_aarch64_cuda_compiler_version12.9mpi_typeexternal:
-        CONFIG: linux_aarch64_cuda_compiler_version12.9mpi_typeexternal
+      linux_aarch64_channel_targetsconda-forgecuda_compiler_version12.9mpi_typeconda:
+        CONFIG: linux_aarch64_channel_targetsconda-forgecuda_compiler_version12.9mpi_typeconda
         UPLOAD_PACKAGES: 'True'
         DOCKER_IMAGE: quay.io/condaforge/linux-anvil-x86_64:alma9
-      linux_ppc64le_mpi_typeconda:
-        CONFIG: linux_ppc64le_mpi_typeconda
+      linux_ppc64le_channel_targetsconda-forge_mpi-externalmpi_typeexternal:
+        CONFIG: linux_ppc64le_channel_targetsconda-forge_mpi-externalmpi_typeexternal
         UPLOAD_PACKAGES: 'True'
         DOCKER_IMAGE: quay.io/condaforge/linux-anvil-x86_64:alma9
-      linux_ppc64le_mpi_typeexternal:
-        CONFIG: linux_ppc64le_mpi_typeexternal
+      linux_ppc64le_channel_targetsconda-forgempi_typeconda:
+        CONFIG: linux_ppc64le_channel_targetsconda-forgempi_typeconda
         UPLOAD_PACKAGES: 'True'
         DOCKER_IMAGE: quay.io/condaforge/linux-anvil-x86_64:alma9
   timeoutInMinutes: 360

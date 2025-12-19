@@ -9,7 +9,7 @@ c_stdlib_version:
 channel_sources:
 - conda-forge
 channel_targets:
-- conda-forge main
+- conda-forge mpi-external
 cuda_compiler:
 - cuda-nvcc
 cuda_compiler_version:
@@ -33,7 +33,7 @@ libfabric:
 libhwloc:
 - 2.12.1
 libpmix_devel:
-- '5'
+- '6'
 mpi_type:
 - external
 target_platform:
@@ -48,5 +48,7 @@ zip_keys:
   - fortran_compiler_version
   - c_stdlib_version
   - cuda_compiler_version
+- - mpi_type
+  - channel_targets
 zlib:
 - '1'
