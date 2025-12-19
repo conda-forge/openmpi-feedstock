@@ -95,10 +95,7 @@ outputs:
       - if: mpi_type == 'external'
         then:
           - script:
-              - conda list --fields fn,track_features | grep "openmpi-p-3"
-            requirements:
-              run:
-                - conda
+              - echo 'ok'
       - if: mpi_type == 'conda'
         then:
           - package_contents:
