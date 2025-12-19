@@ -33,7 +33,7 @@ libfabric:
 libhwloc:
 - 2.12.1
 libpmix_devel:
-- '6'
+- '5'
 mpi_type:
 - conda
 target_platform:
