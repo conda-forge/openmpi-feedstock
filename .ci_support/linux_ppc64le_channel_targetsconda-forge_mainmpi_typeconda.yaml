@@ -9,13 +9,13 @@ c_stdlib_version:
 channel_sources:
 - conda-forge
 channel_targets:
-- conda-forge
+- conda-forge main
 cuda_compiler:
 - cuda-nvcc
 cuda_compiler_version:
-- '12.9'
+- None
 cuda_compiler_version_min:
-- '12.9'
+- None
 cxx_compiler:
 - gxx
 cxx_compiler_version:
@@ -37,11 +37,7 @@ libpmix_devel:
 mpi_type:
 - conda
 target_platform:
-- linux-64
-ucc:
-- '1'
-ucx:
-- '1.19'
+- linux-ppc64le
 zip_keys:
 - - c_compiler_version
   - cxx_compiler_version
