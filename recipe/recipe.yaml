@@ -19,10 +19,10 @@ recipe:
   name: openmpi
   version: ${{ version }}
 
-# source:
-  # url: https://www.open-mpi.org/software/ompi/v${{ major_minor }}/downloads/openmpi-${{ version }}.tar.bz2
-  # sha256: 53131e1a57e7270f645707f8b0b65ba56048f5b5ac3f68faabed3eb0d710e449
-  #
+source:
+  url: https://www.open-mpi.org/software/ompi/v${{ major_minor }}/downloads/openmpi-${{ version }}.tar.bz2
+  sha256: f740994485516deb63b5311af122c265179f5328a0d857a567b85db00b11e415
+
 build:
   number: ${{ build }}
   # this needs to be duplicated into output skips
