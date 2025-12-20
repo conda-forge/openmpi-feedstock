@@ -3,17 +3,7 @@ schema_version: 1
 context:
   version: 4.1.6
   build: 2
-  mpi_type: ${{ mpi_type | default('conda') }}
-  major_minor: ${{ (version | split('.'))[:2] | join('.') }}
-  cuda_compiler_version: ${{ cuda_compiler_version | default('None') }}
-  with_cuda: ${{ 'true' if cuda_compiler_version != 'None' else '' }}
-  cuda_major: >-
-    ${{
-      cuda_compiler_version | split('.') | first
-      if with_cuda
-      else "0"
-    }}
-  string_prefix: ${{ 'external_' if mpi_type == 'external' else '' }}
+  string_prefix: 'external_'
 
 recipe:
   name: openmpi
@@ -27,7 +17,7 @@ build:
   number: ${{ build }}
   # this needs to be duplicated into output skips
   # until https://github.com/prefix-dev/rattler-build/issues/1918 is fixed
-  skip: mpi_type != 'external' or cuda_compiler_version != 'None'
+  skip: not linux
 
 outputs:
   - package:
@@ -37,152 +27,17 @@ outputs:
       string: ${{ string_prefix }}h${{ hash }}_${{ build }}
       
     requirements:
-      run_exports:
-        - if: mpi_type != 'external'
-          then: ${{ pin_subpackage('openmpi', lower_bound='x.x.x', upper_bound='x') }}
-      build:
-        - if: mpi_type != 'external'
-          then:
-            - ${{ compiler('c') }}
-            - ${{ compiler('cxx') }}
-            - if: with_cuda
-              then:
-                - ${{ compiler('cuda') }}
-            - ${{ compiler('fortran') }}
-            - ${{ stdlib('c') }}
-            - pkg-config
-            - make
-            - shellcheck
-      host:
-        - if: mpi_type != 'external'
-          then:
-            - libevent
-            - libfabric-devel ${{ libfabric }}.*
-            - libhwloc
-            - libpmix-devel
-            - zlib
-            - if: linux
-              then:
-                - libnl
-            - if: linux and not ppc64le
-              then:
-                - ucc
-                - ucx
-            - if: with_cuda
-              then:
-                - cuda-version ${{ cuda_compiler_version }}.*
       run:
         - mpi 1.0.* openmpi
-      run_constraints:
-        - if: mpi_type != 'external'
-          then:  
-            # Open MPI only uses CUDA Driver APIs, set the minimal driver version
-            - if: with_cuda
-              then:
-                - __cuda  >= ${{ cuda_major ~ ".0" }}
-                # Ensure a consistent CUDA environment
-                - cuda-version  >= ${{ cuda_major ~ ".0" }}
-            # conflict with prrte
-            # openmpi (starting with 6)
-            # bundles its own fork of prrte
-            - libprrte ==0.0.0
-      ignore_run_exports:
-        from_package:
-          - if: with_cuda
-            then:
-              - ${{ compiler("cuda") | split | first }}
     tests:
-      - if: mpi_type == 'external'
-        then:
-          - script:
-              - echo 'ok'
-      - if: mpi_type == 'conda'
-        then:
-          - package_contents:
-              files:
-                not_exists:
-                  - share/doc/openmpi
-                  - share/man/man3/MPI_Init.3
-          - script:
-              file: run_test
-            requirements:
-              run:
-                - if: linux
-                  then:
-                    - patchelf
-            files:
-              recipe:
-                - tests/helloworld.sh
-  
-  - package:
-      name: openmpi-mpicc
-    build:
-      skip: true
-      script:
-        - echo 'ok'
-    requirements:
-      build:
-        - ${{ stdlib('c') }}
-      run:
-        - ${{ pin_subpackage('openmpi', exact=True) }}
-        - ${{ compiler('c') | replace(' =', '>=') }}
-    tests:
-      - if: mpi_type == 'conda'
-        then:
-          - script:
-              file: run_test
-            files:
-              recipe:
-                - tests/helloworld.c
-
-  - package:
-      name: openmpi-mpicxx
-    build:
-      skip: true
-      script:
-        - echo 'ok'
-    requirements:
-      build:
-        - ${{ stdlib('c') }}
-      run:
-        - ${{ pin_subpackage('openmpi', exact=True) }}
-        - ${{ compiler('cxx') | replace(' =', '>=') }}
-    tests:
-      - if: mpi_type == 'conda'
-        then:
-          - script:
-              file: run_test
-            files:
-              recipe:
-                - tests/helloworld.cxx
-
-  - package:
-      name: openmpi-mpifort
-    build:
-      skip: true
-      script:
-        - echo 'ok'
-    requirements:
-      build:
-        - ${{ stdlib('c') }}
-      run:
-        - ${{ pin_subpackage('openmpi', exact=True) }}
-        - ${{ compiler('fortran') | replace(' =', '>=') }}
-    tests:
-      - if: mpi_type == 'conda'
-        then:
-          - script:
-              file: run_test
-            files:
-              recipe:
-                - tests/helloworld.f
-                - tests/helloworld.f90
+      - script:
+          - echo 'ok'
 
 about:
   homepage: https://www.open-mpi.org/
   license: BSD-3-Clause
   license_family: BSD
-  license_file: LICENSE
+  # license_file: LICENSE
   summary: An open source Message Passing Interface implementation.
   description: |
     The Open MPI Project is an open source Message Passing Interface
