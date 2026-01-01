@@ -4,6 +4,7 @@ context:
   version: 4.1.6
   build: 2
   string_prefix: 'external_'
+  major_minor: ${{ (version | split('.'))[:2] | join('.') }}
 
 recipe:
   name: openmpi
@@ -23,7 +24,6 @@ outputs:
   - package:
       name: openmpi
     build:
-      script: build-mpi
       string: ${{ string_prefix }}h${{ hash }}_${{ build }}
       
     requirements:
