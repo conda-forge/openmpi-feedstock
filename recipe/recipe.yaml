@@ -4,15 +4,10 @@ context:
   version: 4.1.6
   build: 2
   string_prefix: 'external_'
-  major_minor: ${{ (version | split('.'))[:2] | join('.') }}
 
 recipe:
   name: openmpi
   version: ${{ version }}
-
-source:
-  url: https://www.open-mpi.org/software/ompi/v${{ major_minor }}/downloads/openmpi-${{ version }}.tar.bz2
-  sha256: f740994485516deb63b5311af122c265179f5328a0d857a567b85db00b11e415
 
 build:
   number: ${{ build }}
@@ -37,7 +32,7 @@ about:
   homepage: https://www.open-mpi.org/
   license: BSD-3-Clause
   license_family: BSD
-  license_file: LICENSE
+  license_file: LICENSE.txt
   summary: An open source Message Passing Interface implementation.
   description: |
     The Open MPI Project is an open source Message Passing Interface
