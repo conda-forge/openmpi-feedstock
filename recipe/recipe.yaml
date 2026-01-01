@@ -37,7 +37,7 @@ about:
   homepage: https://www.open-mpi.org/
   license: BSD-3-Clause
   license_family: BSD
-  # license_file: LICENSE
+  license_file: LICENSE
   summary: An open source Message Passing Interface implementation.
   description: |
     The Open MPI Project is an open source Message Passing Interface
