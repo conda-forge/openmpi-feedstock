@@ -31,7 +31,7 @@ libevent:
 libfabric:
 - '1.19'
 libhwloc:
-- 2.12.1
+- 2.12.2
 libpmix_devel:
 - '5'
 mpi_type:
