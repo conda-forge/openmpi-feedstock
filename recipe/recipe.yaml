@@ -1,8 +1,8 @@
 schema_version: 1
 
 context:
-  version: 5.0.8
-  build: 111
+  version: "5.0.10"
+  build: 0
   mpi_type: ${{ mpi_type | default('conda') }}
   major_minor: ${{ (version | split('.'))[:2] | join('.') }}
   cuda_compiler_version: ${{ cuda_compiler_version | default('None') }}
@@ -21,8 +21,8 @@ recipe:
 
 source:
   url: https://www.open-mpi.org/software/ompi/v${{ major_minor }}/downloads/openmpi-${{ version }}.tar.bz2
-  sha256: 53131e1a57e7270f645707f8b0b65ba56048f5b5ac3f68faabed3eb0d710e449
-  
+  sha256: 0acecc4fc218e5debdbcb8a41d182c6b0f1d29393015ed763b2a91d5d7374cc6
+
 build:
   number: ${{ build }}
   # this needs to be duplicated into output skips
@@ -35,7 +35,7 @@ outputs:
     build:
       script: build-mpi
       string: ${{ string_prefix }}h${{ hash }}_${{ build }}
-      
+
     requirements:
       run_exports:
         - if: mpi_type != 'external'
@@ -64,10 +64,10 @@ outputs:
             - if: linux
               then:
                 - libnl
-            - if: linux and not ppc64le
-              then:
-                - ucc
-                - ucx
+                - if: not ppc64le
+                  then:
+                    - ucc
+                    - ucx
             - if: with_cuda
               then:
                 - cuda-version ${{ cuda_compiler_version }}.*
@@ -75,7 +75,7 @@ outputs:
         - mpi 1.0.* openmpi
       run_constraints:
         - if: mpi_type != 'external'
-          then:  
+          then:
             # Open MPI only uses CUDA Driver APIs, set the minimal driver version
             - if: with_cuda
               then:
@@ -113,7 +113,7 @@ outputs:
             files:
               recipe:
                 - tests/helloworld.sh
-  
+
   - package:
       name: openmpi-mpicc
     build:
