@@ -14,11 +14,7 @@ channel_sources:
 - conda-forge
 channel_targets:
 - conda-forge main
-cuda_compiler:
-- cuda-nvcc
 cuda_compiler_version:
-- None
-cuda_compiler_version_min:
 - None
 cxx_compiler:
 - clangxx
@@ -33,7 +29,7 @@ libevent:
 libfabric:
 - '1.19'
 libhwloc:
-- 2.12.2
+- 2.13.0
 libpmix_devel:
 - '5'
 macos_machine:
