@@ -1,4 +1,4 @@
-azure:
+workflow_settings:
   settings_linux:
     swapfile_size: 10GiB
   store_build_artifacts: false
