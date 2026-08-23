@@ -26,7 +26,7 @@ if [[ $PKG_NAME == "openmpi" ]]; then
     exit 1
   fi
 
-  if [[ "$target_platform" == linux-* ]]; then
+  if [[ "$target_platform" == linux-64 || "$target_platform" == linux-aarch64 ]]; then
     if [[ -z "$(ompi_info | grep 'with-cuda')" ]]; then
       echo "OpenMPI configured without CUDA support!"
       exit 1

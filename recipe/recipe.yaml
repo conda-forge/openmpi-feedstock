@@ -2,7 +2,7 @@ schema_version: 1
 
 context:
   version: "5.0.10"
-  build: 1
+  build: 2
   mpi_type: ${{ mpi_type | default('conda') }}
   major_minor: ${{ (version | split('.'))[:2] | join('.') }}
   cuda_compiler_version: ${{ cuda_compiler_version | default('None') }}
@@ -25,8 +25,6 @@ source:
 
 build:
   number: ${{ build }}
-  # this needs to be duplicated into output skips
-  # until https://github.com/prefix-dev/rattler-build/issues/1918 is fixed
   skip: win or (linux and cuda_compiler_version != cuda_compiler_version_min)
 
 outputs:
@@ -64,7 +62,7 @@ outputs:
             - if: linux
               then:
                 - libnl
-                - if: not ppc64le
+                - if: aarch64 or x86_64
                   then:
                     - ucc
                     - ucx
@@ -117,7 +115,7 @@ outputs:
   - package:
       name: openmpi-mpicc
     build:
-      skip: mpi_type == 'external' or win or (linux and cuda_compiler_version != cuda_compiler_version_min)
+      skip: mpi_type == 'external'
       script:
         - echo 'ok'
     requirements:
@@ -138,7 +136,7 @@ outputs:
   - package:
       name: openmpi-mpicxx
     build:
-      skip: mpi_type == 'external' or win or (linux and cuda_compiler_version != cuda_compiler_version_min)
+      skip: mpi_type == 'external'
       script:
         - echo 'ok'
     requirements:
@@ -159,7 +157,7 @@ outputs:
   - package:
       name: openmpi-mpifort
     build:
-      skip: mpi_type == 'external' or win or (linux and cuda_compiler_version != cuda_compiler_version_min)
+      skip: mpi_type == 'external'
       script:
         - echo 'ok'
     requirements:
