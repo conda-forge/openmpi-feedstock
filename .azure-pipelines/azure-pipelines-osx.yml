@@ -18,8 +18,6 @@ jobs:
         resize_partitions: false
         store_build_artifacts: false
         tools_install_dir: ~/miniforge3
-        settings_linux: &id001
-          swapfile_size: 10GiB
       osx_arm64_:
         CONFIG: osx_arm64_
         UPLOAD_PACKAGES: 'True'
@@ -30,7 +28,6 @@ jobs:
         resize_partitions: false
         store_build_artifacts: false
         tools_install_dir: ~/miniforge3
-        settings_linux: *id001
   timeoutInMinutes: 360
   variables: {}
 
