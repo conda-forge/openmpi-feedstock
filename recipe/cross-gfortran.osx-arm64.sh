@@ -63,6 +63,7 @@ export ompi_cv_fortran_kind_value_0=0
 export ompi_cv_fortran_kind_value_C_DOUBLE=8
 export ompi_cv_fortran_kind_value_C_DOUBLE_COMPLEX=8
 export ompi_cv_fortran_kind_value_C_FLOAT=4
+export ompi_cv_fortran_kind_value_C_FLOAT128=16
 export ompi_cv_fortran_kind_value_C_FLOAT_COMPLEX=4
 export ompi_cv_fortran_kind_value_C_INT16_T=2
 export ompi_cv_fortran_kind_value_C_INT32_T=4
