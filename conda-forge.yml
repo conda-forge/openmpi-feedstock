@@ -1,6 +1,7 @@
 workflow_settings:
-  settings_linux:
-    swapfile_size: 10GiB
+  pagefile_size:
+    - value: 10
+      os: linux
   store_build_artifacts: false
 build_platform:
   linux_ppc64le: linux_64
