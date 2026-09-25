@@ -76,10 +76,10 @@ Current release info
 Installing openmpi
 ==================
 
-Installing `openmpi` from the `conda-forge` channel can be achieved by adding `conda-forge` to your channels with:
+Installing `openmpi` from the `conda-forge/label/mpi-external` channel can be achieved by adding `conda-forge/label/mpi-external` to your channels with:
 
 ```
-conda config --add channels conda-forge
+conda config --add channels conda-forge/label/mpi-external
 conda config --set channel_priority strict
 ```
 
@@ -125,7 +125,7 @@ It is possible to list all of the versions of `openmpi` available on your platfo
 <summary>With conda</summary>
 
 ```
-conda search openmpi --channel conda-forge
+conda search openmpi --channel conda-forge/label/mpi-external
 ```
 
 </details>
@@ -134,7 +134,7 @@ conda search openmpi --channel conda-forge
 <summary>With mamba</summary>
 
 ```
-mamba search openmpi --channel conda-forge
+mamba search openmpi --channel conda-forge/label/mpi-external
 ```
 
 </details>
@@ -143,7 +143,7 @@ mamba search openmpi --channel conda-forge
 <summary>With pixi</summary>
 
 ```
-pixi search openmpi --channel conda-forge
+pixi search openmpi --channel conda-forge/label/mpi-external
 ```
 
 </details>
@@ -153,13 +153,13 @@ pixi search openmpi --channel conda-forge
 
 ```
 # Search all versions available on your platform:
-mamba repoquery search openmpi --channel conda-forge
+mamba repoquery search openmpi --channel conda-forge/label/mpi-external
 
 # List packages depending on `openmpi`:
-mamba repoquery whoneeds openmpi --channel conda-forge
+mamba repoquery whoneeds openmpi --channel conda-forge/label/mpi-external
 
 # List dependencies of `openmpi`:
-mamba repoquery depends openmpi --channel conda-forge
+mamba repoquery depends openmpi --channel conda-forge/label/mpi-external
 ```
 
 </details>
