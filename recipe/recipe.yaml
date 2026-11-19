@@ -50,7 +50,7 @@ outputs:
                 - ${{ compiler('cuda') }}
             - ${{ compiler('fortran') }}
             - ${{ stdlib('c') }}
-            - pkg-config
+            - pkgconf
             - make
             - shellcheck
       host:
