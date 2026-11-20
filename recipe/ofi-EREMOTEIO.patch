@@ -1,0 +1,14 @@
+diff --git a/opal/mca/btl/ofi/btl_ofi_context.c b/opal/mca/btl/ofi/btl_ofi_context.c
+index 8bc3edd..3649658 100644
+--- a/opal/mca/btl/ofi/btl_ofi_context.c
++++ b/opal/mca/btl/ofi/btl_ofi_context.c
+@@ -393,7 +393,9 @@ int mca_btl_ofi_context_progress(mca_btl_ofi_context_t *context)
+             MCA_BTL_OFI_ABORT();
+         } else {
+             switch(cqerr.err) {
++#ifdef EREMOTEIO
+             case FI_EREMOTEIO:
++#endif
+             case FI_EHOSTUNREACH:
+             case FI_ECONNABORTED:
+             case FI_ECONNRESET:

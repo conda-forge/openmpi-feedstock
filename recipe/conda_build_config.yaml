@@ -9,8 +9,6 @@ libfabric:
   - "1.19"
 libpmix_devel:
   - "5"
-ucx:
-  - '1.21.1'
 
 zip_keys:
   -
